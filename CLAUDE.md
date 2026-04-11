@@ -1,4 +1,4 @@
-# agent-skills
+# skillbox
 
 A Claude Code plugin serving as a repository for
 reusable skills and agents.
@@ -17,7 +17,7 @@ agents/                      # One .md file per agent
 - Agents live in `agents/<agent-name>.md`
 - Use kebab-case for naming
 - Skills and agents are namespaced under
-  `agent-skills:` (e.g. `/agent-skills:my-skill`)
+  `skillbox:` (e.g. `/skillbox:my-skill`)
 - All generated text and code must be in English
 - Line length limits for readability:
   - Text / Markdown: 80 columns max

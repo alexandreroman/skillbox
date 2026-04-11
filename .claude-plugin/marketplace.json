@@ -1,5 +1,5 @@
 {
-  "name": "agent-skills",
+  "name": "skillbox",
   "owner": {
     "name": "Alexandre Roman",
     "email": "alexandre.roman@gmail.com"
@@ -10,14 +10,14 @@
   },
   "plugins": [
     {
-      "name": "agent-skills",
+      "name": "skillbox",
       "source": "./",
       "description": "A repository of reusable skills and agents for Claude Code, built by Alexandre Roman",
       "version": "0.1.0",
       "author": {
         "name": "Alexandre Roman"
       },
-      "repository": "https://github.com/alexandreroman/agent-skills",
+      "repository": "https://github.com/alexandreroman/skillbox",
       "license": "Apache-2.0",
       "keywords": [
         "skills",
