@@ -1,0 +1,17 @@
+{
+  "name": "agent-skills",
+  "version": "0.1.0",
+  "description": "A repository of reusable skills and agents for Claude Code, built by Alexandre Roman",
+  "author": {
+    "name": "Alexandre Roman",
+    "url": "https://github.com/alexandreroman"
+  },
+  "repository": "https://github.com/alexandreroman/agent-skills",
+  "license": "Apache-2.0",
+  "keywords": [
+    "skills",
+    "agents"
+  ],
+  "skills": "./skills/",
+  "agents": "./agents/"
+}
