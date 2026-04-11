@@ -40,6 +40,11 @@ plugin) for all code tasks:
 - Follow standard Markdown conventions: blank line
   before and after headings, blank line before and
   after lists, fenced code blocks with a language tag
+- Always use the latest LTS or stable version of
+  languages, frameworks, and libraries. Check the
+  official documentation or use available tools
+  (e.g. context7) to verify current versions before
+  choosing a dependency.
 
 {{Additional project-specific rules not obvious from
 the code. Keep to 3-5 bullets max. Omit if nothing
