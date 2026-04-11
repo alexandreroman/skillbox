@@ -42,7 +42,14 @@ what to fix.
 2. **Gather context** — read relevant specs, READMEs,
    CLAUDE.md, and configuration files to understand
    conventions and requirements.
-3. **Analyze code** — look for:
+3. **Check CLAUDE.md coherence** — if a `CLAUDE.md`
+   file exists at the project root, verify:
+   - Tech stack matches actual dependencies
+   - Build & run commands are still accurate
+   - Conventions are followed in the reviewed code
+   - Referenced files (e.g. README.md) exist
+   - No stale or outdated information
+4. **Analyze code** — look for:
    - Logic errors and off-by-one mistakes
    - Unhandled edge cases and error paths
    - Security vulnerabilities (OWASP top 10)
@@ -50,7 +57,7 @@ what to fix.
    - Specification or requirement violations
    - API contract mismatches
    - Missing or incorrect validation at boundaries
-4. **Produce report** — write a structured, concise
+5. **Produce report** — write a structured, concise
    report following the format below.
 
 ## Report format
