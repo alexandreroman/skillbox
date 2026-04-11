@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "agent-skills",
-      "source": ".",
+      "source": "./",
       "description": "A repository of reusable skills and agents for Claude Code, built by Alexandre Roman",
       "version": "0.1.0",
       "author": {
