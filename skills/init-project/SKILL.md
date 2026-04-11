@@ -6,7 +6,7 @@ description: >-
   objective and name, then generates README.md and
   CLAUDE.md so Claude Code has proper context from
   day one.
-allowed-tools: Read
+allowed-tools: Read, Skill
 ---
 
 # Initialize Project

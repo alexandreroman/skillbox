@@ -69,5 +69,9 @@ different version.
    and its file to `Application.java`. Update the
    class name inside the file accordingly.
 
+7. Apply the `java-spring-boot` skill to the
+   generated project. Skip step 1 (scope selection)
+   and apply **all domains** automatically.
+
 Reference:
 https://docs.spring.io/initializr/docs/current/reference/html/
