@@ -52,7 +52,26 @@ to use. Suggest:
 The user may also specify a different license.
 If the user has no preference, use Apache-2.0.
 
-### Step 4 — Scan existing state
+### Step 4 — Scaffold the project
+
+If the tech stack chosen in step 1 matches one of the
+scaffolding references, follow its instructions
+**before** generating any documentation files.
+If no reference matches, skip this step.
+
+Pick the matching file from
+[references/scaffolding/](references/scaffolding/):
+
+- [java-spring-boot.md](references/scaffolding/java-spring-boot.md)
+- [nodejs-typescript.md](references/scaffolding/nodejs-typescript.md)
+- [python.md](references/scaffolding/python.md)
+- [go.md](references/scaffolding/go.md)
+- [rust.md](references/scaffolding/rust.md)
+
+Read **only** the matching file and apply its
+instructions.
+
+### Step 5 — Scan existing state
 
 Before generating files, check for:
 
@@ -64,7 +83,7 @@ Before generating files, check for:
 - CI configuration (`.github/workflows/`, `Makefile`,
   `Justfile`) — note build commands.
 
-### Step 5 — Generate README.md
+### Step 6 — Generate README.md
 
 Read the template at
 [references/README.md](references/README.md).
@@ -76,7 +95,7 @@ placeholder has nothing useful to say.
 Reference:
 https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
 
-### Step 6 — Generate CLAUDE.md
+### Step 7 — Generate CLAUDE.md
 
 Read the template at
 [references/CLAUDE.md](references/CLAUDE.md).
@@ -90,7 +109,7 @@ The **Agents section is mandatory** — never remove it.
 Reference:
 https://code.claude.com/docs/en/best-practices
 
-### Step 7 — Generate LICENSE
+### Step 8 — Generate LICENSE
 
 Write `./LICENSE` with the full text of the license
 chosen in step 3. Use the current year and the
@@ -100,7 +119,7 @@ notice.
 Reference:
 https://choosealicense.com/licenses/
 
-### Step 8 — Present and confirm
+### Step 9 — Present and confirm
 
 Show all generated files to the user for review.
 Ask if anything needs adjustment before finalizing.
