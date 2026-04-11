@@ -34,6 +34,14 @@ Use the narrowest test slice available:
 Avoid `@SpringBootTest` unless testing full
 integration.
 
+**Important:** Spring Boot 4.x reorganized test
+slice packages. Before writing imports, check
+the project's actual Spring Boot version and
+verify the correct package (e.g. `@WebMvcTest`
+moved from
+`o.s.boot.test.autoconfigure.web.servlet` to
+`o.s.boot.webmvc.test.autoconfigure`).
+
 ## Integration tests with Testcontainers
 
 If the user opted in, set up a reusable container

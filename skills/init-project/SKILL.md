@@ -106,6 +106,17 @@ essential** (~40-60 lines max). Remove any section
 whose placeholder has nothing useful to say.
 The **Agents section is mandatory** — never remove it.
 
+**Tech-stack-specific skills** — if the tech stack
+includes Java / Spring Boot, add the following line
+to the **code-reviewer** bullet in the Agents
+section:
+
+```
+  When reviewing Java / Spring Boot code, call
+  the **java-spring-boot** skill first to load
+  best practices into the review context.
+```
+
 Reference:
 https://code.claude.com/docs/en/best-practices
 
