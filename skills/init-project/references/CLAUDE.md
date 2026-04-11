@@ -15,6 +15,12 @@ matters. Omit if not yet decided.}}
 {{Essential commands only: install, build, test, run.
 Use a fenced code block. Omit if not yet applicable.}}
 
+## Modules
+
+{{Brief description of each module or top-level
+directory and its responsibility — bullet list.
+Omit if the project has no modular structure.}}
+
 ## Agents
 
 Use the following agents (from the
