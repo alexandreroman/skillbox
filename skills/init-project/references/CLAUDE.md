@@ -17,7 +17,9 @@ Use a fenced code block. Omit if not yet applicable.}}
 
 ## Agents
 
-Use the following agents for all code tasks:
+Use the following agents (from the
+[skillbox](https://github.com/alexandreroman/skillbox)
+plugin) for all code tasks:
 
 - **code-writer** — for ANY task that writes,
   modifies, or refactors code. No exceptions.
