@@ -17,8 +17,8 @@ from the user, then generating foundational files.
 
 ### Step 1 — Understand the objective
 
-Ask the user to describe the project objective in a
-few sentences:
+Use AskUserQuestion to ask the user to describe the
+project objective in a few sentences:
 
 - What problem does it solve?
 - Who is the target audience?
@@ -36,7 +36,8 @@ the objective. Names should be:
 - Easy to type and remember
 - Evocative of the project's purpose
 
-Ask the user to pick one or suggest their own.
+Use AskUserQuestion to ask the user to pick one or
+suggest their own.
 Do NOT proceed until a name is confirmed.
 
 ### Step 3 — Scan existing state
