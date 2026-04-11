@@ -40,7 +40,18 @@ Use AskUserQuestion to ask the user to pick one or
 suggest their own.
 Do NOT proceed until a name is confirmed.
 
-### Step 3 — Scan existing state
+### Step 3 — Choose a license
+
+Use AskUserQuestion to ask the user which license
+to use. Suggest:
+
+- **Apache-2.0** (default)
+- **MIT**
+
+The user may also specify a different license.
+If the user has no preference, use Apache-2.0.
+
+### Step 4 — Scan existing state
 
 Before generating files, check for:
 
@@ -52,7 +63,7 @@ Before generating files, check for:
 - CI configuration (`.github/workflows/`, `Makefile`,
   `Justfile`) — note build commands.
 
-### Step 4 — Generate README.md
+### Step 5 — Generate README.md
 
 Read the template at
 [references/README.md](references/README.md).
@@ -64,7 +75,7 @@ placeholder has nothing useful to say.
 Reference:
 https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
 
-### Step 5 — Generate CLAUDE.md
+### Step 6 — Generate CLAUDE.md
 
 Read the template at
 [references/CLAUDE.md](references/CLAUDE.md).
@@ -78,9 +89,19 @@ The **Agents section is mandatory** — never remove it.
 Reference:
 https://code.claude.com/docs/en/best-practices
 
-### Step 6 — Present and confirm
+### Step 7 — Generate LICENSE
 
-Show both generated files to the user for review.
+Write `./LICENSE` with the full text of the license
+chosen in step 3. Use the current year and the
+user's name (from git config) for the copyright
+notice.
+
+Reference:
+https://choosealicense.com/licenses/
+
+### Step 8 — Present and confirm
+
+Show all generated files to the user for review.
 Ask if anything needs adjustment before finalizing.
 
 ## Rules
