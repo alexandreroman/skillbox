@@ -113,7 +113,7 @@ section:
 
 ```
   When reviewing Java / Spring Boot code, call
-  the **java-spring-boot** skill first to load
+  the **spring-boot-best-practices** skill first to load
   best practices into the review context.
 ```
 

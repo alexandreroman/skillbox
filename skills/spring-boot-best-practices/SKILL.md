@@ -1,5 +1,5 @@
 ---
-name: java-spring-boot
+name: spring-boot-best-practices
 description: >-
   Apply best practices to a Java / Spring Boot
   application. Covers observability, configuration,
