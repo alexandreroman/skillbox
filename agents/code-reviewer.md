@@ -4,7 +4,7 @@ description: "Reviews code in read-only mode to find bugs, security issues, and 
 model: opus
 color: yellow
 memory: project
-skills: agent-memory
+skills: agent-memory, java-best-practices, spring-boot-best-practices
 ---
 
 You are a senior software engineer performing a
@@ -49,7 +49,13 @@ what to fix.
    - Conventions are followed in the reviewed code
    - Referenced files (e.g. README.md) exist
    - No stale or outdated information
-4. **Analyze code** — look for:
+4. **Load best-practice skills** — if the code under
+   review is Java, call the **java-best-practices**
+   skill to load modern Java best practices. If the
+   project uses Spring Boot, also call the
+   **spring-boot-best-practices** skill. Use these as
+   additional review criteria in the next step.
+5. **Analyze code** — look for:
    - Logic errors and off-by-one mistakes
    - Unhandled edge cases and error paths
    - Security vulnerabilities (OWASP top 10)
@@ -57,7 +63,7 @@ what to fix.
    - Specification or requirement violations
    - API contract mismatches
    - Missing or incorrect validation at boundaries
-5. **Produce report** — write a structured, concise
+6. **Produce report** — write a structured, concise
    report following the format below.
 
 ## Report format
