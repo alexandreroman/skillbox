@@ -24,6 +24,8 @@ reviewing, or refactoring code.
   layer caching
 - [GitHub Actions](references/github-actions.md) —
   workflow structure, caching, multi-arch images
+- [Markdown Tables](references/markdown-tables.md) —
+  column alignment rules and validation script
 
 ## Rules
 
