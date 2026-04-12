@@ -46,6 +46,12 @@ team context, external references, workflow preferences,
 or corrective feedback worth persisting across
 conversations.
 
+**Important:** Always use the **project-memory**
+skill to persist information. Never use the built-in
+auto-memory system (`~/.claude/projects/.../memory/`)
+for project decisions or context — it is local and
+not shared with the team.
+
 ## Conventions
 
 - Line length limits for readability:

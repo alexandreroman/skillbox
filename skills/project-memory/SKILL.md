@@ -66,6 +66,21 @@ or resource it references. See
 `references/guidelines.md` for full rules
 on staleness and verification.
 
+## Decision tracking
+
+`MEMORY.md` serves as a record of past
+decisions. When the user makes a decision that
+**contradicts** an existing memory note, do NOT
+silently override it. Instead:
+
+1. Surface the conflict — quote the existing
+   memory and explain how the new decision
+   differs.
+2. Ask for explicit confirmation before
+   proceeding.
+3. Only after confirmation: update or replace
+   the memory note and its `MEMORY.md` entry.
+
 ## How to save
 
 **Step 1** — Read `references/memory-types.md`
@@ -94,8 +109,20 @@ Write all memory content in English, regardless
 of the conversation language.
 
 **Step 3** — Add a pointer in `MEMORY.md`
-(inside the same memory directory). Start the
-file with a `# Project Memory` heading.
+(inside the same memory directory). If the file
+does not exist yet, create it with this header:
+
+```markdown
+# Project Memory
+
+> When a new decision **contradicts** an existing
+> memory note, do NOT silently override it.
+> Instead: surface the conflict, quote the
+> existing memory, explain how the new decision
+> differs, and ask for explicit confirmation
+> before updating.
+```
+
 One line per entry, under 150 characters:
 `- [Title](references/file.md) — one-line hook`.
 Keep the index concise (max 200 lines).
