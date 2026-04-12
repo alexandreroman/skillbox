@@ -25,7 +25,7 @@ Spring Boot code.
 - [Testing](references/testing.md) —
   test slices, Testcontainers, @ServiceConnection
 - [Containers](references/containers.md) —
-  layered JARs, multi-stage Dockerfile
+  layered JARs, AOT cache, CDS, multi-stage Dockerfile
 
 ## Rules
 
