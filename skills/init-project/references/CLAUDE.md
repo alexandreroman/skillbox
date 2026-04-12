@@ -32,6 +32,16 @@ plugin) for all code tasks:
 - **code-reviewer** — for read-only code review
   before merging or when investigating issues.
 
+## Memory
+
+Use the **project-memory** skill (from the
+[skillbox](https://github.com/alexandreroman/skillbox)
+plugin) proactively — without being asked — whenever
+the conversation reveals project decisions, deadlines,
+team context, external references, workflow preferences,
+or corrective feedback worth persisting across
+conversations.
+
 ## Conventions
 
 - Line length limits for readability:

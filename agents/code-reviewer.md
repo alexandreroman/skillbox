@@ -8,7 +8,7 @@ description: >-
 model: opus
 color: yellow
 memory: project
-skills: agent-memory
+skills: project-memory
 ---
 
 You are a senior software engineer performing a
