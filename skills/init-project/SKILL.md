@@ -71,7 +71,27 @@ Pick the matching file from
 Read **only** the matching file and apply its
 instructions.
 
-### Step 5 — Scan existing state
+After running the scaffolding commands,
+generate the application entry point
+(e.g. main class, `main.py`, `main.go`,
+etc.) with working starter code that
+matches the project objective and tech
+stack.
+
+### Step 5 — Apply best practices
+
+Before generating any source file, check
+which coding-rules skills are available
+in the current session (they appear in
+the system-reminder skill list). Invoke
+each applicable skill so its rules are
+loaded, then apply them to all generated
+source code. At a minimum, apply any
+language-agnostic rules skill and any
+skill matching the project's language
+or framework.
+
+### Step 6 — Scan existing state
 
 Before generating files, check for:
 
@@ -83,7 +103,7 @@ Before generating files, check for:
 - CI configuration (`.github/workflows/`, `Makefile`,
   `Justfile`) — note build commands.
 
-### Step 6 — Generate README.md
+### Step 7 — Generate README.md
 
 Read the template at
 [assets/README.md](assets/README.md).
@@ -95,7 +115,7 @@ placeholder has nothing useful to say.
 Reference:
 https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
 
-### Step 7 — Generate CLAUDE.md
+### Step 8 — Generate CLAUDE.md
 
 Read the template at
 [assets/CLAUDE.md](assets/CLAUDE.md).
@@ -109,7 +129,7 @@ The **Agents section is mandatory** — never remove it.
 Reference:
 https://code.claude.com/docs/en/best-practices
 
-### Step 8 — Generate LICENSE
+### Step 9 — Generate LICENSE
 
 Write `./LICENSE` with the full text of the license
 chosen in step 3. Use the current year and the
@@ -119,7 +139,7 @@ notice.
 Reference:
 https://choosealicense.com/licenses/
 
-### Step 9 — Present and confirm
+### Step 10 — Present and confirm
 
 Show all generated files to the user for review.
 Ask if anything needs adjustment before finalizing.
