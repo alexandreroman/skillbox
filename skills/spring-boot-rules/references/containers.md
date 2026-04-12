@@ -1,7 +1,10 @@
 # Containers
 
-Rules for building optimized container images
-from Spring Boot applications.
+Spring Boot–specific additions for container
+images. All general Java container rules apply
+(base image, multi-stage builds, JVM flags,
+security, `.dockerignore`) — this file only
+covers what Spring Boot adds on top.
 
 ## Layered JARs
 
@@ -23,11 +26,11 @@ Docker build produces an `.aot` file that
 dramatically improves startup time and reduces
 memory footprint.
 
-| Flag                                | Purpose             |
-| ----------------------------------- | ------------------- |
-| `-XX:AOTCacheOutput=app.aot`        | Generate the cache  |
-| `-XX:AOTCache=app.aot`              | Use the cache       |
-| `-Dspring.context.exit=onRefresh`   | Exit after training |
+| Flag                              | Purpose             |
+| --------------------------------- | ------------------- |
+| `-XX:AOTCacheOutput=app.aot`      | Generate the cache  |
+| `-XX:AOTCache=app.aot`            | Use the cache       |
+| `-Dspring.context.exit=onRefresh` | Exit after training |
 
 ## CDS (Java < 24)
 
@@ -69,7 +72,10 @@ RUN java -XX:AOTCacheOutput=app.aot \
 # Stage 3 — runtime image
 FROM eclipse-temurin:25-jre
 WORKDIR /app
-COPY --from=train /app/ ./
+RUN addgroup --system app \
+ && adduser --system --ingroup app app
+COPY --from=train --chown=app:app /app/ ./
+USER app:app
 ENTRYPOINT ["java", "-XX:AOTCache=app.aot", \
             "-jar", "application.jar"]
 ```
@@ -79,16 +85,3 @@ creates a separate Docker layer. Dependencies
 change rarely, so they stay cached across builds;
 only the `application/` layer is rebuilt on code
 changes.
-
-## General guidelines
-
-- **Multi-stage builds** — always use a multi-stage
-  `Dockerfile` to keep the runtime image small.
-- **JRE, not JDK** — base the runtime stage on a
-  JRE image (e.g., `eclipse-temurin:25-jre`).
-- **Non-root user** — create a dedicated `app` user
-  and group, and run the application as `app:app`
-  in production images.
-- **Health check** — expose the Actuator health
-  endpoint and declare a `HEALTHCHECK` instruction
-  or Kubernetes liveness/readiness probes.

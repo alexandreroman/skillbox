@@ -28,6 +28,9 @@ when writing, reviewing, or refactoring Java code.
 - [Concurrency](references/concurrency.md) —
   virtual threads, structured concurrency, scoped
   values
+- [Containers](references/containers.md) —
+  base image, multi-stage builds, JVM flags,
+  security
 
 ## Rules
 
