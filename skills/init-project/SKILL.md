@@ -106,28 +106,6 @@ essential** (~40-60 lines max). Remove any section
 whose placeholder has nothing useful to say.
 The **Agents section is mandatory** — never remove it.
 
-**Tech-stack-specific skills** — if the tech stack
-includes Java, add the following lines to the
-**code-reviewer** and **code-writer** bullets in
-the Agents section:
-
-For **any Java project**, add to both agents:
-
-```
-  When working on Java code, call the
-  **java-best-practices** skill first to load modern
-  Java best practices into context.
-```
-
-If the project also uses **Spring Boot**, add to
-both agents:
-
-```
-  When working on Java / Spring Boot code, also call
-  the **spring-boot-best-practices** skill to load
-  Spring Boot best practices into context.
-```
-
 Reference:
 https://code.claude.com/docs/en/best-practices
 

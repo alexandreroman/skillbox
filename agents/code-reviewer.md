@@ -49,12 +49,10 @@ what to fix.
    - Conventions are followed in the reviewed code
    - Referenced files (e.g. README.md) exist
    - No stale or outdated information
-4. **Load best-practice skills** — if the code under
-   review is Java, call the **java-best-practices**
-   skill to load modern Java best practices. If the
-   project uses Spring Boot, also call the
-   **spring-boot-best-practices** skill. Use these as
-   additional review criteria in the next step.
+4. **Load best-practice skills** — check available
+   skills for any that match the project's tech stack
+   (language, framework). Call each matching skill to
+   load best practices as additional review criteria.
 5. **Analyze code** — look for:
    - Logic errors and off-by-one mistakes
    - Unhandled edge cases and error paths
