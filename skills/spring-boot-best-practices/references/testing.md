@@ -1,51 +1,30 @@
 # Testing
 
-Goal: reliable, fast, maintainable test suite with
-appropriate use of Spring Boot test slicing.
+Well-known features (Mockito unit tests, slice test
+annotations, `@SpringBootTest` avoidance) are
+omitted — apply from general knowledge.
 
-## Dependencies
+## Spring Boot 4.x Test Slice Packages
 
-Ensure the following are present:
+Spring Boot 4.x reorganized test slice packages.
+Before writing imports, check the project's actual
+Spring Boot version:
 
-- `spring-boot-starter-test` (included by default)
-- `spring-boot-testcontainers` +
-  `testcontainers` (if the project uses a database
-  or message broker — ask the user)
+| Annotation     | 3.x package                                  | 4.x package                            |
+|----------------|----------------------------------------------|-----------------------------------------|
+| `@WebMvcTest`  | `o.s.boot.test.autoconfigure.web.servlet`    | `o.s.boot.webmvc.test.autoconfigure`    |
+| `@DataJpaTest` | `o.s.boot.test.autoconfigure.orm.jpa`        | `o.s.boot.jpa.test.autoconfigure`       |
+| `@JsonTest`    | `o.s.boot.test.autoconfigure.json`           | `o.s.boot.jackson.test.autoconfigure`   |
 
-## Unit tests
+Always verify the correct package against the
+project's Spring Boot version before suggesting
+imports.
 
-- Test services and domain logic **without** Spring
-  context (`@ExtendWith(MockitoExtension.class)`).
-- Mock external dependencies with Mockito.
-- Naming convention:
-  `MethodName_StateUnderTest_ExpectedBehavior`
-  or descriptive `@DisplayName`.
+## Testcontainers with @ServiceConnection
 
-## Slice tests
-
-Use the narrowest test slice available:
-
-| Slice | Annotation    |
-|-------|---------------|
-| Web   | `@WebMvcTest` |
-| JPA   | `@DataJpaTest`|
-| JSON  | `@JsonTest`   |
-
-Avoid `@SpringBootTest` unless testing full
-integration.
-
-**Important:** Spring Boot 4.x reorganized test
-slice packages. Before writing imports, check
-the project's actual Spring Boot version and
-verify the correct package (e.g. `@WebMvcTest`
-moved from
-`o.s.boot.test.autoconfigure.web.servlet` to
-`o.s.boot.webmvc.test.autoconfigure`).
-
-## Integration tests with Testcontainers
-
-If the user opted in, set up a reusable container
-configuration:
+Use `@ServiceConnection` (Spring Boot 3.1+) instead
+of `@DynamicPropertySource` for Testcontainers — it
+auto-configures the connection properties:
 
 ```java
 @TestConfiguration(proxyBeanMethods = false)
@@ -60,15 +39,19 @@ class ContainersConfig {
 }
 ```
 
-Reference the configuration in integration tests
-with `@Import(ContainersConfig.class)`.
+Reference with `@Import(ContainersConfig.class)` in
+integration tests.
+
+**Key points:**
+
+- `proxyBeanMethods = false` avoids CGLIB proxying
+  overhead in test configs.
+- `@ServiceConnection` replaces manual property
+  wiring — no need for `registry.add(...)` calls.
 
 ## Checklist
 
-- [ ] Unit tests for services and domain logic
-      (no Spring context)
-- [ ] Slice tests for controllers (`@WebMvcTest`)
-      and repositories (`@DataJpaTest`)
-- [ ] `@SpringBootTest` only for full integration
-- [ ] Testcontainers for external dependencies
-      (if applicable)
+- [ ] Correct test slice import packages for the
+      project's Spring Boot version
+- [ ] `@ServiceConnection` instead of
+      `@DynamicPropertySource` for Testcontainers

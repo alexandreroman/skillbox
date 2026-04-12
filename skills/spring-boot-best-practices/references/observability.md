@@ -1,18 +1,14 @@
 # Observability
 
-Goal: structured logging, health checks, metrics,
-and distributed tracing.
+Well-known features (SLF4J logging, actuator
+endpoints, health probes) are omitted — apply from
+general knowledge.
 
-## Dependencies
+## Structured Logging (Spring Boot 3.4+)
 
-Ensure the following starters are present:
-
-- `spring-boot-starter-actuator`
-
-## Structured logging
-
-Configure ECS-format structured logging in
-`application.yaml`:
+Spring Boot 3.4 added native structured logging.
+Configure ECS-format output in `application.yaml`
+without any extra dependency:
 
 ```yaml
 logging:
@@ -21,42 +17,25 @@ logging:
       console: ecs
 ```
 
-Replace raw `System.out.println` or
-`e.printStackTrace()` calls with SLF4J logger usage:
+This replaces custom Logback/Log4j2 JSON layouts.
 
-```java
-private static final Logger LOGGER =
-    LoggerFactory.getLogger(MyClass.class);
+## OpenTelemetry Starter (Spring Boot 4.0+)
+
+Use the dedicated starter instead of manually wiring
+Micrometer bridges. It covers both tracing and
+metrics export in OTLP format, giving a unified
+OTel pipeline.
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>
+        spring-boot-starter-opentelemetry
+    </artifactId>
+</dependency>
 ```
 
-## Actuator
-
-Expose health and metrics on a separate management
-port:
-
-```yaml
-management:
-  server:
-    port: ${MANAGEMENT_PORT:8081}
-  endpoints:
-    web:
-      exposure:
-        include: health, metrics
-  endpoint:
-    health:
-      probes:
-        enabled: true
-  metrics:
-    tags:
-      service.name: ${spring.application.name}
-      service.instance.id: ${random.uuid}
-```
-
-## Tracing (optional)
-
-If the user needs distributed tracing, add
-`spring-boot-starter-opentelemetry` and configure
-sampling in `application.yaml`:
+Configure sampling in `application.yaml`:
 
 ```yaml
 management:
@@ -64,3 +43,11 @@ management:
     sampling:
       probability: 1.0
 ```
+
+## Checklist
+
+- [ ] Structured logging via
+      `logging.structured.format.console` instead
+      of custom JSON layouts
+- [ ] `spring-boot-starter-opentelemetry` instead
+      of manual Micrometer/OTel wiring
