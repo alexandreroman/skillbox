@@ -21,7 +21,7 @@ Spring Boot code.
 ## Domains
 
 - [Observability](references/observability.md) —
-  structured logging, OpenTelemetry starter
+  Actuator, structured logging, OpenTelemetry starter
 - [Testing](references/testing.md) —
   test slices, Testcontainers, @ServiceConnection
 

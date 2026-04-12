@@ -1,8 +1,46 @@
 # Observability
 
-Well-known features (SLF4J logging, actuator
-endpoints, health probes) are omitted — apply from
-general knowledge.
+## Spring Boot Actuator
+
+Expose only the endpoints that are needed and
+serve them on a separate management port so they
+stay off the public network.
+
+Reference configuration in `application.yaml`:
+
+```yaml
+management:
+  server:
+    port: ${MANAGEMENT_PORT:8081}
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true
+        add-additional-paths: true
+  metrics:
+    tags:
+      service.name: ${spring.application.name}
+      service.instance.id: ${random.uuid}
+```
+
+Key points:
+
+- **Separate management port** — keeps actuator
+  endpoints off the main server port, simplifying
+  network policies and avoiding accidental exposure.
+- **Minimal exposure** — only `health` and `metrics`
+  are exposed; add more only when explicitly needed.
+- **Health probes** — `probes.enabled: true` with
+  `add-additional-paths: true` exposes `/livez`
+  and `/readyz` endpoints.
+- **Metric tags** — `service.name` and
+  `service.instance.id` are attached to every
+  metric, enabling per-service and per-instance
+  filtering in dashboards.
 
 ## Structured Logging (Spring Boot 3.4+)
 
@@ -53,7 +91,9 @@ OTel pipeline.
 </dependency>
 ```
 
-Configure sampling in `application.yaml`:
+Tracing is enabled by default with the starter.
+Create a `dev` profile in `application-dev.yaml`
+to capture all traces during development:
 
 ```yaml
 management:
@@ -61,3 +101,8 @@ management:
     sampling:
       probability: 1.0
 ```
+
+In production the default sampling probability
+(0.1) applies, keeping trace volume manageable.
+Set `probability: 1.0` only under the `dev`
+profile.
