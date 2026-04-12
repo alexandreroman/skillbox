@@ -10,11 +10,11 @@ Spring Boot 4.x reorganized test slice packages.
 Before writing imports, check the project's actual
 Spring Boot version:
 
-| Annotation     | 3.x package                                  | 4.x package                            |
-|----------------|----------------------------------------------|-----------------------------------------|
-| `@WebMvcTest`  | `o.s.boot.test.autoconfigure.web.servlet`    | `o.s.boot.webmvc.test.autoconfigure`    |
-| `@DataJpaTest` | `o.s.boot.test.autoconfigure.orm.jpa`        | `o.s.boot.jpa.test.autoconfigure`       |
-| `@JsonTest`    | `o.s.boot.test.autoconfigure.json`           | `o.s.boot.jackson.test.autoconfigure`   |
+| Annotation     | 3.x package                               | 4.x package                          |
+|----------------|-------------------------------------------|--------------------------------------|
+| `@WebMvcTest`  | `o.s.boot.test.autoconfigure.web.servlet` | `o.s.boot.webmvc.test.autoconfigure` |
+| `@DataJpaTest` | `o.s.boot.test.autoconfigure.orm.jpa`     | `o.s.boot.jpa.test.autoconfigure`    |
+| `@JsonTest`    | `o.s.boot.test.autoconfigure.json`        | `o.s.boot.jackson.test.autoconfigure`|
 
 Always verify the correct package against the
 project's Spring Boot version before suggesting

@@ -1,6 +1,10 @@
 ---
 name: "code-reviewer"
-description: "Reviews code in read-only mode to find bugs, security issues, and specification violations. Produces a concise report with findings and recommendations — never modifies code."
+description: >-
+  Reviews code in read-only mode to find bugs,
+  security issues, and specification violations.
+  Produces a concise report with findings and
+  recommendations — never modifies code.
 model: opus
 color: yellow
 memory: project

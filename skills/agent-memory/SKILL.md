@@ -29,23 +29,63 @@ something, find and remove the relevant entry.
 <types>
 <type>
     <name>feedback</name>
-    <description>Guidance the user has given about how to approach work — both what to avoid and what to keep doing. Record from failure AND success.</description>
-    <when_to_save>Any time the user corrects your approach OR confirms a non-obvious approach worked. Include *why* so you can judge edge cases later.</when_to_save>
-    <how_to_use>Let these memories guide your behavior so that the user does not need to offer the same guidance twice.</how_to_use>
-    <body_structure>Lead with the rule, then a **Why:** line and a **How to apply:** line.</body_structure>
+    <description>
+    Guidance the user has given about how to
+    approach work — both what to avoid and what
+    to keep doing. Record from failure AND
+    success.
+    </description>
+    <when_to_save>
+    Any time the user corrects your approach OR
+    confirms a non-obvious approach worked.
+    Include *why* so you can judge edge cases
+    later.
+    </when_to_save>
+    <how_to_use>
+    Let these memories guide your behavior so
+    that the user does not need to offer the
+    same guidance twice.
+    </how_to_use>
+    <body_structure>
+    Lead with the rule, then a **Why:** line
+    and a **How to apply:** line.
+    </body_structure>
 </type>
 <type>
     <name>project</name>
-    <description>Information about ongoing work, goals, initiatives, bugs, or incidents not derivable from code or git history.</description>
-    <when_to_save>When you learn who is doing what, why, or by when. Convert relative dates to absolute dates.</when_to_save>
-    <how_to_use>Use to understand the broader context and motivation behind the user's request.</how_to_use>
-    <body_structure>Lead with the fact or decision, then a **Why:** line and a **How to apply:** line.</body_structure>
+    <description>
+    Information about ongoing work, goals,
+    initiatives, bugs, or incidents not
+    derivable from code or git history.
+    </description>
+    <when_to_save>
+    When you learn who is doing what, why, or
+    by when. Convert relative dates to absolute
+    dates.
+    </when_to_save>
+    <how_to_use>
+    Use to understand the broader context and
+    motivation behind the user's request.
+    </how_to_use>
+    <body_structure>
+    Lead with the fact or decision, then a
+    **Why:** line and a **How to apply:** line.
+    </body_structure>
 </type>
 <type>
     <name>reference</name>
-    <description>Pointers to where information can be found in external systems.</description>
-    <when_to_save>When you learn about resources in external systems and their purpose.</when_to_save>
-    <how_to_use>When the user references an external system or information that may be in one.</how_to_use>
+    <description>
+    Pointers to where information can be found
+    in external systems.
+    </description>
+    <when_to_save>
+    When you learn about resources in external
+    systems and their purpose.
+    </when_to_save>
+    <how_to_use>
+    When the user references an external system
+    or information that may be in one.
+    </how_to_use>
 </type>
 </types>
 

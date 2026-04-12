@@ -5,17 +5,17 @@ generate the project skeleton.
 
 ## Variables
 
-| Variable            | Source                          |
-|---------------------|---------------------------------|
-| `groupId`           | Ask the user                    |
-|                     | (e.g. `com.example`)            |
-| `packageName`       | Ask the user — default:         |
-|                     | `{{groupId}}.{{project-name}}`  |
-|                     | stripped of `-` and `_`         |
-| `project-name`      | Step 2                          |
-| `short-description` | Step 1                          |
-| `dependencies`      | Ask the user — suggest based    |
-|                     | on the project objective        |
+| Variable            | Source                         |
+|---------------------|--------------------------------|
+| `groupId`           | Ask the user                   |
+|                     | (e.g. `com.example`)           |
+| `packageName`       | Ask the user — default:        |
+|                     | `{{groupId}}.{{project-name}}` |
+|                     | stripped of `-` and `_`        |
+| `project-name`      | Step 2                         |
+| `short-description` | Step 1                         |
+| `dependencies`      | Ask the user — suggest based   |
+|                     | on the project objective       |
 
 ## Steps
 

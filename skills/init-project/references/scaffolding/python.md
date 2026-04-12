@@ -3,7 +3,7 @@
 ## Variables
 
 | Variable            | Source |
-| ------------------- | ------ |
+|---------------------|--------|
 | `project-name`      | Step 2 |
 | `short-description` | Step 1 |
 

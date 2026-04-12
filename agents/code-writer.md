@@ -1,6 +1,13 @@
 ---
 name: "code-writer"
-description: "MUST be invoked for ANY task that writes, modifies, or refactors source code — no exceptions, even for trivial changes. Covers new functions, classes, modules, algorithms, API endpoints, bug fixes, and all code edits. Focuses on simplicity, idiomatic style, and community best practices across any language."
+description: >-
+  MUST be invoked for ANY task that writes, modifies,
+  or refactors source code — no exceptions, even for
+  trivial changes. Covers new functions, classes,
+  modules, algorithms, API endpoints, bug fixes, and
+  all code edits. Focuses on simplicity, idiomatic
+  style, and community best practices across any
+  language.
 model: opus
 color: red
 memory: project

@@ -2,10 +2,10 @@
 
 ## Variables
 
-| Variable | Source |
-|---|---|
-| `owner` | Ask the user or read from `git config` |
-| `project-name` | Step 2 |
+| Variable       | Source                                 |
+|----------------|----------------------------------------|
+| `owner`        | Ask the user or read from `git config` |
+| `project-name` | Step 2                                 |
 
 ## Steps
 

@@ -26,5 +26,9 @@ agents/                      # One .md file per agent
 - Follow standard Markdown conventions: blank line
   before and after headings, blank line before and
   after lists, fenced code blocks with a language tag
+- Format Markdown tables with aligned columns:
+  pad cells with spaces so that every `|` in a
+  column lines up vertically, and use `-` runs
+  matching each column width in the separator row
 - Skills must follow the Agent Skills spec:
   https://agentskills.io/specification
