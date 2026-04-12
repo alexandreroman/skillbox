@@ -11,7 +11,7 @@ description: >-
 model: opus
 color: red
 memory: project
-skills: agent-memory
+skills: agent-memory, java-rules, spring-boot-rules
 ---
 
 You are a senior software engineer. You write code that

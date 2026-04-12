@@ -2,11 +2,11 @@
 name: java-rules
 description: >-
   Java coding rules: best practices, code
-  conventions, and design preferences (up to
-  Java 25). Covers language features, concurrency,
-  API patterns, and code style. Use this skill to
-  influence how Java code is written, reviewed,
-  or refactored.
+  conventions, formatting, and design preferences
+  (up to Java 25). Covers code style, language
+  features, concurrency, and API patterns. Use
+  this skill to influence how Java code is written,
+  reviewed, or refactored.
 allowed-tools: Read
 ---
 
