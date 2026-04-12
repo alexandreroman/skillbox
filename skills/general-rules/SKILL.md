@@ -19,6 +19,9 @@ reviewing, or refactoring code.
 
 ## Domains
 
+- [Compose](references/compose.md) —
+  Docker Compose health checks, dependencies,
+  restart policy, read-only volumes
 - [Containers](references/containers.md) —
   Dockerfile best practices, image size, security,
   layer caching
