@@ -36,9 +36,10 @@ domain, read the matching reference file and follow
 its instructions. Present proposed changes to the
 user and get confirmation before moving to the next.
 
-1. [modern-syntax.md](references/modern-syntax.md)
-2. [collections-streams.md](references/collections-streams.md)
-3. [concurrency.md](references/concurrency.md)
+1. [code-style.md](references/code-style.md)
+2. [modern-syntax.md](references/modern-syntax.md)
+3. [collections-streams.md](references/collections-streams.md)
+4. [concurrency.md](references/concurrency.md)
 
 ## Rules
 
