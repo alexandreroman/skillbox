@@ -78,7 +78,10 @@ silently override it. Instead:
    differs.
 2. Ask for explicit confirmation before
    proceeding.
-3. Only after confirmation: update or replace
+3. **Do NOT take any action** — no tool calls,
+   no file writes, no implementation — until
+   the user has explicitly confirmed.
+4. Only after confirmation: update or replace
    the memory note and its `MEMORY.md` entry.
 
 ## How to save
@@ -120,13 +123,20 @@ does not exist yet, create it with this header:
 > Instead: surface the conflict, quote the
 > existing memory, explain how the new decision
 > differs, and ask for explicit confirmation
-> before updating.
+> before updating. **Do NOT take any action** —
+> no tool calls, no file writes — until confirmed.
 ```
 
 One line per entry, under 150 characters:
 `- [Title](references/file.md) — one-line hook`.
 Keep the index concise (max 200 lines).
 Check for duplicates before writing.
+
+If a duplicate or conflicting entry exists, do
+NOT write anything — neither the memory file
+nor the `MEMORY.md` entry. Surface the conflict,
+ask for explicit confirmation, and wait. No
+tool calls or file writes until confirmed.
 
 > **Important:** Always write to the *project*
 > memory directory (`<project root>/.claude/…`),
