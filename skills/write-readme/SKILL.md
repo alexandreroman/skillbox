@@ -102,7 +102,7 @@ Read the reference guide at
 [references/guide.md](references/guide.md).
 
 Read the template at
-[references/template.md](references/template.md).
+[assets/README.md](assets/README.md).
 
 Generate `./README.md` by filling in each
 `{{placeholder}}` with project-specific content:

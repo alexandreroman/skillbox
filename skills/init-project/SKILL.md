@@ -60,13 +60,13 @@ scaffolding references, follow its instructions
 If no reference matches, skip this step.
 
 Pick the matching file from
-[references/scaffolding/](references/scaffolding/):
+[references/](references/):
 
-- [java-spring-boot.md](references/scaffolding/java-spring-boot.md)
-- [nodejs-typescript.md](references/scaffolding/nodejs-typescript.md)
-- [python.md](references/scaffolding/python.md)
-- [go.md](references/scaffolding/go.md)
-- [rust.md](references/scaffolding/rust.md)
+- [java-spring-boot.md](references/java-spring-boot.md)
+- [nodejs-typescript.md](references/nodejs-typescript.md)
+- [python.md](references/python.md)
+- [go.md](references/go.md)
+- [rust.md](references/rust.md)
 
 Read **only** the matching file and apply its
 instructions.
@@ -86,7 +86,7 @@ Before generating files, check for:
 ### Step 6 — Generate README.md
 
 Read the template at
-[references/README.md](references/README.md).
+[assets/README.md](assets/README.md).
 Write `./README.md` by
 filling in each `{{placeholder}}` with project-
 specific content. Remove any section whose
@@ -98,7 +98,7 @@ https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-f
 ### Step 7 — Generate CLAUDE.md
 
 Read the template at
-[references/CLAUDE.md](references/CLAUDE.md).
+[assets/CLAUDE.md](assets/CLAUDE.md).
 Write `./CLAUDE.md` by
 filling in each `{{placeholder}}` with project-
 specific content. Keep the file **short and
