@@ -24,6 +24,8 @@ Spring Boot code.
   Actuator, structured logging, OpenTelemetry starter
 - [Testing](references/testing.md) —
   test slices, Testcontainers, @ServiceConnection
+- [Containers](references/containers.md) —
+  layered JARs, multi-stage Dockerfile
 
 ## Rules
 
