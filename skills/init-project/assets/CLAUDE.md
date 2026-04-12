@@ -34,6 +34,10 @@ plugin) for all code tasks:
 
 ## Memory
 
+At the start of every conversation, read
+`.claude/project-memory/MEMORY.md` to load
+project context from previous conversations.
+
 Use the **project-memory** skill (from the
 [skillbox](https://github.com/alexandreroman/skillbox)
 plugin) proactively — without being asked — whenever

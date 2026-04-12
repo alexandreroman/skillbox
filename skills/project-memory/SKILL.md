@@ -21,7 +21,7 @@ Persistent, file-based memory system. Memory
 directory depends on context:
 
 - Main conversation:
-  `<project root>/.claude/memory/`
+  `<project root>/.claude/project-memory/`
 - Subagent:
   `<project root>/.claude/agent-memory/<agent-name>/`
 
@@ -48,15 +48,35 @@ Save a memory whenever:
 
 To forget: find and remove the relevant entry.
 
+## When to recall
+
+Recall memories whenever:
+
+- A question or task might benefit from
+  prior context — read `MEMORY.md` from the
+  memory directory to find relevant entries.
+- The user explicitly asks to remember,
+  check, or recall something.
+- Starting a new conversation where past
+  decisions or preferences may apply.
+
+Before acting on a recalled memory, verify
+it against the current state of the codebase
+or resource it references. See
+`references/guidelines.md` for full rules
+on staleness and verification.
+
 ## How to save
 
 **Step 1** — Read `references/memory-types.md`
 (next to this SKILL.md) to pick the right type
 and body structure.
 
-**Step 2** — Write a file (e.g.
-`feedback_testing.md`, `project_deadline.md`)
-with this frontmatter:
+**Step 2** — Write the file inside the
+`references/` subdirectory of the memory
+directory (e.g.
+`<memory-dir>/references/feedback_testing.md`).
+Use this frontmatter:
 
 ```yaml
 ---
@@ -66,14 +86,25 @@ type: feedback | project | reference
 ---
 ```
 
+After the frontmatter, start with a
+`# <memory name>` heading matching the `name`
+field.
+
 Write all memory content in English, regardless
 of the conversation language.
 
-**Step 3** — Add a pointer in `MEMORY.md`.
+**Step 3** — Add a pointer in `MEMORY.md`
+(inside the same memory directory). Start the
+file with a `# Project Memory` heading.
 One line per entry, under 150 characters:
-`- [Title](file.md) — one-line hook`.
+`- [Title](references/file.md) — one-line hook`.
 Keep the index concise (max 200 lines).
 Check for duplicates before writing.
+
+> **Important:** Always write to the *project*
+> memory directory (`<project root>/.claude/…`),
+> never to the user-level directory
+> (`~/.claude/projects/…`).
 
 ## Before saving or recalling
 

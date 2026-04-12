@@ -1,5 +1,11 @@
 # Memory Guidelines
 
+## Language
+
+All memory content (file names, frontmatter,
+body text, MEMORY.md index) must be written in
+English, regardless of the conversation language.
+
 ## What NOT to save
 
 - Code patterns, architecture, file paths, or
