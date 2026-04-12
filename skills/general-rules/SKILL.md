@@ -24,6 +24,9 @@ reviewing, or refactoring code.
   layer caching
 - [GitHub Actions](references/github-actions.md) —
   workflow structure, caching, multi-arch images
+- [HTTP Servers](references/http-servers.md) —
+  port configuration via `PORT` env var, bind
+  address, framework defaults
 - [Markdown Tables](references/markdown-tables.md) —
   column alignment rules and validation script
 
