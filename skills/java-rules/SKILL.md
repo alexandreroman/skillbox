@@ -1,18 +1,21 @@
 ---
-name: java-best-practices
+name: java-rules
 description: >-
-  Apply modern Java best practices (up to Java 25)
-  to an existing project. Covers recent language
-  features, concurrency pitfalls, and API patterns
-  that are easy to miss. Use when working on a Java
-  project to audit or modernize its codebase.
+  Java coding rules: best practices, code
+  conventions, and design preferences (up to
+  Java 25). Covers language features, concurrency,
+  API patterns, and code style. Use this skill to
+  influence how Java code is written, reviewed,
+  or refactored.
 allowed-tools: Read
 ---
 
-# Modern Java Best Practices
+# Java Rules
 
-Audit and modernize a Java project by applying
-best practices that go beyond well-known features.
+Best practices, code conventions, and design
+preferences for modern Java projects. Apply these
+rules when writing, reviewing, or refactoring Java
+code.
 Focuses on Java 21–25 additions and common pitfalls.
 
 ## Process

@@ -1,18 +1,21 @@
 ---
-name: spring-boot-best-practices
+name: spring-boot-rules
 description: >-
-  Apply best practices to a Java / Spring Boot
-  application. Covers recent Spring Boot features
-  and pitfalls that are easy to miss (3.4+, 4.x).
-  Use when working on an existing Spring Boot
-  project to audit or improve its structure.
+  Spring Boot coding rules: best practices, code
+  conventions, and architecture preferences
+  (3.4+, 4.x). Covers configuration, structure,
+  and design patterns. Use this skill to influence
+  how Spring Boot code is written, reviewed, or
+  refactored.
 allowed-tools: Read
 ---
 
-# Java / Spring Boot Best Practices
+# Spring Boot Rules
 
-Audit and improve a Java / Spring Boot application.
-Focuses on recent Spring Boot additions and common
+Best practices, code conventions, and architecture
+preferences for Spring Boot applications. Apply
+these rules when writing, reviewing, or refactoring
+Spring Boot code. Focuses on recent additions and
 pitfalls — well-known practices (externalized
 config, `@Valid`, `@RestControllerAdvice`,
 `ProblemDetail`, slice tests, Mockito) are omitted.

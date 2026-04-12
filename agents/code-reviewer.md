@@ -8,7 +8,7 @@ description: >-
 model: opus
 color: yellow
 memory: project
-skills: agent-memory, java-best-practices, spring-boot-best-practices
+skills: agent-memory, java-rules, spring-boot-rules
 ---
 
 You are a senior software engineer performing a
