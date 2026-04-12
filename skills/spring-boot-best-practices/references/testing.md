@@ -48,10 +48,3 @@ integration tests.
   overhead in test configs.
 - `@ServiceConnection` replaces manual property
   wiring — no need for `registry.add(...)` calls.
-
-## Checklist
-
-- [ ] Correct test slice import packages for the
-      project's Spring Boot version
-- [ ] `@ServiceConnection` instead of
-      `@DynamicPropertySource` for Testcontainers

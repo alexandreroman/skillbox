@@ -40,10 +40,3 @@ Prefer `SequencedCollection` over `List` in method
 signatures when only ordered access (not indexing)
 is needed. Provides `getFirst()`, `getLast()`, and
 `reversed()`.
-
-## Checklist
-
-- [ ] Stream gatherers for windowing, batching,
-      and stateful operations
-- [ ] `SequencedCollection` in signatures where
-      only ordered access is needed

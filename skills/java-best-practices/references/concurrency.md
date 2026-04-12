@@ -71,12 +71,3 @@ Migrate from `ThreadLocal` when the value is set
 once per scope, code runs on virtual threads, or
 the value should be inherited by child tasks in
 structured concurrency.
-
-## Checklist
-
-- [ ] No `synchronized` blocks guarding I/O
-      (use `ReentrantLock`)
-- [ ] Structured concurrency for fan-out patterns
-      (if preview features are enabled)
-- [ ] Scoped values instead of `ThreadLocal`
-      (if preview features are enabled)

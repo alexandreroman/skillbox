@@ -18,6 +18,24 @@ logging:
 ```
 
 This replaces custom Logback/Log4j2 JSON layouts.
+Structured logs are preferred because they are easier
+to ingest by log aggregation systems and easier to
+parse and reason about for AI coding agents.
+
+In source code, use SLF4J structured logging with
+key-value pairs instead of string interpolation:
+
+```java
+logger.atInfo()
+    .setMessage("Order processed")
+    .addKeyValue("orderId", orderId)
+    .addKeyValue("amount", amount)
+    .log();
+```
+
+This produces machine-parseable fields in the
+structured output, rather than burying values in
+free-text messages.
 
 ## OpenTelemetry Starter (Spring Boot 4.0+)
 
@@ -43,11 +61,3 @@ management:
     sampling:
       probability: 1.0
 ```
-
-## Checklist
-
-- [ ] Structured logging via
-      `logging.structured.format.console` instead
-      of custom JSON layouts
-- [ ] `spring-boot-starter-opentelemetry` instead
-      of manual Micrometer/OTel wiring

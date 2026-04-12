@@ -39,10 +39,3 @@ cases — easy to overlook:
 case Circle(var radius) ->
     Math.PI * radius * radius;
 ```
-
-## Checklist
-
-- [ ] Flexible constructor bodies where `super()`
-      validation was previously impossible
-- [ ] Records used wherever possible
-- [ ] No JPA entities converted to records
