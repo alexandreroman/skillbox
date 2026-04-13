@@ -54,7 +54,8 @@ RUN pnpm prune --prod --ignore-scripts
 FROM node:24-alpine
 WORKDIR /app
 
-RUN addgroup --system app \
+RUN apk add --no-cache tini \
+ && addgroup --system app \
  && adduser --system --ingroup app app
 
 COPY --from=builder /app/node_modules ./node_modules
@@ -63,5 +64,6 @@ COPY --from=builder /app/package.json ./
 
 USER app:app
 EXPOSE 3000
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["node", "dist/index.js"]
 ```

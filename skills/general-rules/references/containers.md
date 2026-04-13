@@ -73,6 +73,30 @@ files:
 Add language-specific exclusions (e.g., `node_modules/`,
 `target/`, `__pycache__/`) as needed.
 
+## Signal handling (PID 1)
+
+A container's entry-point process runs as PID 1.
+Under Linux, PID 1 does **not** receive default
+signal handlers — `SIGINT` and `SIGTERM` are
+silently ignored unless the process explicitly
+handles them. This means `Ctrl+C` and
+`docker stop` have no effect.
+
+**Use a lightweight init** such as
+[`tini`](https://github.com/krallin/tini) as the
+`ENTRYPOINT`. It forwards signals to child
+processes and reaps zombies:
+
+```dockerfile
+RUN apk add --no-cache tini
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["node", "dist/index.js"]
+```
+
+Alternatively, pass `--init` to `docker run`, but
+an in-image init is preferred so the behaviour is
+portable across orchestrators.
+
 ## Health checks
 
 Expose a health endpoint in the application and
