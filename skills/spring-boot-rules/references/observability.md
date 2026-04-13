@@ -6,41 +6,76 @@ Expose only the endpoints that are needed and
 serve them on a separate management port so they
 stay off the public network.
 
-Reference configuration in `application.yaml`:
+### Separate management port
 
 ```yaml
 management:
   server:
     port: ${MANAGEMENT_PORT:8081}
+```
+
+Actuator endpoints serve operational data
+(health checks, metrics, thread dumps) that
+must never be reachable from the public network.
+Binding them to a dedicated port lets network
+policies and ingress rules block external access
+without touching the application routes.
+
+### Minimal endpoint exposure
+
+```yaml
+management:
   endpoints:
     web:
       exposure:
         include: health, metrics
+```
+
+By default Spring Boot exposes only `health`.
+Explicitly listing `health, metrics` keeps the
+surface small while enabling the two endpoints
+every production service needs. Add more only
+when a concrete use case requires them.
+
+### Health probes
+
+```yaml
+management:
   endpoint:
     health:
       probes:
         enabled: true
         add-additional-paths: true
+```
+
+`probes.enabled: true` activates the liveness
+and readiness health groups. `add-additional-paths:
+true` publishes them at `/livez` and `/readyz` on
+the management port. These paths are used by
+container orchestrators (Kubernetes liveness /
+readiness probes) and Docker health checks
+(`HEALTHCHECK` instruction) alike, providing a
+consistent way to monitor application health
+regardless of the deployment target.
+
+### Metric tags
+
+```yaml
+management:
   metrics:
     tags:
       service.name: ${spring.application.name}
       service.instance.id: ${random.uuid}
 ```
 
-Key points:
-
-- **Separate management port** — keeps actuator
-  endpoints off the main server port, simplifying
-  network policies and avoiding accidental exposure.
-- **Minimal exposure** — only `health` and `metrics`
-  are exposed; add more only when explicitly needed.
-- **Health probes** — `probes.enabled: true` with
-  `add-additional-paths: true` exposes `/livez`
-  and `/readyz` endpoints.
-- **Metric tags** — `service.name` and
-  `service.instance.id` are attached to every
-  metric, enabling per-service and per-instance
-  filtering in dashboards.
+These tags are attached to every metric emitted
+by the application. `service.name` enables
+per-service filtering in dashboards, while
+`service.instance.id` (a random UUID generated
+at startup) distinguishes individual replicas.
+Together they make it possible to drill down
+from a service-level overview to a single
+instance without additional instrumentation.
 
 ## Structured Logging (Spring Boot 3.4+)
 
@@ -56,9 +91,10 @@ logging:
 ```
 
 This replaces custom Logback/Log4j2 JSON layouts.
-Structured logs are preferred because they are easier
-to ingest by log aggregation systems and easier to
-parse and reason about for AI coding agents.
+Structured logs are preferred because they are
+easier to ingest by log aggregation systems and
+easier to parse and reason about for AI coding
+agents.
 
 In source code, use SLF4J structured logging with
 key-value pairs instead of string interpolation:
@@ -77,10 +113,10 @@ free-text messages.
 
 ## OpenTelemetry Starter (Spring Boot 4.0+)
 
-Use the dedicated starter instead of manually wiring
-Micrometer bridges. It covers both tracing and
-metrics export in OTLP format, giving a unified
-OTel pipeline.
+Use the dedicated starter instead of manually
+wiring Micrometer bridges. It covers both tracing
+and metrics export in OTLP format, giving a
+unified OTel pipeline.
 
 ```xml
 <dependency>
