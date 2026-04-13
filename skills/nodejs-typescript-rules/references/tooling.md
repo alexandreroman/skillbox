@@ -35,6 +35,28 @@ validated environment variables (`src/env.ts`).
 - **pre-commit**: `npx lint-staged`
 - **pre-push**: `pnpm typecheck`
 
+## Docker — pnpm + corepack
+
+When using corepack in a Dockerfile, **copy
+`package.json` before running `corepack prepare`**
+— it reads the `packageManager` field from
+`package.json` and fails without it.
+
+```dockerfile
+COPY package.json pnpm-lock.yaml .npmrc ./
+RUN corepack enable && corepack prepare
+RUN pnpm install --frozen-lockfile
+```
+
+When pruning dev dependencies in a Docker build
+stage, always use `--ignore-scripts` to prevent
+lifecycle hooks (e.g., Husky `prepare`) from
+failing after their own packages are removed:
+
+```dockerfile
+RUN pnpm prune --prod --ignore-scripts
+```
+
 ## Project Structure
 
 ```text
