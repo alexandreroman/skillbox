@@ -9,6 +9,7 @@ description: >-
   style, and community best practices across any
   language.
 model: opus
+isolation: worktree
 color: red
 memory: project
 skills: project-memory

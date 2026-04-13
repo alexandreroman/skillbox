@@ -6,6 +6,7 @@ description: >-
   Produces a concise report with findings and
   recommendations — never modifies code.
 model: opus
+isolation: worktree
 color: yellow
 memory: project
 skills: project-memory
