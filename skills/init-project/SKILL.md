@@ -104,15 +104,13 @@ Before generating files, check for:
 
 ### Step 7 — Generate README.md
 
-Read the template at
-[assets/README.md](assets/README.md).
-Write `./README.md` by
-filling in each `{{placeholder}}` with project-
-specific content. Remove any section whose
-placeholder has nothing useful to say.
+Delegate README generation to the **write-readme**
+skill by invoking it with the Skill tool. The skill
+will scan the scaffolded project, gather any missing
+context from the user, and produce a polished README.
 
-Reference:
-https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
+Do NOT generate README.md manually — let write-readme
+handle it entirely.
 
 ### Step 8 — Generate CLAUDE.md
 
