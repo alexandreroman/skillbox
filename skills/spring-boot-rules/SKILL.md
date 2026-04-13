@@ -22,6 +22,8 @@ Spring Boot code.
 
 - [Configuration](references/configuration.md) —
   `@Configuration` classes, proxy bean methods
+- [Visibility](references/visibility.md) —
+  narrowest scope for classes, methods, and beans
 - [Observability](references/observability.md) —
   Actuator, structured logging, OpenTelemetry starter
 - [Testing](references/testing.md) —
