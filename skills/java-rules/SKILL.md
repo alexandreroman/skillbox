@@ -31,6 +31,8 @@ when writing, reviewing, or refactoring Java code.
 - [Containers](references/containers.md) —
   base image, multi-stage builds, JVM flags,
   security
+- [Tooling](references/tooling.md) —
+  build system (Maven), logging (SLF4J/Logback)
 
 ## Rules
 
@@ -42,3 +44,5 @@ when writing, reviewing, or refactoring Java code.
   project targets.
 - **Prefer standard APIs** over third-party
   libraries when the JDK provides an equivalent.
+- **Use Maven and SLF4J/Logback** — see
+  [Tooling](references/tooling.md) for details.
