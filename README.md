@@ -12,7 +12,19 @@ code review with opinionated best-practice defaults.
 
 ## Installation
 
-Add skillbox as a Claude Code plugin:
+Install skillbox from the plugin marketplace:
+
+```bash
+/plugin marketplace add alexandreroman/skillbox
+```
+
+Then enable the plugin for your project:
+
+```bash
+/plugin enable skillbox
+```
+
+Alternatively, add it directly from GitHub:
 
 ```bash
 claude plugins add alexandreroman/skillbox
