@@ -32,12 +32,13 @@ claude plugins add alexandreroman/skillbox
 Loaded automatically when their trigger conditions
 match the current project.
 
-| Skill                | Description                                                                      |
-| -------------------- | -------------------------------------------------------------------------------- |
-| `general-rules`      | Language-agnostic rules for containers, CI/CD, security, and operations          |
-| `java-rules`         | Java 21-25 coding rules: style, records, virtual threads, structured concurrency |
-| `spring-boot-rules`  | Spring Boot 3.4+ / 4.x rules: configuration, testing, observability, migration  |
-| `project-memory`     | Persist project decisions, deadlines, and team context across conversations      |
+| Skill                      | Description                                                                      |
+| -------------------------- | -------------------------------------------------------------------------------- |
+| `general-rules`            | Language-agnostic rules for containers, CI/CD, security, and operations          |
+| `java-rules`               | Java 21-25 coding rules: style, records, virtual threads, structured concurrency |
+| `nodejs-typescript-rules`  | Node.js / TypeScript rules: tooling, strict config, ESLint v9, Prettier          |
+| `spring-boot-rules`        | Spring Boot 3.4+ / 4.x rules: configuration, testing, observability, migration   |
+| `project-memory`           | Persist project decisions, deadlines, and team context across conversations      |
 
 ## Agents
 

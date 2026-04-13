@@ -30,5 +30,9 @@ agents/                      # One .md file per agent
   pad cells with spaces so that every `|` in a
   column lines up vertically, and use `-` runs
   matching each column width in the separator row
+- After editing a Markdown table, run
+  `python3 skills/general-rules/scripts/check_tables.py <file>`
+  and fix any reported misalignment before
+  considering the change done
 - Skills must follow the Agent Skills spec:
   https://agentskills.io/specification
