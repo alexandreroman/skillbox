@@ -35,9 +35,8 @@ RUN pnpm prune --prod --ignore-scripts
 FROM node:24-alpine AS builder
 WORKDIR /app
 
-RUN corepack enable && corepack prepare
-
 COPY package.json pnpm-lock.yaml .npmrc ./
+RUN corepack enable && corepack prepare
 RUN pnpm install --frozen-lockfile
 
 COPY . .
