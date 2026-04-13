@@ -20,7 +20,6 @@ these rules with their own additions.
 | Express / Fastify    | `3000`       |
 | Go `net/http`        | `8080`       |
 | Flask / FastAPI      | `8000`       |
-| Rust Actix / Axum    | `8080`       |
 
 - **Never hard-code the port** — always read from
   the environment so the same image or binary works

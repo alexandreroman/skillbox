@@ -66,7 +66,6 @@ Pick the matching file from
 - [nodejs-typescript.md](references/nodejs-typescript.md)
 - [python.md](references/python.md)
 - [go.md](references/go.md)
-- [rust.md](references/rust.md)
 
 Read **only** the matching file and apply its
 instructions.
