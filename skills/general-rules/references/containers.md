@@ -37,17 +37,6 @@ RUN npm ci
 COPY src/ ./src/
 ```
 
-When using **corepack** (Node.js), the manifest
-must be present before `corepack prepare` runs —
-it reads the `packageManager` field from
-`package.json`:
-
-```dockerfile
-COPY package.json pnpm-lock.yaml .npmrc ./
-RUN corepack enable && corepack prepare
-RUN pnpm install --frozen-lockfile
-```
-
 ## Security
 
 - **Non-root user** — create a dedicated `app` user

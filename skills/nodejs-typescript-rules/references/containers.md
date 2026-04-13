@@ -6,21 +6,15 @@ language-agnostic container rules defined in
 
 ## Activate pnpm via Corepack
 
-Enable the exact pnpm version declared in
-`package.json`:
-
-```dockerfile
-RUN corepack enable && corepack prepare
-```
-
-## Layer caching
-
-Copy dependency manifests **before** source
-code so that a code-only change does not
-invalidate the install layer:
+Copy `package.json` **before** running
+`corepack prepare` — it reads the
+`packageManager` field and fails without it.
+This also enables layer caching: a code-only
+change does not invalidate the install layer.
 
 ```dockerfile
 COPY package.json pnpm-lock.yaml .npmrc ./
+RUN corepack enable && corepack prepare
 RUN pnpm install --frozen-lockfile
 ```
 
