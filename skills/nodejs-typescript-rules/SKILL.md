@@ -21,6 +21,9 @@ writing, reviewing, or refactoring code.
 - [Tooling](references/tooling.md) —
   pnpm, tsx, Vitest, Husky, Zod + t3-env,
   project structure
+- [Containers](references/containers.md) —
+  Dockerfile with pnpm, Corepack, multi-stage
+  builds, dev-dependency pruning
 - [TypeScript](references/typescript.md) —
   strict ESM-first tsconfig.json
 - [Code quality](references/code-quality.md) —
