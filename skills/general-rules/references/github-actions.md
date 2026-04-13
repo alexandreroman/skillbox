@@ -115,6 +115,24 @@ only created once during the merge step:
 - Use `docker/metadata-action` to compute tags
   and labels automatically.
 
+## Quiet logs
+
+Reduce noise in CI output so that relevant
+information stands out. When a tool offers a
+quiet, batch, or non-interactive flag, enable it.
+
+| Tool / Command | Flag                              |
+| -------------- | --------------------------------- |
+| `apt-get`      | `-qq`                             |
+| `npm ci`       | `--silent`                        |
+| `pip install`  | `-q`                              |
+| `mvn`          | `-B` (batch, no progress)         |
+| `gradle`       | `--console=plain -q`              |
+| `wget`         | `-q`                              |
+| `curl`         | `-sS`                             |
+| `docker pull`  | `--quiet`                         |
+| `docker build` | `--quiet` (when no log is needed) |
+
 ## General tips
 
 - **Pin actions to a major version**
