@@ -20,6 +20,8 @@ Spring Boot code.
 
 ## Domains
 
+- [Configuration](references/configuration.md) —
+  `@Configuration` classes, proxy bean methods
 - [Observability](references/observability.md) —
   Actuator, structured logging, OpenTelemetry starter
 - [Testing](references/testing.md) —
