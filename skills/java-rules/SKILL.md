@@ -42,6 +42,12 @@ when writing, reviewing, or refactoring Java code.
   suggesting features. Do not suggest features
   that require a higher Java version than the
   project targets.
+- **Use modern Java syntax** — prefer `var`,
+  records, sealed classes, pattern matching,
+  switch expressions, text blocks, and unnamed
+  variables over their older equivalents. See
+  [Modern syntax](references/modern-syntax.md)
+  for edge cases and caveats.
 - **Prefer standard APIs** over third-party
   libraries when the JDK provides an equivalent.
 - **Use Maven and SLF4J/Logback** — see

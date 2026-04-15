@@ -40,9 +40,8 @@ project opts in to preview features.
 
 ```java
 try (var scope = StructuredTaskScope.open()) {
-    Subtask<String> user =
-        scope.fork(() -> fetchUser(id));
-    Subtask<List<Order>> orders =
+    var user = scope.fork(() -> fetchUser(id));
+    var orders =
         scope.fork(() -> fetchOrders(id));
 
     scope.join();
