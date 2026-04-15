@@ -70,9 +70,17 @@ var result = someObject
 | Method / Field   | `lowerCamelCase`        | `findByName`             |
 | Constant         | `UPPER_SNAKE_CASE`      | `MAX_RETRY_COUNT`        |
 | Package          | all lowercase, no `_`   | `com.acme.billing`       |
-| Type parameter   | single uppercase letter | `T`, `E`, `K`, `V`      |
+| Type parameter   | single uppercase letter | `T`, `E`, `K`, `V`       |
 | Local variable   | `lowerCamelCase`        | `itemCount`              |
 | Boolean accessor | `is` / `has` prefix     | `isEmpty`, `hasChildren` |
+
+- **Logger fields** are constants — name them
+  `LOGGER`, not `log` or `logger`:
+
+```java
+private static final Logger LOGGER =
+    LoggerFactory.getLogger(OrderService.class);
+```
 
 - Avoid abbreviations except universally accepted
   ones (`id`, `url`, `http`).

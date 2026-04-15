@@ -96,14 +96,6 @@ easier to ingest by log aggregation systems and
 easier to parse and reason about for AI coding
 agents.
 
-In source code, declare the logger as a
-`private static final` field named `LOGGER`:
-
-```java
-private static final Logger LOGGER =
-    LoggerFactory.getLogger(OrderService.class);
-```
-
 Use SLF4J structured logging with key-value pairs
 instead of string interpolation:
 
