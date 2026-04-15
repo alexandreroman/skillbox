@@ -30,6 +30,8 @@ Spring Boot code.
   test slices, Testcontainers, @ServiceConnection
 - [Containers](references/containers.md) —
   layered JARs, AOT cache, CDS, multi-stage Dockerfile
+- [MVC](references/mvc.md) —
+  controller mappings, content types
 - [Migration Boot 4](references/migration-boot4.md) —
   package renames, artifact changes, removed APIs
 
