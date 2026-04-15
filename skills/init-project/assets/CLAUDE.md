@@ -69,6 +69,15 @@ not shared with the team.
   official documentation or use available tools
   (e.g. context7) to verify current versions before
   choosing a dependency.
+- Never use compound shell commands (`;`, `&&`,
+  `|`) in Bash tool calls — this applies to
+  every Bash tool invocation Claude makes during
+  a conversation, not just code in documentation.
+  Each command must be a separate Bash tool call.
+  Common violations to watch for: `cd dir &&
+  ./mvnw test`, `curl ... | grep ...`,
+  `./mvnw test 2>&1 | tail -20`. Split every
+  pipeline or chain into individual calls.
 
 {{Additional project-specific rules not obvious from
 the code. Keep to 3-5 bullets max. Omit if nothing
