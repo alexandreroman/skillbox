@@ -88,7 +88,7 @@ assessment, number of findings by severity>
 
 ## Findings
 
-### [Severity] Short title
+### #1 — [Severity] Short title
 
 **Location:** `file/path.ext:L10-L25`
 
@@ -99,7 +99,8 @@ the actual code).
 
 ---
 
-(repeat for each finding, ordered by severity)
+(repeat for each finding, numbered sequentially
+and ordered by severity)
 
 ## Out of scope / limitations
 
