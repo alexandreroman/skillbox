@@ -12,22 +12,11 @@ code review with opinionated best-practice defaults.
 
 ## Installation
 
-Install skillbox from the plugin marketplace:
+Add the `cc-plugins` marketplace, then install skillbox:
 
 ```bash
-/plugin marketplace add alexandreroman/skillbox
-```
-
-Then enable the plugin for your project:
-
-```bash
-/plugin enable skillbox
-```
-
-Alternatively, add it directly from GitHub:
-
-```bash
-claude plugins add alexandreroman/skillbox
+/plugin marketplace add alexandreroman/cc-plugins
+/plugin install skillbox@cc-plugins
 ```
 
 ## Skills
