@@ -3,6 +3,17 @@
 Best practices for writing production-grade
 `compose.yaml` files.
 
+## Filename
+
+Always name the Compose file `compose.yaml`.
+Do not use `docker-compose.yml` or
+`docker-compose.yaml` — those are legacy names
+predating the Compose Specification. Modern
+Docker tooling discovers `compose.yaml` by
+default, so prefer it everywhere: new projects,
+generated examples, documentation snippets, and
+references in CI workflows or READMEs.
+
 ## Health checks
 
 Every application service **must** declare a

@@ -30,7 +30,7 @@ Read the following (skip any that do not exist):
   name, description, version, dependencies, scripts.
 - **CI configuration** — `.github/workflows/`,
   `Makefile`, `Justfile`, `Dockerfile`,
-  `docker-compose.yml`. Note build, test, and deploy
+  `compose.yaml`. Note build, test, and deploy
   commands.
 - **Existing README.md** — note current structure and
   content for reference.
