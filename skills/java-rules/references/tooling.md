@@ -15,6 +15,30 @@ projects.
   introduce Gradle or other build tools unless
   the project already uses them.
 
+## Dependency Versions
+
+To find the latest stable version of a Maven
+dependency, fetch its `maven-metadata.xml`
+file from Maven Central:
+
+```text
+https://repo1.maven.org/maven2/{groupIdPath}/{artifactId}/maven-metadata.xml
+```
+
+Build `{groupIdPath}` by replacing `.` with `/`
+in the `groupId` (e.g. `org.springframework.boot`
+→ `org/springframework/boot`).
+
+Read `<release>` for the latest stable release,
+or `<latest>` for the most recent version
+(which may include snapshots or release
+candidates).
+
+**Do not use** the Maven Central `solrsearch`
+API (`https://search.maven.org/solrsearch/`) to
+look up versions — it is unreliable and often
+returns outdated results.
+
 ## Logging
 
 - **SLF4J with Logback** is the preferred
