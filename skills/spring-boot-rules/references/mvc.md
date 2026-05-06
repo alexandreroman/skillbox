@@ -63,6 +63,23 @@ predictable error envelope (`type`, `title`,
 `status`, `detail`, `instance`), and supports
 extension fields via `setProperty(...)`.
 
+Also enable Spring MVC's built-in `ProblemDetail`
+responses so framework-level errors (404, 405, 415,
+validation failures, etc.) follow the same RFC 7807
+shape as your own handlers:
+
+```properties
+spring.mvc.problemdetails.enabled=true
+```
+
+For WebFlux applications, use
+`spring.webflux.problemdetails.enabled=true`
+instead. Without this flag, default Spring MVC
+error responses fall back to the legacy
+`{"timestamp":..., "status":..., "error":...}`
+shape, which conflicts with the contract your
+`@ExceptionHandler` methods expose.
+
 ## Declare `@ExceptionHandler` at the controller level
 
 Prefer per-controller `@ExceptionHandler` methods
