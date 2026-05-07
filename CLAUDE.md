@@ -22,7 +22,6 @@ agents/                      # One .md file per agent
 - Line length limits for readability:
   - Text / Markdown: 80 columns max
   - Code: 120 columns max
-- Use worktrees for non-trivial changes
 - Follow standard Markdown conventions: blank line
   before and after headings, blank line before and
   after lists, fenced code blocks with a language tag
