@@ -24,8 +24,12 @@ only covers what Java adds on top.
 # Stage 1 — build
 FROM eclipse-temurin:25-jdk AS build
 WORKDIR /build
-COPY . .
-RUN ./mvnw -B package -DskipTests
+COPY pom.xml .
+RUN --mount=type=cache,id=maven,target=/root/.m2 \
+    ./mvnw -B dependency:go-offline -q
+COPY src ./src
+RUN --mount=type=cache,id=maven,target=/root/.m2 \
+    ./mvnw -B package -DskipTests -q
 
 # Stage 2 — runtime
 FROM eclipse-temurin:25-jre
@@ -37,6 +41,45 @@ COPY --from=build --chown=app:app \
 USER app:app
 ENTRYPOINT ["java", "-jar", "app.jar"]
 ```
+
+## Build cache (BuildKit cache mounts)
+
+Use BuildKit's `--mount=type=cache` to persist the
+build tool's local repository across image builds.
+This avoids re-downloading dependencies on every
+rebuild and dramatically speeds up incremental
+builds. The cache lives on the BuildKit daemon, not
+in the image layers, so the final image stays
+small.
+
+For **Maven**, mount `/root/.m2`:
+
+```dockerfile
+RUN --mount=type=cache,id=maven,target=/root/.m2 \
+    mvn package -DskipTests -q
+```
+
+For **Gradle**, mount `/root/.gradle`:
+
+```dockerfile
+RUN --mount=type=cache,id=gradle,target=/root/.gradle \
+    ./gradlew build
+```
+
+Rules:
+
+- **Use the same `id`** across every `RUN`
+  instruction that needs the cache so they share
+  the same volume. Different ids create separate
+  caches.
+- **Combine with the COPY-then-RUN ordering** —
+  copy the build descriptor (`pom.xml`,
+  `build.gradle`) and run an offline dependency
+  fetch first, then copy the source. Docker layer
+  caching and BuildKit cache mounts then reinforce
+  each other.
+- **Do not bake the cache into the image** — never
+  use `COPY --from` on a cache mount target.
 
 ## JVM flags for containers
 
