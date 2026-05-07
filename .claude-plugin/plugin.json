@@ -1,6 +1,6 @@
 {
   "name": "skillbox",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A repository of reusable skills and agents for Claude Code, built by Alexandre Roman",
   "author": {
     "name": "Alexandre Roman",
