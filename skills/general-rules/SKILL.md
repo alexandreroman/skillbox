@@ -29,6 +29,9 @@ reviewing, or refactoring code.
 - [Git](references/git.md) —
   commit message formatting (verb + action,
   imperative mood)
+- [Hot Reload](references/hot-reload.md) —
+  every executable component needs a
+  technology-native hot-reload dev command
 - [GitHub Actions](references/github-actions.md) —
   workflow structure, caching, multi-arch images
 - [HTTP Servers](references/http-servers.md) —
