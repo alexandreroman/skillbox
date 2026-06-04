@@ -42,7 +42,7 @@ Create the following tasks in order:
 
 1. Scaffold project
 2. Apply best practices
-3. Generate Makefile
+3. Generate developer tooling
 4. Generate README.md
 5. Generate CLAUDE.md
 6. Generate LICENSE
@@ -192,12 +192,14 @@ language or framework.
 
 Mark the best-practices task `completed`.
 
-### Phase 4 — Generate Makefile (project only)
+### Phase 4 — Generate developer tooling (project only)
 
 **Skip this entire phase for modules.** A module inherits
-the parent project's Makefile.
+the parent project's tooling.
 
-Mark the Makefile task `in_progress`.
+Mark the tooling task `in_progress`.
+
+#### 4a — Generate the Makefile
 
 Every project gets a `Makefile` at its root as the single,
 self-documenting entry point for common developer tasks.
@@ -238,7 +240,38 @@ Rules for the generated Makefile:
 - Remove sections that do not apply rather than leaving
   empty or placeholder recipes.
 
-Mark the Makefile task `completed`.
+#### 4b — Configure Compose infrastructure
+
+If the app depends on infrastructure services (databases,
+brokers, Temporal, object storage, ...), create a
+`compose.yaml` at the project root that defines them, and
+list those service names in the Makefile's
+`{{infra-services}}`. Skip this step when the app has no
+such dependencies.
+
+**Temporal service.** When the project uses Temporal, add a
+`temporal` service modeled on
+[assets/compose.temporal.yaml](assets/compose.temporal.yaml).
+Merge that service into `compose.yaml` and add `temporal`
+to `{{infra-services}}`. Follow this canonical model:
+
+- Use the official `temporalio/temporal` image and run the
+  `server start-dev` command — a single-process dev server
+  with a built-in database and Web UI. **Dev only, never
+  production.**
+- Bind `--ip 0.0.0.0` so other containers and the host can
+  reach it. Publish `7233` (gRPC, for workers and clients)
+  and the UI port `8233`.
+- Add a healthcheck running
+  `temporal operator cluster health` so dependent services
+  can wait on `condition: service_healthy`.
+- Cap memory via `deploy.resources.limits.memory` and set
+  `restart: unless-stopped`.
+- Point workers and clients at `temporal:7233` from inside
+  the Compose network (or `localhost:7233` from the host)
+  with the `default` namespace.
+
+Mark the tooling task `completed`.
 
 ### Phase 5 — Generate documentation (project only)
 
@@ -318,6 +351,11 @@ Mark the review task `completed`.
   default goal, a `dev` target to run the app locally with
   hot reload, and `app-up`/`app-down` targets when a
   container compose file exists.
+- **Temporal in Compose** — when the project uses Temporal,
+  define its dev service with the `temporalio/temporal`
+  image running `server start-dev`, exposing `7233` and the
+  UI port `8233`, with a `temporal operator cluster health`
+  healthcheck. Dev only, never production.
 - **Agents section is mandatory** in CLAUDE.md —
   always include code-writer and code-reviewer.
 - **README.md reference is mandatory** in CLAUDE.md —
