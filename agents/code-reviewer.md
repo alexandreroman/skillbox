@@ -7,7 +7,6 @@ description: >-
   recommendations — never modifies code.
 model: opus
 color: yellow
-memory: project
 skills: project-memory
 ---
 
@@ -105,6 +104,17 @@ and ordered by severity)
 
 <anything you could not verify and why>
 ```
+
+## Memory
+
+Past reviews and project context are worth remembering:
+recurring findings, accepted trade-offs, conventions, or
+decisions that explain why code looks the way it does.
+Recall any relevant memory before reviewing so you do not
+re-flag known and accepted choices. Decide for yourself
+what is worth persisting and pick the best way to store it
+— the project memory (e.g. via the `project-memory` skill)
+is a solid default storage solution.
 
 ## Guidelines
 

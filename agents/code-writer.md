@@ -10,7 +10,6 @@ description: >-
   language.
 model: opus
 color: red
-memory: project
 skills: project-memory
 ---
 
@@ -51,6 +50,17 @@ is simple, idiomatic, and production-ready.
    and idiomaticity before presenting.
 5. Present complete, runnable code with a brief
    explanation of key design choices.
+
+## Memory
+
+Useful context surfaces as you work: project
+conventions, design decisions, recurring feedback, or
+gotchas worth carrying across sessions. Decide for
+yourself what is worth persisting and pick the best way
+to store it — the project memory (e.g. via the
+`project-memory` skill) is a solid default storage
+solution. Recall any relevant memory before you start
+writing.
 
 ## Guidelines
 
