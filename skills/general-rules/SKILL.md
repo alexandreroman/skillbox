@@ -3,10 +3,11 @@ name: general-rules
 description: >-
   Language-agnostic engineering rules: best
   practices and conventions that apply to any
-  project. Covers containers, CI/CD, security,
-  and operational concerns. Use this skill to
-  influence how infrastructure and cross-cutting
-  code is written or reviewed.
+  project. Covers containers, CI/CD, Git and
+  commit conventions, security, and operational
+  concerns. Use this skill to influence how
+  infrastructure and cross-cutting code is written
+  or reviewed.
 allowed-tools: Read
 ---
 
@@ -25,6 +26,9 @@ reviewing, or refactoring code.
 - [Containers](references/containers.md) —
   Dockerfile best practices, image size, security,
   layer caching
+- [Git](references/git.md) —
+  commit message formatting (verb + action,
+  imperative mood)
 - [GitHub Actions](references/github-actions.md) —
   workflow structure, caching, multi-arch images
 - [HTTP Servers](references/http-servers.md) —
