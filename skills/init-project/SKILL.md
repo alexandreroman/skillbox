@@ -42,10 +42,11 @@ Create the following tasks in order:
 
 1. Scaffold project
 2. Apply best practices
-3. Generate README.md
-4. Generate CLAUDE.md
-5. Generate LICENSE
-6. Review and confirm
+3. Generate Makefile
+4. Generate README.md
+5. Generate CLAUDE.md
+6. Generate LICENSE
+7. Review and confirm
 
 ### Module-mode plan
 
@@ -191,11 +192,59 @@ language or framework.
 
 Mark the best-practices task `completed`.
 
-### Phase 4 — Generate documentation (project only)
+### Phase 4 — Generate Makefile (project only)
+
+**Skip this entire phase for modules.** A module inherits
+the parent project's Makefile.
+
+Mark the Makefile task `in_progress`.
+
+Every project gets a `Makefile` at its root as the single,
+self-documenting entry point for common developer tasks.
+
+Read the template at [assets/Makefile](assets/Makefile).
+Write `./Makefile`, replacing each `{{placeholder}}` with
+commands appropriate for the detected tech stack:
+
+- `{{dev-command}}` — run the app locally with hot reload
+  (e.g. `go tool air`, `pnpm dev`, `uvicorn --reload`,
+  `./mvnw spring-boot:run`). This is the headline `dev`
+  target developers run day to day.
+- `{{compose}}` — the container compose command
+  (`docker compose` or `podman compose`), used by the
+  `app-up` / `app-down` targets to run the full stack in
+  containers and by the `infra-up` / `infra-down` targets
+  to manage infrastructure services. Remove the **Stack**
+  and **Infra** sections if the project has no compose
+  file.
+- `{{infra-services}}` — the compose service names for
+  infrastructure dependencies the app needs while running
+  locally (e.g. `postgres redis`). The `dev` target brings
+  these up before starting the app. Leave empty to manage
+  every service.
+- `{{test-command}}`, `{{lint-command}}`,
+  `{{build-command}}` — the stack's test, lint, and build
+  commands.
+- `{{dev-targets}}` — any extra target names that should
+  load `.env.local` (leave empty if none).
+
+Rules for the generated Makefile:
+
+- Keep the `help` target as the default goal so a bare
+  `make` lists available targets instead of running them.
+- Preserve the self-documenting convention: `##@` for
+  section headers and `## description` after each target.
+- Declare every non-file target `.PHONY`.
+- Remove sections that do not apply rather than leaving
+  empty or placeholder recipes.
+
+Mark the Makefile task `completed`.
+
+### Phase 5 — Generate documentation (project only)
 
 **Skip this entire phase for modules.**
 
-#### 4a — Generate README.md
+#### 5a — Generate README.md
 
 Mark the README task `in_progress`.
 
@@ -212,7 +261,7 @@ handle it entirely.
 
 Mark the README task `completed`.
 
-#### 4b — Generate CLAUDE.md
+#### 5b — Generate CLAUDE.md
 
 Mark the CLAUDE.md task `in_progress`.
 
@@ -230,7 +279,7 @@ https://code.claude.com/docs/en/best-practices
 
 Mark the CLAUDE.md task `completed`.
 
-#### 4c — Generate LICENSE
+#### 5c — Generate LICENSE
 
 Mark the LICENSE task `in_progress`.
 
@@ -244,7 +293,7 @@ https://choosealicense.com/licenses/
 
 Mark the LICENSE task `completed`.
 
-### Phase 5 — Review and confirm
+### Phase 6 — Review and confirm
 
 Mark the review task `in_progress`.
 
@@ -264,6 +313,11 @@ Mark the review task `completed`.
   documentation. Do not duplicate information between
   README.md and CLAUDE.md; CLAUDE.md should reference
   README.md rather than repeat it.
+- **Makefile is mandatory** for projects (not modules) —
+  generate a self-documenting `Makefile` with a `help`
+  default goal, a `dev` target to run the app locally with
+  hot reload, and `app-up`/`app-down` targets when a
+  container compose file exists.
 - **Agents section is mandatory** in CLAUDE.md —
   always include code-writer and code-reviewer.
 - **README.md reference is mandatory** in CLAUDE.md —
