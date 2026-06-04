@@ -73,6 +73,12 @@ what to fix.
    - Specification or requirement violations
    - API contract mismatches
    - Missing or incorrect validation at boundaries
+   - Markdown formatting when `.md` files are in scope —
+     validate table alignment against the documented
+     convention by running `general-rules`'
+     `scripts/check_tables.py` on them, and flag any
+     misalignment as a documented-convention violation
+     (not a mere cosmetic nit)
 6. **Produce report** — write a structured, concise
    report following the format below.
 
