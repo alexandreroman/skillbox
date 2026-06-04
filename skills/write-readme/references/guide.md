@@ -168,11 +168,11 @@ Use a table for environment variables or config
 options:
 
 ```markdown
-| Variable      | Description          | Default   |
-| ------------- | -------------------- | --------- |
-| `PORT`        | Server listen port   | `8080`    |
-| `DATABASE_URL`| PostgreSQL connection | (required)|
-| `LOG_LEVEL`   | Logging verbosity    | `info`    |
+| Variable       | Description           | Default    |
+| -------------- | --------------------- | ---------- |
+| `PORT`         | Server listen port    | `8080`     |
+| `DATABASE_URL` | PostgreSQL connection | (required) |
+| `LOG_LEVEL`    | Logging verbosity     | `info`     |
 ```
 
 For config files, show a minimal annotated example.
