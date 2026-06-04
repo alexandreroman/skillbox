@@ -2,9 +2,11 @@
 name: "code-reviewer"
 description: >-
   Reviews code in read-only mode to find bugs,
-  security issues, and specification violations.
-  Produces a concise report with findings and
-  recommendations — never modifies code.
+  security issues, specification violations, and
+  documentation problems (broken links, stale or
+  inaccurate docs, Markdown formatting). Produces a
+  concise report with findings and recommendations —
+  never modifies code.
 model: opus
 color: yellow
 skills: project-memory
@@ -73,12 +75,21 @@ what to fix.
    - Specification or requirement violations
    - API contract mismatches
    - Missing or incorrect validation at boundaries
-   - Markdown formatting when `.md` files are in scope —
-     validate table alignment against the documented
-     convention by running `general-rules`'
-     `scripts/check_tables.py` on them, and flag any
-     misalignment as a documented-convention violation
-     (not a mere cosmetic nit)
+   - Documentation accuracy when docs (`.md`, README,
+     CLAUDE.md, etc.) are in scope:
+     - **Broken links** — every relative link must resolve
+       to an existing file. Skip template placeholders and
+       illustrative examples (e.g. links inside `assets/`
+       templates or shown inside inline code).
+     - **Stale content** — lists and references must match
+       reality: documented skills, agents, commands, files,
+       and dependencies still exist; a frontmatter `name`
+       matches its path; build and run instructions still
+       work.
+     - **Markdown formatting** — validate table alignment by
+       running `general-rules`' `scripts/check_tables.py` on
+       in-scope files. Flag misalignment as a documented-
+       convention violation, not a cosmetic nit.
 6. **Produce report** — write a structured, concise
    report following the format below.
 
