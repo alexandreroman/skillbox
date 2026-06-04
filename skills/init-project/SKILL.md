@@ -211,7 +211,13 @@ commands appropriate for the detected tech stack:
 - `{{dev-command}}` — run the app locally with hot reload
   (e.g. `go tool air`, `pnpm dev`, `uvicorn --reload`,
   `./mvnw spring-boot:run`). This is the headline `dev`
-  target developers run day to day.
+  target developers run day to day. It is wrapped in a
+  `trap 'kill 0' EXIT INT TERM` so Ctrl-C reaps the whole
+  process group and leaves no orphans. Replace just the
+  command itself; keep the surrounding `trap`, `&`, and
+  `wait`. When `dev` runs several processes, background each
+  as `( cmd; kill 0 ) &` before the final `wait` so a crash
+  of one tears down the rest (see the reference pattern).
 - `{{compose}}` — the container compose command
   (`docker compose` or `podman compose`), used by the
   `app-up` / `app-down` targets to run the full stack in

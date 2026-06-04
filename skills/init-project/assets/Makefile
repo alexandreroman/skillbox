@@ -40,7 +40,12 @@ infra-logs: ## Follow logs from infrastructure services
 
 .PHONY: dev
 dev: infra-up ## Start infra, then run the app locally with hot reload
-	{{dev-command}}
+	# Trap reaps the whole process group (kill 0) on exit or signal, so no
+	# orphaned processes survive Ctrl-C or a child crash. For multiple dev
+	# processes, background each as `( cmd; kill 0 ) &` before the wait.
+	@trap 'kill 0' EXIT INT TERM; \
+		{{dev-command}} & \
+		wait
 
 ##@ Stack
 
