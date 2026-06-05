@@ -30,8 +30,29 @@ decision, then a **Why:** line and a
 
 ## reference
 
-Pointers to where information can be found in
-external systems.
+Pointers to where authoritative information lives,
+inside or outside the repository — docs sites,
+dashboards, issue trackers, chat channels, API
+endpoints, firmware or download URLs, on-device
+files, or a CLI recipe to reach a resource. The
+durable value is the **location and its purpose**,
+so a future session goes straight to the source
+instead of guessing or rediscovering it.
 
-**When to save:** when you learn about resources
-in external systems and their purpose.
+**When to save:** when you learn where a resource
+lives and why it matters — especially when it is
+not discoverable from the repository itself.
+Choose `reference` over `project` when the lasting
+value is the *pointer* (where to look) rather than
+the *work* it supports, and over `feedback` when
+you are recording a *location* rather than a way
+of working. A quirk or fact you keep needing to
+look up (a serial port, a device path, an API
+behaviour) belongs here once it has a stable
+source to point at.
+
+**Body structure:** lead with what the resource is
+and where it lives (URL, path, or command), then a
+**Why:** line for when to reach for it and a
+**How to access:** line with the concrete steps or
+address.
