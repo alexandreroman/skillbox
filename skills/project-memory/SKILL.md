@@ -111,6 +111,12 @@ field.
 Write all memory content in English, regardless
 of the conversation language.
 
+Write entries in the present tense, as standing
+facts. Do NOT narrate past events or anecdotes
+(e.g. avoid "the user asked to remove the cache");
+state the durable fact instead (e.g. "the project
+does not use a cache layer").
+
 **Step 3** — Add a pointer in `MEMORY.md`
 (inside the same memory directory). If the file
 does not exist yet, create it with this header:
