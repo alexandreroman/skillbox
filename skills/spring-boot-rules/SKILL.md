@@ -4,9 +4,11 @@ description: >-
   Spring Boot coding rules: best practices, code
   conventions, and architecture preferences
   (3.4+, 4.x). Covers configuration, structure,
-  and design patterns. Use this skill to influence
-  how Spring Boot code is written, reviewed, or
-  refactored.
+  and design patterns. Consult this skill when
+  designing, planning, or researching Spring Boot
+  best practices — even for familiar APIs — and when
+  writing, reviewing, or refactoring Spring Boot
+  code. Invoke it before external web search.
 allowed-tools: Read
 ---
 

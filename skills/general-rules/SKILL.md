@@ -5,9 +5,13 @@ description: >-
   practices and conventions that apply to any
   project. Covers containers, CI/CD, Git and
   commit conventions, security, and operational
-  concerns. Use this skill to influence how
-  infrastructure and cross-cutting code is written
-  or reviewed.
+  concerns. Consult this skill when designing,
+  planning, or researching best practices for
+  infrastructure and cross-cutting concerns — even
+  for familiar tools — and when writing or reviewing
+  such code. Invoke it before external web search;
+  these rules are the project's authoritative
+  conventions.
 allowed-tools: Read
 ---
 
@@ -15,8 +19,9 @@ allowed-tools: Read
 
 Language-agnostic best practices and conventions
 that apply to any project. Read the relevant
-references to apply these rules when writing,
-reviewing, or refactoring code.
+references to apply these rules when designing,
+researching best practices, writing, reviewing, or
+refactoring code.
 
 ## Domains
 
@@ -44,6 +49,9 @@ reviewing, or refactoring code.
 
 - **Respond in the user's language** when
   communicating with the user.
+- **Consult these rules before external research.**
+  They are the project's authoritative conventions;
+  reach for web search only after checking them.
 - **If context7 is available**, use it to verify
   current API and tool versions before adding or
   modifying dependencies.

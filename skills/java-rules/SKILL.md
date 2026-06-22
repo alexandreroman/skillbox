@@ -4,9 +4,11 @@ description: >-
   Java coding rules: best practices, code
   conventions, formatting, and design preferences
   (up to Java 25). Covers code style, language
-  features, concurrency, and API patterns. Use
-  this skill to influence how Java code is written,
-  reviewed, or refactored.
+  features, concurrency, and API patterns. Consult
+  this skill when designing, planning, or researching
+  Java best practices — even for familiar APIs — and
+  when writing, reviewing, or refactoring Java code.
+  Invoke it before external web search.
 allowed-tools: Read
 ---
 

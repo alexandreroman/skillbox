@@ -3,9 +3,11 @@ name: go-rules
 description: >-
   Go coding rules: best practices, code
   conventions, modern syntax, concurrency, and
-  tooling preferences (Go 1.21+). Use this skill
-  to influence how Go code is written, reviewed,
-  or refactored.
+  tooling preferences (Go 1.21+). Consult this
+  skill when designing, planning, or researching
+  Go best practices — even for familiar APIs — and
+  when writing, reviewing, or refactoring Go code.
+  Invoke it before external web search.
 allowed-tools: Read
 ---
 

@@ -3,9 +3,11 @@ name: nodejs-typescript-rules
 description: >-
   Node.js / TypeScript coding rules: tooling choices,
   TypeScript strict config, ESLint v9 flat config,
-  Prettier preferences. Use this skill to influence
-  how Node.js / TypeScript code is written, reviewed,
-  or refactored.
+  Prettier preferences. Consult this skill when
+  designing, planning, or researching Node.js /
+  TypeScript best practices — even for familiar
+  APIs — and when writing, reviewing, or refactoring
+  such code. Invoke it before external web search.
 allowed-tools: Read
 ---
 
