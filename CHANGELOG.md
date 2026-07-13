@@ -8,6 +8,16 @@ project adheres to [Semantic Versioning][semver].
 [keepachangelog]: https://keepachangelog.com/en/1.1.0/
 [semver]: https://semver.org/spec/v2.0.0.html
 
+## [0.4.3] - 2026-07-13
+
+### Changed
+
+- Require an explicit `id` on every BuildKit cache mount. An
+  `id`-less `--mount=type=cache` misbehaves under podman/buildah
+  (silent cache misses, and for Go a hard `go build` module
+  resolution failure). Documented in `general-rules` and
+  `go-rules`.
+
 ## [0.4.2] - 2026-06-22
 
 ### Changed
@@ -85,6 +95,7 @@ project adheres to [Semantic Versioning][semver].
 - `code-writer` and `code-reviewer` agents with opinionated
   best-practice defaults.
 
+[0.4.3]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.3
 [0.4.2]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.2
 [0.4.1]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.1
 [0.4.0]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.0
