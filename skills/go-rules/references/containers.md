@@ -75,6 +75,15 @@ RUN --mount=type=cache,id=gomod,target=/go/pkg/mod \
 - Use **the same `id`** across all `RUN`
   instructions that need each cache so they
   share the same volume.
+- **Always set an explicit `id`** — it is not
+  only about sharing. Under podman/buildah an
+  `id`-less `type=cache` mount on `/go/pkg/mod`
+  breaks `go build` module resolution: the build
+  fails with `no required module provides
+  package …` even though `go mod download`
+  populated the cache and `go list -m all`
+  resolves the module. A stable `id` (e.g.
+  `id=gomod`) avoids it.
 
 ## Multi-Stage Build Example
 

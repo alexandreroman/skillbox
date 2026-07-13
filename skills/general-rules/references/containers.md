@@ -37,6 +37,22 @@ RUN npm ci
 COPY src/ ./src/
 ```
 
+## BuildKit cache mounts
+
+`--mount=type=cache` persists dependency and build
+caches across image builds (package-manager
+downloads, compiler caches). Language skills give
+the concrete mount targets.
+
+- **Always set an explicit `id`** on each cache
+  mount, and reuse the same `id` across every `RUN`
+  that mounts it. Beyond sharing the volume, an
+  `id`-less mount can misbehave under podman/buildah:
+  at best you get silent cache misses, and for Go it
+  breaks `go build` module resolution outright
+  (`no required module provides package …` — see
+  `go-rules`).
+
 ## Security
 
 - **Non-root user** — create a dedicated `app` user
