@@ -27,7 +27,10 @@ refactoring code.
 
 - [Compose](references/compose.md) —
   Docker Compose health checks, dependencies,
-  restart policy, read-only volumes
+  restart policy, read-only volumes, multi-file
+  overlays (dev overlay vs. auto-merged
+  `compose.override.yaml`), and host-port overrides
+  with `!override`
 - [Containers](references/containers.md) —
   Dockerfile best practices, image size, security,
   layer caching
