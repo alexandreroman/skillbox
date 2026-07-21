@@ -8,6 +8,15 @@ project adheres to [Semantic Versioning][semver].
 [keepachangelog]: https://keepachangelog.com/en/1.1.0/
 [semver]: https://semver.org/spec/v2.0.0.html
 
+## [0.4.4] - 2026-07-21
+
+### Added
+
+- Document Compose multi-file overlays in `general-rules`: a dev
+  overlay for the hot-reload inner loop, an auto-merged
+  `compose.override.yaml` for host-port remapping via `!override`,
+  and a tool-agnostic single-entry-point reverse-proxy note.
+
 ## [0.4.3] - 2026-07-13
 
 ### Changed
@@ -95,6 +104,7 @@ project adheres to [Semantic Versioning][semver].
 - `code-writer` and `code-reviewer` agents with opinionated
   best-practice defaults.
 
+[0.4.4]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.4
 [0.4.3]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.3
 [0.4.2]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.2
 [0.4.1]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.1
