@@ -131,6 +131,19 @@ does not exist yet, create it with this header:
 > differs, and ask for explicit confirmation
 > before updating. **Do NOT take any action** —
 > no tool calls, no file writes — until confirmed.
+
+> **Note wording** — state permanent facts in the
+> present tense. A note read out of context must
+> not reveal what it replaces or what just
+> happened. Ban narration markers: "now", "no
+> longer", "previously / used to", "reverses /
+> replaces", "kept", "changed to", "reintroduce",
+> "the user asked to". Phrase prohibitions
+> positively ("the API is versioned under /v2"),
+> not as the negation of a former state. Test:
+> remove the note from its context — if a sentence
+> only makes sense knowing the prior state,
+> rewrite it.
 ```
 
 One line per entry, under 150 characters:
