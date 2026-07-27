@@ -8,6 +8,16 @@ project adheres to [Semantic Versioning][semver].
 [keepachangelog]: https://keepachangelog.com/en/1.1.0/
 [semver]: https://semver.org/spec/v2.0.0.html
 
+## [0.4.5] - 2026-07-27
+
+### Changed
+
+- Mark the convention skills (`general-rules`, `go-rules`,
+  `java-rules`, `nodejs-typescript-rules`, `spring-boot-rules`)
+  as `user-invocable: false`. They carry coding rules rather
+  than actions, so they no longer appear as slash commands;
+  Claude still loads them automatically when relevant.
+
 ## [0.4.4] - 2026-07-21
 
 ### Added
@@ -104,6 +114,7 @@ project adheres to [Semantic Versioning][semver].
 - `code-writer` and `code-reviewer` agents with opinionated
   best-practice defaults.
 
+[0.4.5]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.5
 [0.4.4]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.4
 [0.4.3]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.3
 [0.4.2]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.2
