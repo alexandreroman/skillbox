@@ -13,6 +13,7 @@ description: >-
   these rules are the project's authoritative
   conventions.
 allowed-tools: Read
+user-invocable: false
 ---
 
 # General Rules

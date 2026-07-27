@@ -9,6 +9,7 @@ description: >-
   when writing, reviewing, or refactoring Go code.
   Invoke it before external web search.
 allowed-tools: Read
+user-invocable: false
 ---
 
 # Go Rules

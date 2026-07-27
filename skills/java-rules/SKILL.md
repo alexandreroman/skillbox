@@ -10,6 +10,7 @@ description: >-
   when writing, reviewing, or refactoring Java code.
   Invoke it before external web search.
 allowed-tools: Read
+user-invocable: false
 ---
 
 # Java Rules

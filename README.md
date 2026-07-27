@@ -31,7 +31,10 @@ Add the `cc-plugins` marketplace, then install skillbox:
 ### Automatic
 
 Loaded automatically when their trigger conditions
-match the current project.
+match the current project. The `*-rules` skills are
+model-only (`user-invocable: false`): they carry
+conventions rather than actions, so they do not show
+up as slash commands.
 
 | Skill                      | Description                                                                      |
 | -------------------------- | -------------------------------------------------------------------------------- |

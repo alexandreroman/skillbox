@@ -9,6 +9,7 @@ description: >-
   APIs — and when writing, reviewing, or refactoring
   such code. Invoke it before external web search.
 allowed-tools: Read
+user-invocable: false
 ---
 
 # Node.js / TypeScript Rules

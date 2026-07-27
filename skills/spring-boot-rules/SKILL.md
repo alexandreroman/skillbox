@@ -10,6 +10,7 @@ description: >-
   writing, reviewing, or refactoring Spring Boot
   code. Invoke it before external web search.
 allowed-tools: Read
+user-invocable: false
 ---
 
 # Spring Boot Rules
