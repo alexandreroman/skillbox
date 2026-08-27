@@ -8,7 +8,7 @@ project adheres to [Semantic Versioning][semver].
 [keepachangelog]: https://keepachangelog.com/en/1.1.0/
 [semver]: https://semver.org/spec/v2.0.0.html
 
-## [Unreleased]
+## [0.6.0] - 2026-08-27
 
 ### Changed
 
@@ -24,18 +24,6 @@ project adheres to [Semantic Versioning][semver].
   is finalized at the end with the build commands and module
   list. Restarting the session is no longer needed for the
   project's own rules and memory to apply.
-- Stop naming agent-harness tools in skill and agent content.
-  Skills now state the intent — ask the user, invoke a skill,
-  delegate to an agent, track the plan — and leave the tool
-  choice to the coding agent.
-
-### Removed
-
-- The stale `allowed-tools` lists on `init-project` and
-  `write-readme`. Both orchestrate a full bootstrap — asking,
-  reading, writing, delegating, tracking — and neither list
-  covered what the skill actually does.
-
 - Broaden the `code-reviewer` agent's default scope: it now
   reviews documentation and the project memory alongside the
   code, unless the user asks for a narrower perimeter. Stale,
@@ -52,6 +40,17 @@ project adheres to [Semantic Versioning][semver].
   the release that introduced a feature rather than a maximum.
   `init-project` picks the most recent Java release offered by
   Spring Initializr instead of hardcoding 25.
+- Stop naming agent-harness tools in skill and agent content.
+  Skills now state the intent — ask the user, invoke a skill,
+  delegate to an agent, track the plan — and leave the tool
+  choice to the coding agent.
+
+### Removed
+
+- The stale `allowed-tools` lists on `init-project` and
+  `write-readme`. Both orchestrate a full bootstrap — asking,
+  reading, writing, delegating, tracking — and neither list
+  covered what the skill actually does.
 
 ## [0.5.0] - 2026-08-27
 
@@ -190,6 +189,7 @@ project adheres to [Semantic Versioning][semver].
 - `code-writer` and `code-reviewer` agents with opinionated
   best-practice defaults.
 
+[0.6.0]: https://github.com/alexandreroman/skillbox/releases/tag/v0.6.0
 [0.5.0]: https://github.com/alexandreroman/skillbox/releases/tag/v0.5.0
 [0.4.5]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.5
 [0.4.4]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.4
