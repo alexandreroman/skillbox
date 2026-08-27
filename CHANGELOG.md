@@ -12,6 +12,30 @@ project adheres to [Semantic Versioning][semver].
 
 ### Changed
 
+- Front-load project context in `init-project`. A new
+  "Establish project context" phase runs right after the
+  requirements interview and before any file is scaffolded: it
+  writes a bootstrap `CLAUDE.md`, reads it back and adopts it as
+  active instructions for the current session, opens the project
+  memory through `project-memory` and records the founding
+  decisions (objective, name, license, stack), then loads
+  `project-rules` for the detected stack. Scaffolding is
+  delegated to the `code-writer` agent from then on. `CLAUDE.md`
+  is finalized at the end with the build commands and module
+  list. Restarting the session is no longer needed for the
+  project's own rules and memory to apply.
+- Stop naming agent-harness tools in skill and agent content.
+  Skills now state the intent — ask the user, invoke a skill,
+  delegate to an agent, track the plan — and leave the tool
+  choice to the coding agent.
+
+### Removed
+
+- The stale `allowed-tools` lists on `init-project` and
+  `write-readme`. Both orchestrate a full bootstrap — asking,
+  reading, writing, delegating, tracking — and neither list
+  covered what the skill actually does.
+
 - Broaden the `code-reviewer` agent's default scope: it now
   reviews documentation and the project memory alongside the
   code, unless the user asks for a narrower perimeter. Stale,

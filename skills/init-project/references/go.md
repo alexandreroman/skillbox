@@ -9,7 +9,7 @@
 
 ## Steps
 
-1. Use AskUserQuestion to confirm the module owner
+1. Ask the user to confirm the module owner
    if it cannot be inferred from `git config`
    (e.g. GitHub username or organization).
 

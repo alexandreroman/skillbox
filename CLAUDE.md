@@ -33,5 +33,9 @@ agents/                      # One .md file per agent
   `python3 skills/project-rules/scripts/check_tables.py <file>`
   and fix any reported misalignment before
   considering the change done
+- Never name agent-harness tools in skill or agent
+  content — state the intent and let the coding agent
+  pick the tool. Frontmatter fields that require tool
+  names (e.g. `allowed-tools`) are the exception
 - Skills must follow the Agent Skills spec:
   https://agentskills.io/specification

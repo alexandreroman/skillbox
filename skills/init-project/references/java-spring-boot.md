@@ -19,9 +19,9 @@ generate the project skeleton.
 
 ## Steps
 
-1. Use AskUserQuestion to collect the `groupId`,
-   `packageName`, and confirm the dependency list
-   with the user. Always include `devtools`.
+1. Ask the user for the `groupId` and `packageName`,
+   and confirm the dependency list. Always include
+   `devtools`.
    Suggest additional dependencies based
    on the project objective (e.g. `web`, `data-jpa`).
    Propose a default `packageName` built from
@@ -29,7 +29,7 @@ generate the project skeleton.
    stripped (e.g. `com.example.myapp`). The user may
    override it.
 
-2. Use WebFetch to call the Spring Initializr API:
+2. Call the Spring Initializr API:
 
 ```text
 https://start.spring.io/starter.zip
