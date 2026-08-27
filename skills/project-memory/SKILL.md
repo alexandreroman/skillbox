@@ -17,13 +17,11 @@ allowed-tools: Read, Write, Edit, Glob
 
 # Project Memory
 
-Persistent, file-based memory system. Memory
-directory depends on context:
+Persistent, file-based memory system. All
+memory lives in a single directory, shared by
+the main conversation and any subagent:
 
-- Main conversation:
-  `<project root>/.claude/project-memory/`
-- Subagent:
-  `<project root>/.claude/agent-memory/<agent-name>/`
+`<project root>/.claude/project-memory/`
 
 Create the directory if it does not exist.
 

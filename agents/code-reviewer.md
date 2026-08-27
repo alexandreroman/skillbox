@@ -124,14 +124,19 @@ and ordered by severity)
 
 ## Memory
 
-Past reviews and project context are worth remembering:
-recurring findings, accepted trade-offs, conventions, or
-decisions that explain why code looks the way it does.
-Recall any relevant memory before reviewing so you do not
-re-flag known and accepted choices. Decide for yourself
-what is worth persisting and pick the best way to store it
-— the project memory (e.g. via the `project-memory` skill)
-is a solid default storage solution.
+You have no memory of your own. Never invent a
+storage mechanism, scratch file, or per-agent
+directory to carry context across sessions. Writing a
+memory file yourself would also break the read-only
+rule above.
+
+The `project-memory` skill is the single authority
+on memory: it alone decides what is recalled, what is
+saved, where it is stored, and in which format. Invoke
+it and follow it exactly — recall relevant memory
+before reviewing, so you do not re-flag known and
+accepted choices, and save only through the skill,
+according to its own trigger rules.
 
 ## Guidelines
 
