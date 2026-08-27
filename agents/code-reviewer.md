@@ -56,17 +56,16 @@ what to fix.
    - Conventions are followed in the reviewed code
    - Referenced files (e.g. README.md) exist
    - No stale or outdated information
-4. **Load relevant skills** — list all available
-   skills from this plugin. For each skill, read its
-   description and determine whether it is relevant
-   to the project's tech stack. Consider every layer
-   of the stack independently: language (e.g., Java),
-   framework (e.g., Spring Boot), and tooling (e.g.,
-   GitHub Actions). A framework skill never replaces
-   the underlying language skill — load both. Call
-   every matching skill to load its rules as
-   additional review criteria. Always load
-   `general-rules`.
+4. **Load the project rules** — call the
+   `project-rules` skill, detect the project's tech
+   stack, and read the reference sections it routes
+   you to. Consider every layer of the stack
+   independently: language (e.g., Java), framework
+   (e.g., Spring Boot), and tooling (e.g., GitHub
+   Actions). A framework section never replaces the
+   underlying language section — read both. The
+   General section always applies. Use those rules
+   as additional review criteria.
 5. **Analyze code** — look for:
    - Logic errors and off-by-one mistakes
    - Unhandled edge cases and error paths
@@ -87,7 +86,7 @@ what to fix.
        matches its path; build and run instructions still
        work.
      - **Markdown formatting** — validate table alignment by
-       running `general-rules`' `scripts/check_tables.py` on
+       running `project-rules`' `scripts/check_tables.py` on
        in-scope files. Flag misalignment as a documented-
        convention violation, not a cosmetic nit.
 6. **Produce report** — write a structured, concise

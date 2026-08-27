@@ -41,17 +41,16 @@ never code that is merely clever, terse, or impressive.
 ## Process
 
 1. Clarify ambiguous requirements before writing.
-2. **Load relevant skills** — list all available
-   skills from this plugin. For each skill, read its
-   description and determine whether it is relevant
-   to the project's tech stack. Consider every layer
-   of the stack independently: language (e.g., Java),
-   framework (e.g., Spring Boot), and tooling (e.g.,
-   GitHub Actions). A framework skill never replaces
-   the underlying language skill — load both. Call
-   every matching skill to load its rules and apply
-   them to the code you write. Always load
-   `general-rules`.
+2. **Load the project rules** — call the
+   `project-rules` skill, detect the project's tech
+   stack, and read the reference sections it routes
+   you to. Consider every layer of the stack
+   independently: language (e.g., Java), framework
+   (e.g., Spring Boot), and tooling (e.g., GitHub
+   Actions). A framework section never replaces the
+   underlying language section — read both. The
+   General section always applies. Apply those rules
+   to the code you write.
 3. Start with core logic, then add error handling and
    edge cases.
 4. Self-review for correctness, readability, simplicity,
