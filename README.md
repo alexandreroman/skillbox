@@ -30,10 +30,10 @@ Add the `cc-plugins` marketplace, then install skillbox:
 
 ## Agents
 
-| Agent            | Description                                                             |
-| ---------------- | ----------------------------------------------------------------------- |
-| `code-writer`    | Writes, modifies, and refactors source code with simplicity-first style |
-| `code-reviewer`  | Read-only code review producing a severity-ranked findings report       |
+| Agent           | Description                                                                         |
+| --------------- | ----------------------------------------------------------------------------------- |
+| `code-writer`   | Writes, modifies, and refactors source code with simplicity-first style             |
+| `code-reviewer` | Read-only review of code, docs, and project memory: bugs, complexity, and dead code |
 
 ## Usage
 

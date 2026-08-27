@@ -8,6 +8,22 @@ project adheres to [Semantic Versioning][semver].
 [keepachangelog]: https://keepachangelog.com/en/1.1.0/
 [semver]: https://semver.org/spec/v2.0.0.html
 
+## [Unreleased]
+
+### Changed
+
+- Broaden the `code-reviewer` agent's default scope: it now
+  reviews documentation and the project memory alongside the
+  code, unless the user asks for a narrower perimeter. Stale,
+  contradicted, or redundant memory entries are reported as
+  findings; the agent stays read-only and never edits them.
+- Make simplification and dead-code removal first-class review
+  criteria for `code-reviewer`. It hunts for needless complexity
+  (single-use abstractions, duplicated logic, speculative
+  generality) and for dead code (unused symbols, unreachable
+  branches, obsolete flags, unused dependencies), recommending
+  deletion over refactoring and refactoring over addition.
+
 ## [0.5.0] - 2026-08-27
 
 ### Changed
