@@ -181,14 +181,13 @@ Mark the scaffold task `completed`.
 
 Mark the best-practices task `in_progress`.
 
-Before generating any source file, check which
-coding-rules skills are available in the current
-session (they appear in the system-reminder skill
-list). Invoke each applicable skill so its rules
-are loaded, then apply them to all generated source
-code. At a minimum, apply any language-agnostic
-rules skill and any skill matching the project's
-language or framework.
+Before generating any source file, invoke the
+`project-rules` skill if it is available in the
+current session (it appears in the system-reminder
+skill list). Follow its stack-detection table and
+read the General section plus every section matching
+the project's language and framework, then apply
+those rules to all generated source code.
 
 Mark the best-practices task `completed`.
 

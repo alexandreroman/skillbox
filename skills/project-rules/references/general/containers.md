@@ -2,8 +2,9 @@
 
 Language-agnostic best practices for building
 production container images. Language-specific
-skills (e.g., `java-rules`, `spring-boot-rules`)
-extend these rules with their own additions.
+sections (e.g., `java/containers.md`,
+`spring-boot/containers.md`) extend these rules
+with their own additions.
 
 ## Image size
 
@@ -51,7 +52,7 @@ the concrete mount targets.
   at best you get silent cache misses, and for Go it
   breaks `go build` module resolution outright
   (`no required module provides package …` — see
-  `go-rules`).
+  `go/containers.md`).
 
 ## Security
 

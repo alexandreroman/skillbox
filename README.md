@@ -23,27 +23,10 @@ Add the `cc-plugins` marketplace, then install skillbox:
 
 ### User-invocable
 
-| Skill          | Description                                                                    |
-| -------------- | ------------------------------------------------------------------------------ |
-| `init-project` | Interactive project scaffolding with README, CLAUDE.md, and license generation |
-| `write-readme` | Generate a polished README.md for an existing project                          |
-
-### Automatic
-
-Loaded automatically when their trigger conditions
-match the current project. The `*-rules` skills are
-model-only (`user-invocable: false`): they carry
-conventions rather than actions, so they do not show
-up as slash commands.
-
-| Skill                      | Description                                                                      |
-| -------------------------- | -------------------------------------------------------------------------------- |
-| `general-rules`            | Language-agnostic rules for containers, CI/CD, security, and operations          |
-| `go-rules`                 | Go 1.21+ coding rules: tooling, Air hot reload, slog, iterators, errgroup        |
-| `java-rules`               | Java 21-25 coding rules: style, records, virtual threads, structured concurrency |
-| `nodejs-typescript-rules`  | Node.js / TypeScript rules: tooling, strict config, ESLint v9, Prettier          |
-| `spring-boot-rules`        | Spring Boot 3.4+ / 4.x rules: configuration, testing, observability, migration   |
-| `project-memory`           | Persist project decisions, deadlines, and team context across conversations      |
+| Skill            | Description                                                                      |
+| ---------------- | -------------------------------------------------------------------------------- |
+| `project-rules`  | Coding rules for Java, Go, Node.js / TypeScript, Spring Boot, and infrastructure |
+| `project-memory` | Persist project decisions, deadlines, and team context across conversations      |
 
 ## Agents
 

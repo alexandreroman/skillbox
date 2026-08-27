@@ -8,6 +8,37 @@ project adheres to [Semantic Versioning][semver].
 [keepachangelog]: https://keepachangelog.com/en/1.1.0/
 [semver]: https://semver.org/spec/v2.0.0.html
 
+## [0.5.0] - 2026-08-27
+
+### Changed
+
+- Merge the five convention skills (`general-rules`, `go-rules`,
+  `java-rules`, `nodejs-typescript-rules`, `spring-boot-rules`)
+  into a single `project-rules` skill. Its `SKILL.md` carries a
+  stack-detection table and routes to `references/<stack>/`, so a
+  project reads the General section plus only the sections that
+  match its language and framework. The reference files
+  themselves are unchanged.
+- Point the `code-writer` and `code-reviewer` agents and the
+  `init-project` skill at `project-rules` instead of enumerating
+  the per-language skills.
+- Make `project-memory` the single authority on memory. The
+  `code-writer` and `code-reviewer` agents no longer decide for
+  themselves what to persist or how to store it; they recall and
+  save only through the skill, following its own trigger rules.
+
+### Removed
+
+- The `general-rules`, `go-rules`, `java-rules`,
+  `nodejs-typescript-rules`, and `spring-boot-rules` skills.
+  Their references now live under
+  `skills/project-rules/references/`, and
+  `check_tables.py` under `skills/project-rules/scripts/`.
+- The per-agent memory directory
+  `<project root>/.claude/agent-memory/<agent-name>/`. The main
+  conversation and subagents now share
+  `<project root>/.claude/project-memory/`.
+
 ## [0.4.5] - 2026-07-27
 
 ### Changed
@@ -114,6 +145,7 @@ project adheres to [Semantic Versioning][semver].
 - `code-writer` and `code-reviewer` agents with opinionated
   best-practice defaults.
 
+[0.5.0]: https://github.com/alexandreroman/skillbox/releases/tag/v0.5.0
 [0.4.5]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.5
 [0.4.4]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.4
 [0.4.3]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.3

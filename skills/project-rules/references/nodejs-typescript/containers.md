@@ -2,7 +2,7 @@
 
 Node.js / TypeScript additions to the
 language-agnostic container rules defined in
-`general-rules`.
+`general/containers.md`.
 
 ## Activate pnpm via Corepack
 
