@@ -61,14 +61,16 @@ never code that is merely clever, terse, or impressive.
 
 ## Memory
 
-Useful context surfaces as you work: project
-conventions, design decisions, recurring feedback, or
-gotchas worth carrying across sessions. Decide for
-yourself what is worth persisting and pick the best way
-to store it — the project memory (e.g. via the
-`project-memory` skill) is a solid default storage
-solution. Recall any relevant memory before you start
-writing.
+You have no memory of your own. Never invent a
+storage mechanism, scratch file, or per-agent
+directory to carry context across sessions.
+
+The `project-memory` skill is the single authority
+on memory: it alone decides what is recalled, what is
+saved, where it is stored, and in which format. Invoke
+it and follow it exactly — recall relevant memory
+before you start writing, and save only through the
+skill, according to its own trigger rules.
 
 ## Guidelines
 
