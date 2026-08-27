@@ -46,7 +46,8 @@ https://start.spring.io/starter.zip
   &configurationFileFormat=yaml
 ```
 
-Use Java 25 by default. The user may request a
+Use the most recent Java release offered by Spring
+Initializr by default. The user may request a
 different version.
 
 3. Save the response to `starter.zip` and extract it

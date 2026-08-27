@@ -23,6 +23,11 @@ project adheres to [Semantic Versioning][semver].
   generality) and for dead code (unused symbols, unreachable
   branches, obsolete flags, unused dependencies), recommending
   deletion over refactoring and refactoring over addition.
+- Drop the Java 25 upper bound from `project-rules`: the Java
+  rules now target Java 21 and later, with version tags read as
+  the release that introduced a feature rather than a maximum.
+  `init-project` picks the most recent Java release offered by
+  Spring Initializr instead of hardcoding 25.
 
 ## [0.5.0] - 2026-08-27
 
