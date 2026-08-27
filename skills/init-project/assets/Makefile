@@ -13,7 +13,7 @@ endif
 # Local overrides, loaded only for dev/test targets so that
 # deploy/release targets see the canonical .env values only.
 # Sequential include means later assignments win.
-DEV_TARGETS := dev test check infra-up infra-down infra-logs {{dev-targets}}
+DEV_TARGETS := dev test check infra-up infra-down {{dev-targets}}
 GOALS := $(or $(MAKECMDGOALS),$(.DEFAULT_GOAL))
 ifneq (,$(filter $(DEV_TARGETS),$(GOALS)))
 ifneq (,$(wildcard .env.local))
@@ -31,10 +31,6 @@ infra-up: ## Start local infrastructure services (databases, brokers, ...)
 .PHONY: infra-down
 infra-down: ## Stop local infrastructure services
 	{{compose}} stop {{infra-services}}
-
-.PHONY: infra-logs
-infra-logs: ## Follow logs from infrastructure services
-	{{compose}} logs -f {{infra-services}}
 
 ##@ Develop
 
@@ -56,10 +52,6 @@ app-up: ## Bring up the full stack in containers (build + start)
 .PHONY: app-down
 app-down: ## Tear down the full stack (removes containers and network)
 	{{compose}} down
-
-.PHONY: app-logs
-app-logs: ## Follow logs from every stack container
-	{{compose}} logs -f
 
 ##@ Quality
 
