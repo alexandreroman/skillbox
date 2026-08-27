@@ -3,7 +3,7 @@ name: project-rules
 description: >-
   Project engineering rules: best practices, code
   conventions, and design preferences for Java
-  (21-25), Go (1.21+), Node.js / TypeScript, and
+  (21+), Go (1.21+), Node.js / TypeScript, and
   Spring Boot (3.4+, 4.x), plus language-agnostic
   concerns (containers, Docker Compose, CI/CD, Git,
   HTTP servers). Consult this skill when designing,
@@ -88,7 +88,10 @@ Language-agnostic rules, for every project.
 
 ## Java
 
-Modern Java projects (Java 21–25).
+Modern Java projects (Java 21 and later). Version
+tags such as "Java 24+" mark when a feature became
+available — they are not upper bounds, and every rule
+keeps applying to newer Java releases.
 
 - [Code style](references/java/code-style.md) —
   formatting, naming, imports, braces
