@@ -9,7 +9,7 @@ Run the appropriate scaffolding command:
 - **Vite + Nuxt**: `npx nuxi@latest init .`
 
 Preferred option: **Vite + Nuxt**.
-Use AskUserQuestion to confirm the framework choice
+Ask the user to confirm the framework choice
 if not explicitly stated.
 
 ## Makefile

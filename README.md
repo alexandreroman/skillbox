@@ -53,7 +53,8 @@ Invoke a skill from the Claude Code prompt:
 > configures the `code-writer` and `code-reviewer`
 > agents and wires up project memory so that
 > decisions, deadlines, and team context persist
-> across conversations.
+> across conversations — and it applies them from the
+> very first generated file, with no session restart.
 
 ## Project structure
 

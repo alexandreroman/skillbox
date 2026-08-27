@@ -6,7 +6,6 @@ description: >-
   existing project. Interactively gathers the objective
   and name, then generates the appropriate files so
   Claude Code has proper context from day one.
-allowed-tools: Read, Skill, TaskCreate, TaskUpdate
 ---
 
 # Initialize Project
@@ -33,31 +32,31 @@ template for the new project or module.
 ## Plan
 
 After gathering requirements (phase 1), create a
-plan using TaskCreate so the user can track progress.
+tracked plan so the user can follow progress.
 Adapt the plan to the detected mode:
 
 ### Project-mode plan
 
 Create the following tasks in order:
 
-1. Scaffold project
-2. Apply best practices
+1. Establish project context
+2. Scaffold project
 3. Generate developer tooling
 4. Generate README.md
-5. Generate CLAUDE.md
-6. Generate LICENSE
+5. Generate LICENSE
+6. Finalize CLAUDE.md
 7. Review and confirm
 
 ### Module-mode plan
 
 Create the following tasks in order:
 
-1. Scaffold module
-2. Apply best practices
+1. Load project context
+2. Scaffold module
 3. Review and confirm
 
-Use TaskUpdate to mark each task `in_progress` when
-you start it and `completed` when you finish it.
+Mark each task `in_progress` when you start it and
+`completed` when you finish it.
 
 ## Process
 
@@ -67,8 +66,8 @@ This phase runs **before** the plan is created.
 
 #### 1a — Understand the objective
 
-Use AskUserQuestion to ask the user to describe the
-objective in a few sentences:
+Ask the user to describe the objective in a few
+sentences:
 
 - What problem does it solve?
 - Who is the target audience?
@@ -101,16 +100,14 @@ objective. Names should be:
 For modules, the name will be used as the directory
 name inside the existing project.
 
-Use AskUserQuestion to ask the user to pick one or
-suggest their own.
+Ask the user to pick one or suggest their own.
 Do NOT proceed until a name is confirmed.
 
 #### 1c — Choose a license (project only)
 
 **Skip this step for modules.**
 
-Use AskUserQuestion to ask the user which license
-to use. Suggest:
+Ask the user which license to use. Suggest:
 
 - **Apache-2.0** (default)
 - **MIT**
@@ -122,11 +119,94 @@ If the user has no preference, use Apache-2.0.
 
 Now that requirements are clear, create the tasks
 listed in the Plan section above (project-mode or
-module-mode) using TaskCreate.
+module-mode).
 
-### Phase 2 — Scaffold
+### Phase 2 — Establish project context
+
+Mark the context task `in_progress`.
+
+This phase runs **before a single project file is
+written**. Its purpose is to make the project's own
+instructions — `CLAUDE.md`, the project memory, and the
+project rules — active for the rest of *this* session.
+Nothing here may be deferred to a session restart:
+Claude Code loads `CLAUDE.md` at startup only, so the
+skill must load and apply it itself.
+
+#### 2a — Bootstrap CLAUDE.md
+
+**Project mode.** Read the template at
+[assets/CLAUDE.md](assets/CLAUDE.md) and write
+`./CLAUDE.md` now, filling it with what phase 1 already
+established: the project name, a one-sentence
+description, and the tech stack when it is known.
+
+- Copy the **Agents**, **Memory**, and **Conventions**
+  sections as-is — they never depend on the scaffold.
+- Omit **Build & run** and **Modules** for now; phase
+  5c fills them in once the scaffold exists.
+- Check for an existing `CLAUDE.md` first and ask the
+  user before overwriting.
+
+**Module mode.** Do not write a `CLAUDE.md`. Read the
+parent project's `CLAUDE.md` instead, plus any closer
+one between the repository root and the module
+directory.
+
+#### 2b — Adopt CLAUDE.md immediately
+
+Read back the `CLAUDE.md` that now governs the project
+and treat its content as **active instructions for the
+remainder of this session**, exactly as if it had been
+loaded at startup. In particular, from phase 3 onwards:
+
+- Delegate every source-file write, edit, or refactor
+  to the **code-writer** agent — never edit source
+  files yourself.
+- Apply the conventions it states: line-length limits,
+  Markdown formatting, and latest stable versions for
+  languages, frameworks, and libraries.
+
+#### 2c — Open the project memory
+
+Invoke the **project-memory** skill and follow its own
+format and trigger rules. Do not invent a storage
+layout.
+
+- **Project mode** — it creates
+  `.claude/project-memory/` and its `MEMORY.md`. Save
+  the founding decisions from phase 1: the objective
+  and target audience, the chosen name, the license,
+  the tech stack and why it was picked, and any
+  constraint the user stated. These are exactly the
+  decisions that would otherwise be lost between
+  sessions.
+- **Module mode** — read the existing `MEMORY.md`
+  before scaffolding so the module follows past
+  decisions, then save the module's objective and
+  where it sits in the project.
+
+#### 2d — Load the project rules
+
+Invoke the **project-rules** skill. Detect the stack
+from the phase 1 answers in
+project mode — the manifests do not exist yet — or
+from the parent project's manifests in module mode.
+Read the General section plus every section matching
+the language and framework, then apply those rules to
+everything generated from phase 3 onwards.
+
+Mark the context task `completed`.
+
+### Phase 3 — Scaffold
 
 Mark the scaffold task `in_progress`.
+
+Per the `CLAUDE.md` adopted in phase 2b, the
+**code-writer** agent writes every source file created
+in this phase. Hand it the objective, the chosen name,
+the stack, and the layout decided below; it loads the
+project rules and the project memory on its own.
 
 #### When a base was provided
 
@@ -176,20 +256,6 @@ the application entry point (e.g. main class,
 code that matches the objective and tech stack.
 
 Mark the scaffold task `completed`.
-
-### Phase 3 — Apply best practices
-
-Mark the best-practices task `in_progress`.
-
-Before generating any source file, invoke the
-`project-rules` skill if it is available in the
-current session (it appears in the system-reminder
-skill list). Follow its stack-detection table and
-read the General section plus every section matching
-the project's language and framework, then apply
-those rules to all generated source code.
-
-Mark the best-practices task `completed`.
 
 ### Phase 4 — Generate developer tooling (project only)
 
@@ -290,34 +356,16 @@ Before generating files, check for an existing
 `README.md` — ask the user before overwriting.
 
 Delegate README generation to the **write-readme**
-skill by invoking it with the Skill tool. The skill
-will scan the scaffolded project, gather any missing
-context from the user, and produce a polished README.
+skill. It scans the scaffolded project, gathers any
+missing context from the user, and produces a polished
+README.
 
 Do NOT generate README.md manually — let write-readme
 handle it entirely.
 
 Mark the README task `completed`.
 
-#### 5b — Generate CLAUDE.md
-
-Mark the CLAUDE.md task `in_progress`.
-
-Read the template at
-[assets/CLAUDE.md](assets/CLAUDE.md).
-Write `./CLAUDE.md` by filling in each
-`{{placeholder}}` with project-specific content.
-Keep the file **short and essential** (~40-60 lines
-max). Remove any section whose placeholder has
-nothing useful to say. The **Agents section is
-mandatory** — never remove it.
-
-Reference:
-https://code.claude.com/docs/en/best-practices
-
-Mark the CLAUDE.md task `completed`.
-
-#### 5c — Generate LICENSE
+#### 5b — Generate LICENSE
 
 Mark the LICENSE task `in_progress`.
 
@@ -330,6 +378,31 @@ Reference:
 https://choosealicense.com/licenses/
 
 Mark the LICENSE task `completed`.
+
+#### 5c — Finalize CLAUDE.md
+
+Mark the CLAUDE.md task `in_progress`.
+
+`CLAUDE.md` already exists from phase 2a. Fill in the
+`{{placeholder}}` sections that were left out because
+the scaffold did not exist yet:
+
+- **Tech stack** — confirm or correct it against what
+  was actually generated.
+- **Build & run** — the essential commands, taken from
+  the generated `Makefile`.
+- **Modules** — one bullet per module or top-level
+  directory.
+
+Keep the file **short and essential** (~40-60 lines
+max). Remove any section whose placeholder still has
+nothing useful to say. The **Agents** and **Memory**
+sections are mandatory — never remove them.
+
+Reference:
+https://code.claude.com/docs/en/best-practices
+
+Mark the CLAUDE.md task `completed`.
 
 ### Phase 6 — Review and confirm
 
@@ -361,8 +434,25 @@ Mark the review task `completed`.
   image running `server start-dev`, exposing `7233` and the
   UI port `8233`, with a `temporal operator cluster health`
   healthcheck. Dev only, never production.
+- **Context before code** — phase 2 must complete
+  before any project file is written. The generated
+  `CLAUDE.md`, the project memory, and the project
+  rules govern the scaffold itself, not only the work
+  that follows it.
+- **No session restart** — never tell the user to
+  restart the session for `CLAUDE.md` or the project
+  memory to take effect. The skill reads and applies
+  them itself, in the current session.
+- **Delegate code to code-writer** — from phase 3
+  onwards, every source file is written by the
+  code-writer agent. The skill writes only what it
+  owns: `README.md`, `CLAUDE.md`, `LICENSE`,
+  `Makefile`, and `compose.yaml`.
 - **Agents section is mandatory** in CLAUDE.md —
   always include code-writer and code-reviewer.
+- **Memory section is mandatory** in CLAUDE.md —
+  always point at `.claude/project-memory/MEMORY.md`
+  and the project-memory skill.
 - **README.md reference is mandatory** in CLAUDE.md —
   always link to README.md.
 - **No secrets or paths** — do not include absolute
@@ -371,10 +461,10 @@ Mark the review task `completed`.
   moving to the next. Do not generate files before
   the user has confirmed the objective and name.
 - **Module mode** — when creating a module, skip
-  phases marked "project only". Only scaffold the
-  code and apply best practices. The module inherits
-  the parent project's documentation and
-  configuration.
+  phases marked "project only". Load the parent
+  project's `CLAUDE.md`, memory, and rules in phase 2,
+  then scaffold the code. The module inherits the
+  parent project's documentation and configuration.
 - **Base mode** — when an existing directory is
   used as a base, preserve its conventions
   (build config, dependencies, directory layout)

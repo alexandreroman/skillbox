@@ -6,7 +6,6 @@ description: >-
   codebase, gathers missing context from the user,
   and produces a polished README following best
   practices.
-allowed-tools: Read, Skill
 ---
 
 # Generate README
@@ -55,8 +54,8 @@ Compile a mental summary of:
 
 ### Step 2 — Check for existing README
 
-If `README.md` already exists, use AskUserQuestion to
-show its current state and ask:
+If `README.md` already exists, show its current state
+and ask the user:
 
 > A README.md already exists. Do you want me to
 > rewrite it from scratch, or update specific
@@ -67,7 +66,7 @@ Do NOT overwrite without confirmation.
 ### Step 3 — Gather missing context
 
 If any of the following are unclear after Step 1,
-use AskUserQuestion to ask the user. Skip questions
+ask the user. Skip questions
 whose answers are already obvious from the codebase.
 
 - **Project purpose** — What does this project do in
@@ -132,8 +131,7 @@ Generate `./README.md` by filling in each
 
 ### Step 5 — Review and refine
 
-Present the generated README to the user. Use
-AskUserQuestion to ask:
+Present the generated README to the user and ask:
 
 > Here is the generated README. Would you like to
 > adjust anything — add sections, change wording,
