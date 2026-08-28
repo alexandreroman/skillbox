@@ -8,6 +8,15 @@ project adheres to [Semantic Versioning][semver].
 [keepachangelog]: https://keepachangelog.com/en/1.1.0/
 [semver]: https://semver.org/spec/v2.0.0.html
 
+## [Unreleased]
+
+### Removed
+
+- The `infra-logs` and `app-logs` targets from the `init-project`
+  Makefile template. Following container logs is a one-off
+  troubleshooting step, not a task worth a dedicated target;
+  `infra-logs` is also dropped from `DEV_TARGETS`.
+
 ## [0.6.0] - 2026-08-27
 
 ### Changed
