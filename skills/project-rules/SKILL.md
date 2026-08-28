@@ -143,6 +143,9 @@ Guide).
 - [Concurrency](references/go/concurrency.md) —
   `errgroup`, `sync.Once*`, `WaitGroup.Go`,
   context propagation
+- [Dependency injection](references/go/dependency-injection.md) —
+  when to adopt uber-go/fx, module layout, `slog`
+  event logging, graph validation
 - [Testing](references/go/testing.md) —
   table-driven tests, `t.Cleanup`,
   `testing/synctest`, `b.Loop`, fuzzing
@@ -165,6 +168,12 @@ Key rules:
 - **Wrap errors with `%w`** in `fmt.Errorf` and
   compare via `errors.Is` / `errors.As` — never
   `==` or string matching.
+- **Recommend uber-go/fx for a large volume of
+  components** — many constructors, several
+  subsystems, or start/stop lifecycles. Hand wiring
+  stays the default below that bar, and libraries
+  never depend on fx. See
+  [Dependency injection](references/go/dependency-injection.md).
 
 ## Node.js / TypeScript
 
