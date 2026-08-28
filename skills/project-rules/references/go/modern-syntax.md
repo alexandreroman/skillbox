@@ -123,6 +123,71 @@ type Set[T comparable] = map[T]struct{}
 Useful for compatibility shims and renaming
 generic types without forcing call-site changes.
 
+## Generic Methods (Go 1.27+)
+
+Since Go 1.27, concrete (non-interface) methods can
+declare their own type parameters, between the
+method name and the parameter list:
+
+```go
+type List[E any] struct {
+    elem E
+    next *List[E]
+}
+
+// R belongs to the method, independent of the
+// receiver's E.
+func (List[E]) Map[R any](f func(E) R) List[R] {
+    /* ... */
+}
+```
+
+Before 1.27, the result type had to be lifted into
+a package-level generic function:
+
+```go
+// Go 1.18 workaround
+func MapList[E, R any](l List[E], f func(E) R) List[R] { /* ... */ }
+```
+
+Rules:
+
+- Prefer a method when the operation belongs to one
+  type and only the **result** type varies. Keep a
+  package-level generic function when the operation
+  spans several types.
+- Chained calls then read left to right —
+  `NewList(0, 2, 4).Map(add(2)).Map(divideBy(2))`
+  instead of nesting `MapList(MapList(...), ...)`.
+- A method expression recovers the function form
+  when it reads better: `f := List[int].Map[int]`.
+- Like every generic construct, a generic method
+  must be instantiated — explicitly or by
+  inference — before it is called or converted to a
+  function value.
+
+**Interface methods still cannot declare type
+parameters**, and this is deliberate — the compiler
+would have to instantiate the method for every type
+argument a separate package might use:
+
+```go
+type I interface {
+    M[P any]()    // invalid in Go 1.27
+}
+```
+
+A generic method therefore never helps satisfy an
+interface: `func (T) M[P any]()` does not make `T`
+implement `interface{ M() }`, even though
+`T.M[int]` has a matching signature. When a type
+must satisfy an interface, keep the method
+non-generic — a thin non-generic method delegating
+to a generic one is the usual way out.
+
+See [Generic Methods](https://go.dev/blog/generic-methods)
+on the Go blog.
+
 ## Generics — Use Sparingly
 
 - Reach for generics only when the alternative
@@ -133,6 +198,9 @@ generic types without forcing call-site changes.
   compile times grow, errors get noisier, and
   the standard library style prefers concrete
   types.
+- The same restraint applies to generic methods:
+  add one to remove duplication, not to make an
+  API look fluent.
 - Constraints live in `cmp.Ordered`,
   `comparable`, and `~T` underlying-type
   approximations — most projects do not need a

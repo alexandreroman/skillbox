@@ -10,6 +10,14 @@ project adheres to [Semantic Versioning][semver].
 
 ## [Unreleased]
 
+### Added
+
+- A "Generic Methods (Go 1.27+)" section to the `project-rules` Go
+  modern-syntax reference: type parameters on concrete methods,
+  when to prefer a method over a package-level generic function,
+  method expressions, and the standing ban on generic interface
+  methods.
+
 ### Removed
 
 - The `infra-logs` and `app-logs` targets from the `init-project`

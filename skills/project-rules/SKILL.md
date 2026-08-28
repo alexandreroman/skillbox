@@ -139,7 +139,7 @@ Guide).
   `any` vs `interface{}`
 - [Modern syntax](references/go/modern-syntax.md) —
   range over int/func, `slices`/`maps`, builtins,
-  generics caveats
+  generic methods, generics caveats
 - [Concurrency](references/go/concurrency.md) —
   `errgroup`, `sync.Once*`, `WaitGroup.Go`,
   context propagation
