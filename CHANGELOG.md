@@ -12,6 +12,12 @@ project adheres to [Semantic Versioning][semver].
 
 ### Added
 
+- A "Dependency Injection — uber-go/fx" reference to the
+  `project-rules` Go section, recommending fx for projects with a
+  large volume of components: the threshold for adopting it over
+  hand wiring, per-package `fx.Module` layout, `slog` event
+  logging, and a `fx.ValidateApp` guard against runtime wiring
+  errors.
 - A "Generic Methods (Go 1.27+)" section to the `project-rules` Go
   modern-syntax reference: type parameters on concrete methods,
   when to prefer a method over a package-level generic function,
