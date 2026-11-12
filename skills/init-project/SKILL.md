@@ -140,9 +140,10 @@ description, and the tech stack when it is known.
 - Check for an existing `AGENTS.md` (or `CLAUDE.md`)
   first and ask the user before overwriting.
 - Do **not** generate a `CLAUDE.md`: its presence makes
-  Claude Code ignore `AGENTS.md`. Only for Claude Code
-  older than 2.1.277, which does not read `AGENTS.md`,
-  add a one-line `CLAUDE.md` containing `@AGENTS.md`.
+  Claude Code ignore `AGENTS.md`. Do not check the
+  Claude Code version either. Only if the user says
+  their tool does not read `AGENTS.md`, add a one-line
+  `CLAUDE.md` containing `@AGENTS.md`.
 
 **Module mode.** Do not write an instruction file. Read
 the parent project's `AGENTS.md` (or `CLAUDE.md`) instead,
