@@ -1,11 +1,5 @@
 # Memory Guidelines
 
-## Language
-
-All memory content (file names, frontmatter,
-body text, MEMORY.md index) must be written in
-English, regardless of the conversation language.
-
 ## What NOT to save
 
 - Code patterns, architecture, file paths, or
@@ -14,7 +8,7 @@ English, regardless of the conversation language.
 - Git history or who-changed-what — use
   `git log`.
 - Debugging solutions — the fix is in the code.
-- Anything already in CLAUDE.md files.
+- Anything already in AGENTS.md or CLAUDE.md files.
 - Ephemeral task details or current conversation
   context.
 - Personal user data (role, preferences,

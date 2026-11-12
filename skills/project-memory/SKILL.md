@@ -12,6 +12,7 @@ description: >-
   something previously saved. Do not wait for an
   explicit request — if the information is worth
   remembering, invoke this skill immediately.
+user-invocable: false
 allowed-tools: Read, Write, Edit, Glob
 ---
 
@@ -24,6 +25,10 @@ the main conversation and any subagent:
 `<project root>/.claude/project-memory/`
 
 Create the directory if it does not exist.
+
+Inside a subagent, never write on a conflict or
+a duplicate: report it back to the caller instead,
+since a subagent cannot reach the user.
 
 ## When to save — trigger checklist
 
@@ -106,8 +111,9 @@ After the frontmatter, start with a
 `# <memory name>` heading matching the `name`
 field.
 
-Write all memory content in English, regardless
-of the conversation language.
+Write all memory content (file names,
+frontmatter, body text, `MEMORY.md` index) in
+English, regardless of the conversation language.
 
 Write entries in the present tense, as standing
 facts. Do NOT narrate past events or anecdotes
@@ -121,14 +127,6 @@ does not exist yet, create it with this header:
 
 ```markdown
 # Project Memory
-
-> When a new decision **contradicts** an existing
-> memory note, do NOT silently override it.
-> Instead: surface the conflict, quote the
-> existing memory, explain how the new decision
-> differs, and ask for explicit confirmation
-> before updating. **Do NOT take any action** —
-> no tool calls, no file writes — until confirmed.
 
 > **Note wording** — state permanent facts in the
 > present tense. A note read out of context must
@@ -147,13 +145,11 @@ does not exist yet, create it with this header:
 One line per entry, under 150 characters:
 `- [Title](references/file.md) — one-line hook`.
 Keep the index concise (max 200 lines).
-Check for duplicates before writing.
-
-If a duplicate or conflicting entry exists, do
-NOT write anything — neither the memory file
-nor the `MEMORY.md` entry. Surface the conflict,
-ask for explicit confirmation, and wait. No
-tool calls or file writes until confirmed.
+Check for duplicates before writing. If a
+duplicate or conflicting entry exists, write
+nothing (neither the memory file nor the
+`MEMORY.md` entry) and follow "Decision
+tracking".
 
 > **Important:** Always write to the *project*
 > memory directory (`<project root>/.claude/…`),
