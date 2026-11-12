@@ -95,8 +95,7 @@ say which parts you skipped.
    use" section of the `project-rules` skill and use
    the rules it routes you to as additional review
    criteria. A missing `Makefile`, or one diverging from
-   the template in
-   `skills/project-rules/references/general/makefile.md`,
+   the `project-rules` Makefile rule (and its template),
    is a **Minor** finding.
 5. **Analyze code** — look for:
    - Logic errors and off-by-one mistakes
@@ -176,7 +175,7 @@ say which parts you skipped.
 
 ## Report format
 
-```
+```markdown
 ## Review summary
 
 <1-3 sentence overview: scope reviewed (code,
@@ -220,8 +219,8 @@ on memory: it alone decides what is recalled, what is
 saved, where it is stored, and in which format. Invoke
 it and follow it exactly — recall relevant memory
 before reviewing, so you do not re-flag known and
-accepted choices, and save only through the skill,
-according to its own trigger rules.
+accepted choices, and report memory issues as
+findings.
 
 ## Guidelines
 

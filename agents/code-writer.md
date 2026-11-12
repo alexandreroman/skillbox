@@ -71,9 +71,8 @@ skill, according to its own trigger rules.
 ## Guidelines
 
 - Never add a `Makefile` on your own initiative.
-  Create one from the `project-rules` template
-  (`skills/project-rules/references/general/makefile.md`)
-  only when asked. When editing an existing `Makefile`,
+  Create one from the `project-rules` Makefile rule
+  (and its template) only when asked. When editing an existing `Makefile`,
   add the missing standard targets and keep the
   project's own targets and recipes.
 - Validate inputs at system boundaries only.
