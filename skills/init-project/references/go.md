@@ -1,14 +1,5 @@
 # Go
 
-## Variables
-
-| Variable       | Source                                 |
-|----------------|----------------------------------------|
-| `owner`        | Asked in step 1                        |
-| `project-name` | Step 2                                 |
-
-## Steps
-
 1. Ask the user for the module owner (GitHub username
    or organization), even when a default seems
    obvious. Propose one from the repository's remote
@@ -16,7 +7,9 @@
    from an unrelated URL such as a plugin's
    repository.
 
-2. Run `go mod init github.com/{{owner}}/{{project-name}}`
+2. Run `go mod init github.com/{{owner}}/{{project-name}}`,
+   with the owner from step 1 and the name chosen in
+   phase 1b.
 
 3. Set up linting, formatting and hot reload as
    described in

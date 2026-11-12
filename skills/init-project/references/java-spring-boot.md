@@ -3,33 +3,20 @@
 Use [Spring Initializr](https://start.spring.io) to
 generate the project skeleton.
 
-## Variables
-
-| Variable            | Source                         |
-|---------------------|--------------------------------|
-| `groupId`           | Ask the user                   |
-|                     | (e.g. `com.example`)           |
-| `packageName`       | Ask the user — default:        |
-|                     | `{{groupId}}.{{project-name}}` |
-|                     | stripped of `-` and `_`        |
-| `project-name`      | Step 2                         |
-| `short-description` | Step 1                         |
-| `dependencies`      | Ask the user — suggest based   |
-|                     | on the project objective       |
-
 ## Steps
 
-1. Ask the user for the `groupId` and `packageName`,
-   and confirm the dependency list. Always include
-   `devtools`.
-   Suggest additional dependencies based
-   on the project objective (e.g. `web`, `data-jpa`).
-   Propose a default `packageName` built from
-   `{{groupId}}.{{project-name}}` with `-` and `_`
-   stripped (e.g. `com.example.myapp`). The user may
-   override it.
+1. Ask the user for the `groupId` (e.g. `com.example`)
+   and `packageName`, and confirm the dependency list.
+   Always include `devtools`. Suggest additional
+   dependencies based on the project objective (e.g.
+   `web`, `data-jpa`). Propose a default `packageName`
+   built from `{{groupId}}.{{project-name}}` with `-`
+   and `_` stripped (e.g. `com.example.myapp`). The
+   user may override it.
 
-2. Call the Spring Initializr API:
+2. Call the Spring Initializr API, with the name chosen
+   in phase 1b and a one-sentence description of the
+   objective from phase 1a:
 
 ```text
 https://start.spring.io/starter.zip
