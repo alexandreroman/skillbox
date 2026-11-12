@@ -62,10 +62,7 @@ project adheres to [Semantic Versioning][semver].
 - Rename the `init-project` instruction template from
   `CLAUDE.md` to `AGENTS.md`. It imports the memory index with
   `@.claude/project-memory/MEMORY.md`, so the memory loads on
-  startup, and states the two limits of `AGENTS.md` (Claude Code
-  2.1.277+, ignored next to a `CLAUDE.md` or `CLAUDE.local.md`)
-  with a one-line `CLAUDE.md` importing `@AGENTS.md` as the
-  fallback.
+  startup.
 - State each `project-memory` rule once (the conflict rule and
   the English rule were repeated) and add a rule for subagents:
   on a conflict or a duplicate they write nothing and report it

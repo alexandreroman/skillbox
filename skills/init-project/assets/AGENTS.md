@@ -58,11 +58,6 @@ auto-memory system (`~/.claude/projects/.../memory/`)
 for project decisions or context — it is local and
 not shared with the team.
 
-**Note:** Claude Code reads `AGENTS.md` natively
-from v2.1.277, and ignores it when a `CLAUDE.md`
-or `CLAUDE.local.md` exists in the project. Fallback:
-add a one-line `CLAUDE.md` containing `@AGENTS.md`.
-
 ## Conventions
 
 - Line length limits for readability:
