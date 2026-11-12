@@ -8,7 +8,7 @@ project adheres to [Semantic Versioning][semver].
 [keepachangelog]: https://keepachangelog.com/en/1.1.0/
 [semver]: https://semver.org/spec/v2.0.0.html
 
-## [Unreleased]
+## [0.7.0] - 2026-11-12
 
 ### Added
 
@@ -336,6 +336,7 @@ project adheres to [Semantic Versioning][semver].
 - `code-writer` and `code-reviewer` agents with opinionated
   best-practice defaults.
 
+[0.7.0]: https://github.com/alexandreroman/skillbox/releases/tag/v0.7.0
 [0.6.0]: https://github.com/alexandreroman/skillbox/releases/tag/v0.6.0
 [0.5.0]: https://github.com/alexandreroman/skillbox/releases/tag/v0.5.0
 [0.4.5]: https://github.com/alexandreroman/skillbox/releases/tag/v0.4.5
