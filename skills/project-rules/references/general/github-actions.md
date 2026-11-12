@@ -82,7 +82,7 @@ only created once during the merge step:
 
 ```yaml
 - name: Build and push by digest
-  uses: docker/build-push-action@v6
+  uses: docker/build-push-action@v7
   with:
     context: .
     platforms: ${{ matrix.platform }}
@@ -136,7 +136,7 @@ quiet, batch, or non-interactive flag, enable it.
 ## General tips
 
 - **Pin actions to a major version**
-  (e.g., `actions/checkout@v4`) — avoid `@main`
+  (e.g., `actions/checkout@v7`) — avoid `@main`
   or `@latest`.
 - **Use `if:` guards** to skip expensive jobs on
   PRs (e.g., publish only on push to `main`).
