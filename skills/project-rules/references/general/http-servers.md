@@ -1,7 +1,7 @@
 # HTTP Servers
 
 Language-agnostic best practices for HTTP server
-configuration. Language-specific skills extend
+configuration. Language-specific sections extend
 these rules with their own additions.
 
 ## Port configuration

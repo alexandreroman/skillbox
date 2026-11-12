@@ -42,8 +42,8 @@ COPY src/ ./src/
 
 `--mount=type=cache` persists dependency and build
 caches across image builds (package-manager
-downloads, compiler caches). Language skills give
-the concrete mount targets.
+downloads, compiler caches). Each language's
+`containers.md` gives the concrete mount targets.
 
 - **Always set an explicit `id`** on each cache
   mount, and reuse the same `id` across every `RUN`
