@@ -37,7 +37,7 @@ task calls for them.
 
 | Skill            | Description                                            |
 | ---------------- | ------------------------------------------------------ |
-| `project-rules`  | Coding rules for Java, Go, Node.js, Spring Boot, infra |
+| `project-rules`  | Rules: Java, Go, Node.js, Python, Spring Boot, infra   |
 | `project-memory` | Persist project decisions, deadlines, and team context |
 | `write-readme`   | Generate a README.md for an existing project           |
 
@@ -87,6 +87,13 @@ Docs: <https://code.claude.com/docs/en/memory#agents-md>
 .claude-plugin/plugin.json   Plugin manifest
 skills/                      One folder per skill (SKILL.md)
 agents/                      One file per agent (.md)
+tests/                       Unit tests for skill scripts
+```
+
+Run the tests from the repository root:
+
+```bash
+python3 -m unittest discover -s tests -t .
 ```
 
 ## License

@@ -9,6 +9,7 @@ reusable skills and agents.
 .claude-plugin/plugin.json   # Plugin manifest
 skills/                      # One folder per skill
 agents/                      # One .md file per agent
+tests/                       # Unit tests for skill scripts
 ```
 
 ## Conventions
@@ -37,5 +38,8 @@ agents/                      # One .md file per agent
   content — state the intent and let the coding agent
   pick the tool. Frontmatter fields that require tool
   names (e.g. `allowed-tools`) are the exception
+- Run the tests with
+  `python3 -m unittest discover -s tests -t .`
+  after changing a skill script
 - Skills must follow the Agent Skills spec:
   https://agentskills.io/specification
