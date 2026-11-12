@@ -1,17 +1,14 @@
 ---
 name: project-rules
 description: >-
-  Project engineering rules: best practices, code
-  conventions, and design preferences for Java
-  (21+), Go (1.21+), Node.js / TypeScript, Python,
-  and Spring Boot (3.4+, 4.x), plus language-agnostic
-  concerns (containers, Docker Compose, Makefile,
-  CI/CD, Git, HTTP servers). Consult this skill when designing,
-  planning, or researching best practices — even for
-  familiar APIs and tools — and when writing,
-  reviewing, or refactoring code. Invoke it before
-  external web search; these rules are the project's
-  authoritative conventions.
+  Project engineering rules and conventions for Java
+  21+, Go 1.21+, Node.js / TypeScript, Python, Spring
+  Boot 3.4+ / 4.x, and containers, Compose, Makefile,
+  CI/CD, Git, HTTP servers. Use when designing,
+  planning, writing, reviewing, or refactoring code,
+  or researching best practices, even for familiar
+  APIs and tools. Invoke it before any web search:
+  these rules are authoritative.
 allowed-tools: Read
 user-invocable: false
 ---
