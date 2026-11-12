@@ -56,16 +56,19 @@ short summary from the code and the instruction file:
 the objective, the target audience, the tech stack, and
 any visible constraint. Show it to the user in one
 question and ask them to confirm or correct it. Record
-only what they confirm, plus the decisions they made
-during this run; record nothing inferred that they did
-not confirm. Skip this when the memory already covers
-the project.
+only what they confirm, plus any choice made during this
+run that shapes the project's setup, such as keeping
+`CLAUDE.md`; record nothing inferred that they did not
+confirm. Skip this when the memory already covers the
+project.
 
 ## Offer the missing files
 
 For each piece below that is missing, ask separately
 and create it only when the user accepts. Never
-overwrite an existing file.
+overwrite an existing file. A declined offer is not a
+decision: do not record it in memory unless the user
+says it is permanent, so the next run offers it again.
 
 - **Makefile** — per the project-rules rules in
   `references/general/makefile.md`, as in phase 4a.
