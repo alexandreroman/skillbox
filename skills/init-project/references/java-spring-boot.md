@@ -18,27 +18,28 @@ generate the project skeleton.
    in phase 1b and a one-sentence description of the
    objective from phase 1a:
 
-```text
-https://start.spring.io/starter.zip
-  ?type=maven-project
-  &language=java
-  &javaVersion=25
-  &packaging=jar
-  &groupId={{groupId}}
-  &artifactId={{project-name}}
-  &name={{project-name}}
-  &description={{short-description}}
-  &packageName={{packageName}}
-  &dependencies={{comma-separated dependency ids}}
-  &configurationFileFormat=yaml
-```
+   ```text
+   https://start.spring.io/starter.zip
+     ?type=maven-project
+     &language=java
+     &javaVersion={{java-version}}
+     &packaging=jar
+     &groupId={{groupId}}
+     &artifactId={{project-name}}
+     &name={{project-name}}
+     &description={{short-description}}
+     &packageName={{packageName}}
+     &dependencies={{comma-separated dependency ids}}
+     &configurationFileFormat=yaml
+   ```
 
-Use the most recent Java release offered by Spring
-Initializr by default. The user may request a
-different version.
+   `{{java-version}}` is the latest LTS release that
+   Spring Initializr offers, unless the user requests
+   another version.
 
 3. Save the response to `starter.zip` and extract it
    into the project directory.
+
 4. Configure logging as described in
    [Spring Boot observability](../../project-rules/references/spring-boot/observability.md).
 
