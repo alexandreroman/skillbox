@@ -27,10 +27,8 @@ during the requirements phase:
 | **Module**      | Sub-directory inside existing project      |
 | **Integration** | Existing repository adopting skillbox      |
 
-A **base directory** can optionally be specified in
-either mode. When provided, the base replaces the
-generic scaffolding references and is used as a
-template for the new project or module.
+Project and module modes can start from an existing
+directory used as a **base** (see phase 3).
 
 ## Plan
 
@@ -88,8 +86,9 @@ component, or sub-project, treat it as a module.
 directory is an existing project (sources present) and
 the user does not ask for a new module, offer
 integration mode and ask for confirmation. In that
-mode, skip 1b and 1c, then follow "Integration mode"
-below instead of phases 2 to 6.
+mode, skip 1b and 1c, then follow
+[references/integration.md](references/integration.md)
+instead of phases 2 to 6.
 
 Do NOT proceed until you have a clear answer.
 
@@ -143,8 +142,6 @@ description, and the tech stack when it is known.
 
 - Copy the **Agents**, **Memory**, and **Conventions**
   sections as-is — they never depend on the scaffold.
-  The **Memory** section imports the memory index
-  (`@.claude/project-memory/MEMORY.md`).
 - Omit **Build & run** and **Modules** for now; phase
   5c fills them in once the scaffold exists.
 - Check for an existing `AGENTS.md` (or `CLAUDE.md`)
@@ -165,15 +162,11 @@ module directory.
 Read back the `AGENTS.md` that now governs the project
 and treat its content as **active instructions for the
 remainder of this session**, exactly as if it had been
-loaded at startup. In particular, from phase 3 onwards:
-
-- Delegate every source-file write, edit, or refactor
-  to the **code-writer** agent — never edit source
-  files yourself. The skill writes only `AGENTS.md`,
-  `LICENSE`, `Makefile`, and `compose.yaml`; the
-  README goes to **write-readme**.
-- Apply the conventions it states: line-length limits
-  and Markdown formatting.
+loaded at startup. From phase 3 onwards, delegate every
+source-file write, edit, or refactor to the
+**code-writer** agent: the skill itself writes only
+`AGENTS.md`, `LICENSE`, `Makefile`, and `compose.yaml`,
+and the README goes to **write-readme**.
 
 #### 2c — Open the project memory
 
@@ -212,9 +205,7 @@ everything generated from phase 3 onwards.
 
 ### Phase 3 — Scaffold
 
-Per the `AGENTS.md` adopted in phase 2b, the
-**code-writer** agent writes every source file created
-in this phase. Hand it the objective, the chosen name,
+Hand **code-writer** the objective, the chosen name,
 the stack, and the layout decided below; it loads the
 project rules and the project memory on its own.
 
@@ -290,13 +281,9 @@ such dependencies.
 
 #### 5a — Generate README.md
 
-Delegate README generation to the **write-readme**
-skill. It scans the scaffolded project, gathers any
-missing context from the user, and produces a polished
-README.
-
-Do NOT generate README.md manually — let write-readme
-handle it entirely.
+Delegate README generation entirely to the
+**write-readme** skill: it scans the scaffolded project
+and gathers any missing context from the user.
 
 #### 5b — Generate LICENSE
 
@@ -322,11 +309,10 @@ the scaffold did not exist yet:
   directory.
 
 Keep the file **short and essential** (~40-60 lines
-max). Remove any section whose placeholder still has
-nothing useful to say. The **Agents** section (with
-code-writer and code-reviewer) and the **Memory**
-section (with the memory index import) are mandatory —
-never remove them.
+max) and link to `README.md` rather than repeat it.
+Remove any section whose placeholder still has nothing
+useful to say, except **Agents** and **Memory**, which
+are mandatory.
 
 Reference:
 https://code.claude.com/docs/en/best-practices
@@ -336,24 +322,8 @@ https://code.claude.com/docs/en/best-practices
 Show all generated files to the user for review.
 Ask if anything needs adjustment before finalizing.
 
-## Integration mode
-
-For an existing repository adopting skillbox. Read
-[references/integration.md](references/integration.md)
-and follow it: it adds only what is missing and never
-rewrites existing content, so a second run changes
-nothing.
-
 ## Rules
 
-- **English only for generated files** — all content
-  in README.md and AGENTS.md must be in English,
-  regardless of the user's language.
-- **Concise** — prefer references over inline
-  documentation. Do not duplicate information between
-  README.md and AGENTS.md; AGENTS.md should reference
-  README.md rather than repeat it.
-- **README.md reference is mandatory** in AGENTS.md —
-  always link to README.md.
-- **No secrets or paths** — do not include absolute
-  paths, credentials, or environment-specific values.
+- Write generated files in English, whatever the
+  user's language, with no credentials, absolute paths,
+  or environment-specific values.
