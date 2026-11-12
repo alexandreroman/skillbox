@@ -61,18 +61,19 @@ writing, reviewing, or refactoring code.
 - **Use the latest LTS / stable version** of every
   language, runtime, framework, and dependency,
   unless the project pins one.
+- **Check the project's language version** (e.g.
+  in `pom.xml` or `go.mod`) before suggesting
+  features. Never propose an API that requires a
+  newer version than the project targets.
+- **Prefer standard APIs** (JDK, Go standard
+  library, Node.js and the Web Platform) over
+  third-party libraries that duplicate them.
 
 ## General
 
 Language-agnostic rules, for every project.
 
-- [Compose](references/general/compose.md) —
-  Docker Compose health checks, dependencies,
-  restart policy, read-only volumes, multi-file
-  overlays (dev overlay vs. auto-merged
-  `compose.override.yaml`), host-port overrides
-  with `!override`, and the Temporal template
-  ([compose.temporal.yaml](assets/compose.temporal.yaml))
+- [Compose](references/general/compose.md) — health checks, overlays, Temporal
 - [Containers](references/general/containers.md) —
   Dockerfile best practices, image size, security,
   layer caching
@@ -117,22 +118,10 @@ keeps applying to newer Java releases.
 - [Tooling](references/java/tooling.md) —
   build system (Maven), logging (SLF4J/Logback)
 
-Key rules:
-
-- **Check the project's Java version** before
-  suggesting features. Do not suggest features that
-  require a higher Java version than the project
-  targets.
-- **Use modern Java syntax** — prefer `var`,
-  records, sealed classes, pattern matching, switch
-  expressions, text blocks, and unnamed variables
-  over their older equivalents. See
-  [Modern syntax](references/java/modern-syntax.md)
-  for edge cases and caveats.
-- **Prefer standard APIs** over third-party
-  libraries when the JDK provides an equivalent.
-- **Use Maven and SLF4J/Logback** — see
-  [Tooling](references/java/tooling.md) for details.
+Key rule: **use modern Java syntax** — prefer
+`var`, records, sealed classes, pattern matching,
+switch expressions, text blocks, and unnamed
+variables over their older equivalents.
 
 ## Go
 
@@ -162,28 +151,6 @@ Guide).
   distroless base, `CGO_ENABLED=0`, `-ldflags`,
   BuildKit cache mounts
 
-Key rules:
-
-- **Check the project's Go version** in `go.mod`
-  before suggesting features. Do not propose APIs
-  that require a newer Go toolchain than the
-  project targets.
-- **Prefer the standard library** over third-party
-  packages when `slices`, `maps`, `cmp`,
-  `log/slog`, `net/http`, or `context` already
-  cover the use case.
-- **Use `any` over `interface{}`** in new code
-  (Go 1.18+ alias).
-- **Wrap errors with `%w`** in `fmt.Errorf` and
-  compare via `errors.Is` / `errors.As` — never
-  `==` or string matching.
-- **Recommend uber-go/fx for a large volume of
-  components** — many constructors, several
-  subsystems, or start/stop lifecycles. Hand wiring
-  stays the default below that bar, and libraries
-  never depend on fx. See
-  [Dependency injection](references/go/dependency-injection.md).
-
 ## Node.js / TypeScript
 
 Opinionated choices and non-trivial configurations
@@ -201,17 +168,6 @@ for modern Node.js / TypeScript projects.
   ESLint v9 flat config, Prettier preferences,
   lint-staged globs
 
-Key rules:
-
-- **Prefer standard APIs** over third-party
-  libraries when Node.js or the Web Platform
-  provides an equivalent.
-- **Use pnpm** — see
-  [Tooling](references/nodejs-typescript/tooling.md)
-  for details.
-- **Prefer Vite + Nuxt** for web front ends — see
-  [Tooling](references/nodejs-typescript/tooling.md).
-
 ## Python
 
 Python projects, drawn from the scaffold's choices.
@@ -219,12 +175,6 @@ Python projects, drawn from the scaffold's choices.
 - [Tooling](references/python/tooling.md) —
   uv, ruff, pytest, watchfiles, hot reload per
   framework
-
-Key rules:
-
-- **Use uv, ruff, and pytest** — see
-  [Tooling](references/python/tooling.md) for
-  details, including the hot-reload command.
 
 ## Spring Boot
 
