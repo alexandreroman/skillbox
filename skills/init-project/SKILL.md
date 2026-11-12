@@ -48,6 +48,16 @@ Mark each task `in_progress` when you start it and
 
 ## Process
 
+**Asking the user.** Ask every closed question (mode,
+standalone or module, base directory, name, license,
+confirmations, offers) as a multiple-choice question
+through the interactive question prompt whenever the
+environment provides one, so the user picks an option
+or types their own. Group related questions in one
+prompt. Keep only open questions, such as the objective
+and the audience, as plain text. This applies to the
+integration mode too.
+
 ### Phase 1 — Gather requirements
 
 This phase runs **before** the plan is created.

@@ -38,8 +38,8 @@ project adheres to [Semantic Versioning][semver].
   summary of the project that the user confirms.
 - Safeguards in `init-project`: it stops before scaffolding when
   the project memory cannot be written, always asks for the Go
-  module owner instead of guessing it, and never checks the
-  Claude Code version.
+  module owner instead of guessing it, never checks the Claude
+  Code version, and asks closed questions as multiple choice.
 - Tests for `check_tables.py` in `tests/`, covering every case
   fixed below.
 
