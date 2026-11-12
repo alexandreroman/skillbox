@@ -13,7 +13,7 @@ This also enables layer caching: a code-only
 change does not invalidate the install layer.
 
 ```dockerfile
-COPY package.json pnpm-lock.yaml .npmrc ./
+COPY package.json pnpm-lock.yaml ./
 RUN corepack enable && corepack prepare
 RUN pnpm install --frozen-lockfile
 ```
@@ -35,7 +35,7 @@ RUN pnpm prune --prod --ignore-scripts
 FROM node:24-alpine AS builder
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml .npmrc ./
+COPY package.json pnpm-lock.yaml ./
 RUN corepack enable && corepack prepare
 RUN pnpm install --frozen-lockfile
 

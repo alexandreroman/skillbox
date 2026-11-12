@@ -5,12 +5,7 @@ Node.js / TypeScript projects.
 
 ## Package Manager — pnpm
 
-`.npmrc`:
-
-```ini
-shamefully-hoist=false
-strict-peer-dependencies=false
-```
+Use **pnpm** as the package manager.
 
 ## Web Framework — Vite + Nuxt
 
