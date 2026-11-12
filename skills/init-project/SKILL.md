@@ -183,7 +183,9 @@ loaded at startup. In particular, from phase 3 onwards:
 
 - Delegate every source-file write, edit, or refactor
   to the **code-writer** agent — never edit source
-  files yourself.
+  files yourself. The skill writes only `AGENTS.md`,
+  `LICENSE`, `Makefile`, and `compose.yaml`; the
+  README goes to **write-readme**.
 - Apply the conventions it states: line-length limits
   and Markdown formatting.
 
@@ -229,6 +231,9 @@ the stack, and the layout decided below; it loads the
 project rules and the project memory on its own.
 
 #### When a base was provided
+
+The base takes precedence: do not mix it with the
+scaffolding references below.
 
 1. Read the base directory's structure (manifest
    files, source layout, configuration).
@@ -359,8 +364,10 @@ the scaffold did not exist yet:
 
 Keep the file **short and essential** (~40-60 lines
 max). Remove any section whose placeholder still has
-nothing useful to say. The **Agents** and **Memory**
-sections are mandatory — never remove them.
+nothing useful to say. The **Agents** section (with
+code-writer and code-reviewer) and the **Memory**
+section (with the memory index import) are mandatory —
+never remove them.
 
 Reference:
 https://code.claude.com/docs/en/best-practices
@@ -393,40 +400,7 @@ nothing.
   documentation. Do not duplicate information between
   README.md and AGENTS.md; AGENTS.md should reference
   README.md rather than repeat it.
-- **Context before code** — phase 2 must complete
-  before any project file is written. The generated
-  `AGENTS.md`, the project memory, and the project
-  rules govern the scaffold itself, not only the work
-  that follows it.
-- **No session restart** — never tell the user to
-  restart the session for `AGENTS.md` or the project
-  memory to take effect. The skill reads and applies
-  them itself, in the current session.
-- **Delegate code to code-writer** — from phase 3
-  onwards, every source file is written by the
-  code-writer agent. The skill writes only what it
-  owns: `README.md`, `AGENTS.md`, `LICENSE`,
-  `Makefile`, and `compose.yaml`.
-- **Agents section is mandatory** in AGENTS.md —
-  always include code-writer and code-reviewer.
-- **Memory section is mandatory** in AGENTS.md —
-  always point at `.claude/project-memory/MEMORY.md`
-  and the project-memory skill.
 - **README.md reference is mandatory** in AGENTS.md —
   always link to README.md.
 - **No secrets or paths** — do not include absolute
   paths, credentials, or environment-specific values.
-- **Sequential phases** — complete each phase before
-  moving to the next. Do not generate files before
-  the user has confirmed the objective and name.
-- **Module mode** — when creating a module, skip
-  phases marked "project only". Load the parent
-  project's `AGENTS.md`, memory, and rules in phase 2,
-  then scaffold the code. The module inherits the
-  parent project's documentation and configuration.
-- **Base mode** — when an existing directory is
-  used as a base, preserve its conventions
-  (build config, dependencies, directory layout)
-  and adapt only names and business logic.
-  Do not mix scaffolding references with a base —
-  the base takes precedence.
