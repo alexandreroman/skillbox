@@ -1,13 +1,18 @@
 ---
 name: init-project
 description: >-
-  Use when starting a new project, bootstrapping an
-  empty repository, adding a new module to an existing
-  project, or adopting skillbox in an existing
-  repository ("adopt skillbox", "set up Claude Code in
-  this repo"). Interactively gathers the objective and
-  name, then generates or completes the files so Claude
-  Code has proper context from day one.
+  Use when starting, initializing ("init", "initialise"),
+  scaffolding, or bootstrapping a new project or an empty
+  repository, including demo, sample, and companion
+  repositories ("set up a new repo"), when adding a new
+  module to an existing project, or when adopting
+  skillbox in an existing repository ("adopt skillbox",
+  "set up Claude Code in this repo"). Interactively
+  gathers the objective and name, then generates or
+  completes the files so Claude Code has proper context
+  from day one. Start here even when the request names
+  other skills: it loads project-rules and write-readme
+  itself.
 ---
 
 # Initialize Project
@@ -146,11 +151,24 @@ description, and the tech stack when it is known.
   5c fills them in once the scaffold exists.
 - Check for an existing `AGENTS.md` (or `CLAUDE.md`)
   first and ask the user before overwriting.
-- Do **not** generate a `CLAUDE.md`: its presence makes
-  Claude Code ignore `AGENTS.md`. Do not check the
-  Claude Code version either. Only if the user says
-  their tool does not read `AGENTS.md`, add a one-line
-  `CLAUDE.md` containing `@AGENTS.md`.
+- Do **not** generate a `CLAUDE.md` unprompted: its
+  presence makes Claude Code ignore `AGENTS.md`. Do not
+  check the Claude Code version either. Only if the
+  user says their tool does not read `AGENTS.md`, add a
+  one-line `CLAUDE.md` containing `@AGENTS.md`.
+- **The user asks for a `CLAUDE.md`** (in the brief or
+  later): this conflicts with the rule above, so do not
+  pick a layout silently. Explain the conflict and ask
+  which one to use:
+  - **AGENTS.md only** — no `CLAUDE.md`.
+  - **AGENTS.md + CLAUDE.md import** — a one-line
+    `CLAUDE.md` containing `@AGENTS.md`.
+  - **CLAUDE.md only** — write the template to
+    `CLAUDE.md` instead and create no `AGENTS.md`.
+
+  Record the choice in the project memory (phase 2c).
+  From then on, "`AGENTS.md`" in this skill means the
+  file that holds the instructions.
 
 **Module mode.** Do not write an instruction file. Read
 the parent project's `AGENTS.md` (or `CLAUDE.md`) instead,
@@ -159,12 +177,12 @@ module directory.
 
 #### 2b — Adopt AGENTS.md immediately
 
-Read back the `AGENTS.md` that now governs the project
-and treat its content as **active instructions for the
-remainder of this session**, exactly as if it had been
-loaded at startup. From phase 3 onwards, delegate every
-source-file write, edit, or refactor to the
-**code-writer** agent: the skill itself writes only
+Read back the instruction file that now governs the
+project and treat its content as **active instructions
+for the remainder of this session**, exactly as if it
+had been loaded at startup. From phase 3 onwards,
+delegate every source-file write, edit, or refactor to
+the **code-writer** agent: the skill itself writes only
 `AGENTS.md`, `LICENSE`, `Makefile`, and `compose.yaml`,
 and the README goes to **write-readme**.
 
@@ -178,10 +196,10 @@ layout.
   `.claude/project-memory/` and its `MEMORY.md`. Save
   the founding decisions from phase 1: the objective
   and target audience, the chosen name, the license,
-  the tech stack and why it was picked, and any
-  constraint the user stated. These are exactly the
-  decisions that would otherwise be lost between
-  sessions.
+  the tech stack and why it was picked, any constraint
+  the user stated, and the instruction-file layout when
+  2a asked for it. These are exactly the decisions that
+  would otherwise be lost between sessions.
 - **Module mode** — read the existing `MEMORY.md`
   before scaffolding so the module follows past
   decisions, then save the module's objective and

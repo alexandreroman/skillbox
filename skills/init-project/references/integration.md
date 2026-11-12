@@ -36,6 +36,10 @@ Look for `AGENTS.md` and `CLAUDE.md` at the root.
 - A missing `AGENTS.md` is created from
   [assets/AGENTS.md](../assets/AGENTS.md), as in
   phase 2a.
+- **The user asks for a `CLAUDE.md`** while neither
+  file exists — ask which layout to use, as in phase
+  2a, instead of following the "Neither" row. When a
+  file already exists, the table applies.
 
 ## Add the missing sections
 

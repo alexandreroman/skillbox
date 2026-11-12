@@ -4,7 +4,8 @@ description: >-
   Generate or update the README.md of an existing project for GitHub
   publication, from its codebase and the user's answers. Use when the user
   asks to write, create, regenerate, or improve a README, or when another
-  skill delegates README generation.
+  skill delegates README generation. For a brand-new repository, start with
+  init-project, which delegates the README here once the project exists.
 user-invocable: false
 ---
 
@@ -13,6 +14,11 @@ user-invocable: false
 Create or rewrite a project's README.md for GitHub
 publication from its code, manifests, and
 configuration.
+
+When bootstrapping a brand-new repository, run the
+**init-project** skill first, unless it is already
+running: it scaffolds the project, then delegates the
+README to this skill.
 
 ## Process
 

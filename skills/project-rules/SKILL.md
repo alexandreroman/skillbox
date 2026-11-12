@@ -8,7 +8,9 @@ description: >-
   planning, writing, reviewing, or refactoring code,
   or researching best practices, even for familiar
   APIs and tools. Invoke it before any web search:
-  these rules are authoritative.
+  these rules are authoritative. For a brand-new
+  repository or module, start with init-project, which
+  loads these rules itself.
 allowed-tools: Read
 user-invocable: false
 ---
@@ -20,6 +22,11 @@ preferences, split by stack. Read the references
 that match the project at hand, then apply them
 when designing, researching best practices,
 writing, reviewing, or refactoring code.
+
+When bootstrapping a brand-new repository or module,
+run the **init-project** skill first, unless it is
+already running: it loads these rules itself, before the
+first file is written.
 
 ## How to use
 
