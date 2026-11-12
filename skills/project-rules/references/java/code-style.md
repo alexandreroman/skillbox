@@ -40,9 +40,9 @@ if (done) {
 ## Line Length
 
 - **120 characters max** per line.
-- When wrapping, break **after** an operator or
-  comma, and indent the continuation by 8 spaces
-  (double indent):
+- When wrapping, break **before** a `.` or an
+  operator and **after** a comma, and indent the
+  continuation by 8 spaces (double indent):
 
 ```java
 var result = someObject
