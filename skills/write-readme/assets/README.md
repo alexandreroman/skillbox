@@ -4,10 +4,8 @@
 for, and what problem it solves. Do not start with
 "This is a...". Lead with what it does.}}
 
-{{badges — one line of shields.io badges. Include
-only badges backed by real infrastructure (CI,
-license, version, coverage). Remove this line
-entirely if no badges apply.}}
+{{badges — one line of shields.io badges. Remove
+this line entirely if no badges apply.}}
 
 ## Features
 
@@ -27,7 +25,8 @@ everything.}}
 ## Getting Started
 
 {{Shortest path from zero to running. Typically:
-clone, install dependencies, run. Use fenced code
+clone, install dependencies, configure if needed,
+run. Use fenced code
 blocks with language tags. Show one primary method;
 mention alternatives briefly if they exist.}}
 
@@ -69,8 +68,8 @@ section for simple projects.}}
 ```mermaid
 {{architecture-diagram — Mermaid diagram showing
 high-level components and their interactions.
-Keep to 5-10 nodes. Remove this block if a diagram
-would not add value.}}
+Remove this block if a diagram would not add
+value.}}
 ```
 
 {{modules-table — For multi-module projects only.

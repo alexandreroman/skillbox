@@ -11,9 +11,8 @@ user-invocable: false
 # Generate README
 
 Create or rewrite a project's README.md for GitHub
-publication. Analyzes existing code, manifests, and
-configuration to produce a comprehensive, well-
-structured README.
+publication from its code, manifests, and
+configuration.
 
 ## Process
 
@@ -42,16 +41,10 @@ Read the following (skip any that do not exist):
   files, or entry points to understand what the
   project does.
 
-Compile a mental summary of:
-
-- Project name and purpose
-- Tech stack (language, framework, key dependencies)
-- Build and run commands
-- Test commands
-- Key features or modules
-- License type
-- Whether the project is a library, CLI tool, web app,
-  API, plugin, or other
+From these, work out the project's name and purpose,
+tech stack, build, run, and test commands, key
+features or modules, license, and kind (library, CLI
+tool, web app, API, plugin, or other).
 
 ### Step 2 — Check for existing README
 
@@ -67,8 +60,8 @@ Do NOT overwrite without confirmation.
 ### Step 3 — Gather missing context
 
 If any of the following are unclear after Step 1,
-ask the user. Skip questions
-whose answers are already obvious from the codebase.
+ask the user. Skip questions whose answers are
+already obvious from the codebase.
 
 - **Project purpose** — What does this project do in
   one or two sentences?
@@ -79,56 +72,26 @@ whose answers are already obvious from the codebase.
 - **Prerequisites** — Any non-obvious requirements
   (specific runtime versions, external services, API
   keys)?
-- **Badges** — Should the README include badges
-  (CI status, license, version, coverage)?
-  Suggest based on what CI and manifests reveal.
-- **Screenshots or diagrams** — Does the user want
-  to include any visuals?
-- **Architecture diagram** — For non-trivial
-  projects, propose including a Mermaid diagram
-  showing the high-level architecture or component
-  interactions.
-- **Modules** — For multi-module projects (e.g.
-  monorepos, multi-module Maven/Gradle builds,
-  workspaces), list each module with a one-line
-  description of its role.
+- **Badges** — Which badges to include? Suggest
+  those that CI and manifests support.
+- **Visuals** — Any screenshots or diagrams? For
+  non-trivial projects, propose a Mermaid
+  architecture diagram.
 
 Batch related questions into a single prompt to avoid
 excessive back-and-forth.
 
 ### Step 4 — Generate README.md
 
-Read the reference guide at
-[references/guide.md](references/guide.md).
-
-Read the template at
-[assets/README.md](assets/README.md).
+Read the guide at [references/guide.md](references/guide.md)
+and the template at [assets/README.md](assets/README.md).
 
 Generate `./README.md` by filling in each
-`{{placeholder}}` with project-specific content:
-
-- **Remove sections** that do not apply (e.g. no
-  Configuration section if the project has none).
-- **Adapt code examples** to the actual project
-  commands and API.
-- **Use fenced code blocks** with the correct
-  language tag for all commands and code snippets.
-- **Use relative links** for repo resources
-  (e.g. `./docs/`, `./CONTRIBUTING.md`).
-- **Add badges only if justified** — do not add
-  aspirational badges for CI that does not exist.
-- **Keep it concise** — prefer short paragraphs and
-  bullet lists over walls of text.
-- **Architecture diagram** — for non-trivial
-  projects, include a Mermaid diagram showing
-  high-level components and their interactions.
-  Prefer Mermaid over ASCII art for GitHub
-  rendering. Keep diagrams simple — 5 to 10 nodes
-  maximum.
-- **Module descriptions** — for multi-module
-  projects, include a table or bullet list
-  describing each module's purpose. Place this in
-  the Architecture section.
+`{{placeholder}}` with project-specific content.
+Remove sections that do not apply (e.g. no
+Configuration section if the project has none) and
+adapt code examples to the actual project commands
+and API.
 
 ### Step 5 — Review and refine
 
@@ -152,13 +115,12 @@ satisfied.
   exists in the project. Do not invent features,
   commands, or configuration that you have not
   confirmed.
-- **No secrets or absolute paths** — do not include
-  credentials, tokens, or machine-specific paths.
+- **No secrets or absolute paths** — no credentials,
+  tokens, or machine-specific paths, even as
+  examples: use placeholders like `your-api-key`.
 - **Sequential steps** — complete each step before
   moving to the next.
 - **Maintainable over comprehensive** — a shorter
   README that stays accurate beats a long one that
   rots. Prefer linking to external docs over
   duplicating them.
-- **Line length** — keep Markdown lines to 80 columns
-  max. Code blocks may extend to 120 columns.
