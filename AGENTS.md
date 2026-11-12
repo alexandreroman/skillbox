@@ -42,4 +42,6 @@ tests/                       # Unit tests for skill scripts
   `python3 -m unittest discover -s tests -t .`
   after changing a skill script
 - Skills must follow the Agent Skills spec:
-  https://agentskills.io/specification
+  https://agentskills.io/specification. Exception:
+  the `user-invocable` frontmatter field, a Claude
+  Code extension the spec does not define
