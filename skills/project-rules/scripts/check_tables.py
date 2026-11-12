@@ -3,19 +3,44 @@
 aligned columns. Exit code 0 = all aligned,
 1 = misalignment found."""
 
+import re
 import sys
+
+FENCE = re.compile(r"^ *(?:(?:[-*+]|\d+[.)]) +)?(`{3,}|~{3,})(.*)$")
+SEP = re.compile(r"(?<!\\)\|")
 
 
 def check(path: str) -> bool:
-    with open(path) as f:
-        lines = f.readlines()
+    try:
+        with open(path, encoding="utf-8") as f:
+            lines = f.readlines()
+    except FileNotFoundError:
+        print(f"{path}: file not found", file=sys.stderr)
+        return False
+    except (OSError, UnicodeDecodeError) as e:
+        print(f"{path}: cannot read file ({e.__class__.__name__})", file=sys.stderr)
+        return False
 
     in_table = False
     tables: list[list[tuple[int, str]]] = []
     current: list[tuple[int, str]] = []
 
+    fence = ""
     for i, line in enumerate(lines):
         stripped = line.rstrip("\n")
+        m = FENCE.match(stripped)
+        if fence:
+            if m and m.group(1)[0] == fence[0] and len(m.group(1)) >= len(fence) and not m.group(2).strip():
+                fence = ""
+            continue
+        if m:
+            fence = m.group(1)
+            if in_table:
+                tables.append(current)
+                in_table = False
+                current = []
+            continue
+        stripped = stripped.lstrip()
         if stripped.startswith("|"):
             if not in_table:
                 in_table = True
@@ -32,7 +57,7 @@ def check(path: str) -> bool:
     ok = True
     for table in tables:
         widths = [
-            [len(c) for c in row.split("|")[1:-1]]
+            [len(c) for c in SEP.split(row)[1:-1]]
             for _, row in table
         ]
         ref = widths[0]
@@ -48,12 +73,16 @@ def check(path: str) -> bool:
     return ok
 
 
-if __name__ == "__main__":
-    paths = sys.argv[1:]
-    if not paths:
+def main(argv: list[str]) -> int:
+    if not argv:
         print("usage: check_tables.py FILE ...")
-        sys.exit(2)
-    all_ok = all(check(p) for p in paths)
-    if all_ok:
+        return 2
+    results = [check(p) for p in argv]
+    if all(results):
         print("All tables aligned.")
-    sys.exit(0 if all_ok else 1)
+        return 0
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
