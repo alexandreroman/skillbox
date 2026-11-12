@@ -124,7 +124,7 @@ quiet, batch, or non-interactive flag, enable it.
 | Tool / Command | Flag                              |
 | -------------- | --------------------------------- |
 | `apt-get`      | `-qq`                             |
-| `npm ci`       | `--silent`                        |
+| `pnpm install` | `--silent`                        |
 | `pip install`  | `-q`                              |
 | `mvn`          | `-B` (batch, no progress)         |
 | `gradle`       | `--console=plain -q`              |

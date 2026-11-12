@@ -33,8 +33,8 @@ RUN apt-get update \
   the dependency-install layer.
 
 ```dockerfile
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 COPY src/ ./src/
 ```
 
