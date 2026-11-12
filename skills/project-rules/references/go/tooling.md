@@ -78,13 +78,13 @@ formatters:
 Use **Air** (`github.com/air-verse/air`) to
 rebuild and restart the binary on file changes
 during development — Go has no built-in watch
-mode. Install once, then run from the project
-root:
+mode. Add it once as a tool dependency, then run
+from the project root:
 
 ```sh
-go install github.com/air-verse/air@latest
-air init   # generates .air.toml
-air
+go get -tool github.com/air-verse/air@latest
+go tool air init   # generates .air.toml
+go tool air
 ```
 
 Useful `.air.toml` tweaks:
@@ -115,29 +115,13 @@ Rules:
 Alternatives: `reflex`, `gow`, `wgo`. Air is the
 de-facto community standard.
 
-## Task Runner — Task
+## Task Runner — Make
 
-Prefer **Task** (`taskfile.dev`) over `make` for
-new Go projects: cross-platform, YAML-based, no
-tab/space pitfalls. A `Taskfile.yml` skeleton:
-
-```yaml
-version: "3"
-tasks:
-  dev:
-    cmds: ["air"]
-  lint:
-    cmds: ["golangci-lint run"]
-  test:
-    cmds: ["go test -race -shuffle=on ./..."]
-  build:
-    cmds:
-      - >-
-        CGO_ENABLED=0 go build
-        -trimpath
-        -ldflags="-s -w"
-        -o ./bin/app ./cmd/app
-```
+Use **Make** like every other stack, with the
+standard targets of
+[../general/makefile.md](../general/makefile.md).
+Hot reload runs through `go tool air` in the `dev`
+target.
 
 ## Project Layout
 
