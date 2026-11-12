@@ -4,14 +4,17 @@
 
 | Variable       | Source                                 |
 |----------------|----------------------------------------|
-| `owner`        | Ask the user or read from `git config` |
+| `owner`        | Asked in step 1                        |
 | `project-name` | Step 2                                 |
 
 ## Steps
 
-1. Ask the user to confirm the module owner
-   if it cannot be inferred from `git config`
-   (e.g. GitHub username or organization).
+1. Ask the user for the module owner (GitHub username
+   or organization), even when a default seems
+   obvious. Propose one from the repository's remote
+   or `git config` if available, but never derive it
+   from an unrelated URL such as a plugin's
+   repository.
 
 2. Run `go mod init github.com/{{owner}}/{{project-name}}`
 
