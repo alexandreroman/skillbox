@@ -23,17 +23,30 @@ Add the `cc-plugins` marketplace, then install skillbox:
 
 ### User-invocable
 
-| Skill            | Description                                                                      |
-| ---------------- | -------------------------------------------------------------------------------- |
-| `project-rules`  | Coding rules for Java, Go, Node.js / TypeScript, Spring Boot, and infrastructure |
-| `project-memory` | Persist project decisions, deadlines, and team context across conversations      |
+Shown in the slash menu. Run them from the Claude Code
+prompt.
+
+| Skill          | Description                             |
+| -------------- | --------------------------------------- |
+| `init-project` | Bootstrap a new project or add a module |
+
+### Model-only
+
+Hidden from the slash menu. Claude uses them when the
+task calls for them.
+
+| Skill            | Description                                            |
+| ---------------- | ------------------------------------------------------ |
+| `project-rules`  | Coding rules for Java, Go, Node.js, Spring Boot, infra |
+| `project-memory` | Persist project decisions, deadlines, and team context |
+| `write-readme`   | Generate a README.md for an existing project           |
 
 ## Agents
 
-| Agent           | Description                                                                         |
-| --------------- | ----------------------------------------------------------------------------------- |
-| `code-writer`   | Writes, modifies, and refactors source code with simplicity-first style             |
-| `code-reviewer` | Read-only review of code, docs, and project memory: bugs, complexity, and dead code |
+| Agent           | Description                                 |
+| --------------- | ------------------------------------------- |
+| `code-writer`   | Writes and refactors code, simplicity first |
+| `code-reviewer` | Read-only review of code, docs, and memory  |
 
 ## Usage
 
@@ -43,18 +56,30 @@ Invoke a skill from the Claude Code prompt:
 
 ```text
 /skillbox:init-project
-/skillbox:write-readme
 ```
 
 > [!TIP]
 > **Getting started with a new project** — Run
 > `/skillbox:init-project` first when bootstrapping
-> a new repository. It generates a `CLAUDE.md` that
+> a new repository. It generates an `AGENTS.md` that
 > configures the `code-writer` and `code-reviewer`
 > agents and wires up project memory so that
 > decisions, deadlines, and team context persist
 > across conversations — and it applies them from the
 > very first generated file, with no session restart.
+
+## Agent instructions
+
+Generated projects get an `AGENTS.md` file and no
+`CLAUDE.md`. Claude Code (v2.1.277 and later) reads
+`AGENTS.md` natively, but it ignores `AGENTS.md` when
+the project has a `CLAUDE.md` or a `CLAUDE.local.md`.
+
+For older versions, or when a `CLAUDE.md` is already
+present, add a one-line `CLAUDE.md` that contains
+`@AGENTS.md`.
+
+Docs: <https://code.claude.com/docs/en/memory#agents-md>
 
 ## Project structure
 

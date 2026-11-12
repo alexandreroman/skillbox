@@ -6,6 +6,7 @@ description: >-
   codebase, gathers missing context from the user,
   and produces a polished README following best
   practices.
+user-invocable: false
 ---
 
 # Generate README
@@ -33,8 +34,9 @@ Read the following (skip any that do not exist):
   commands.
 - **Existing README.md** — note current structure and
   content for reference.
-- **CLAUDE.md** — extract project description, tech
-  stack, conventions.
+- **Instruction file** — read `AGENTS.md`; if it does
+  not exist, read `CLAUDE.md`. Extract project
+  description, tech stack, conventions.
 - **LICENSE** — identify the license type.
 - **CONTRIBUTING.md** — note if it exists.
 - **Source code entry points** — main files, index
