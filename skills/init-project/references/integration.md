@@ -50,9 +50,16 @@ adopt it as in phase 2b.
 
 Invoke **project-memory** as in phase 2c: it creates
 `.claude/project-memory/MEMORY.md` only when missing.
-Record only decisions the user explicitly confirmed
-during the interview. Record nothing inferred from the
-code, even when it seems obvious.
+
+When the memory holds no project context yet, draft a
+short summary from the code and the instruction file:
+the objective, the target audience, the tech stack, and
+any visible constraint. Show it to the user in one
+question and ask them to confirm or correct it. Record
+only what they confirm, plus the decisions they made
+during this run; record nothing inferred that they did
+not confirm. Skip this when the memory already covers
+the project.
 
 ## Offer the missing files
 
