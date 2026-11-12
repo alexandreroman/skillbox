@@ -52,15 +52,8 @@ different version.
 
 3. Save the response to `starter.zip` and extract it
    into the project directory.
-4. Add the following default configuration to the
-   generated `application.yaml`:
-
-   ```yaml
-   logging:
-     structured:
-       format:
-         console: ecs
-   ```
+4. Configure logging as described in
+   [Spring Boot observability](../../project-rules/references/spring-boot/observability.md).
 
 5. Clean up `pom.xml`: remove the `<url>`,
    `<licenses>`, `<developers>`, and `<scm>`
