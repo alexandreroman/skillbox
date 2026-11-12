@@ -138,8 +138,6 @@ module-mode, or integration-mode).
 
 ### Phase 2 — Establish project context
 
-Mark the context task `in_progress`.
-
 This phase runs **before a single project file is
 written**. Its purpose is to make the project's own
 instructions — `AGENTS.md`, the project memory, and the
@@ -218,11 +216,7 @@ Read the General section plus every section matching
 the language and framework, then apply those rules to
 everything generated from phase 3 onwards.
 
-Mark the context task `completed`.
-
 ### Phase 3 — Scaffold
-
-Mark the scaffold task `in_progress`.
 
 Per the `AGENTS.md` adopted in phase 2b, the
 **code-writer** agent writes every source file created
@@ -280,14 +274,10 @@ the application entry point (e.g. main class,
 `main.py`, `main.go`, etc.) with working starter
 code that matches the objective and tech stack.
 
-Mark the scaffold task `completed`.
-
 ### Phase 4 — Generate developer tooling (project only)
 
 **Skip this entire phase for modules.** A module inherits
 the parent project's tooling.
-
-Mark the tooling task `in_progress`.
 
 #### 4a — Generate the Makefile
 
@@ -310,15 +300,11 @@ List the service names in the Makefile's
 `{{infra-services}}`. Skip this step when the app has no
 such dependencies.
 
-Mark the tooling task `completed`.
-
 ### Phase 5 — Generate documentation (project only)
 
 **Skip this entire phase for modules.**
 
 #### 5a — Generate README.md
-
-Mark the README task `in_progress`.
 
 Before generating files, check for an existing
 `README.md` — ask the user before overwriting.
@@ -331,11 +317,7 @@ README.
 Do NOT generate README.md manually — let write-readme
 handle it entirely.
 
-Mark the README task `completed`.
-
 #### 5b — Generate LICENSE
-
-Mark the LICENSE task `in_progress`.
 
 Write `./LICENSE` with the full text of the license
 chosen in phase 1. Use the current year and the
@@ -345,11 +327,7 @@ notice.
 Reference:
 https://choosealicense.com/licenses/
 
-Mark the LICENSE task `completed`.
-
 #### 5c — Finalize AGENTS.md
-
-Mark the AGENTS.md task `in_progress`.
 
 `AGENTS.md` already exists from phase 2a. Fill in the
 `{{placeholder}}` sections that were left out because
@@ -372,16 +350,10 @@ never remove them.
 Reference:
 https://code.claude.com/docs/en/best-practices
 
-Mark the AGENTS.md task `completed`.
-
 ### Phase 6 — Review and confirm
-
-Mark the review task `in_progress`.
 
 Show all generated files to the user for review.
 Ask if anything needs adjustment before finalizing.
-
-Mark the review task `completed`.
 
 ## Integration mode
 
