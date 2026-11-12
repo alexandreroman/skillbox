@@ -52,10 +52,6 @@ version: "2"
 linters:
   default: standard
   enable:
-    - errcheck
-    - govet
-    - ineffassign
-    - staticcheck
     - revive
     - gosec
     - bodyclose
@@ -70,8 +66,9 @@ formatters:
 - `revive` replaces the long-deprecated `golint`.
 - `errorlint` enforces `%w` wrapping and
   `errors.Is/As` checks.
-- `staticcheck` is part of the default set since
-  v2 — do not list it under `enable` redundantly.
+- `default: standard` already enables `errcheck`,
+  `govet`, `ineffassign`, `staticcheck` and
+  `unused` — do not list them under `enable`.
 
 ## Hot Reload — Air
 
