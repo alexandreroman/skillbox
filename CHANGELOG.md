@@ -93,6 +93,10 @@ project adheres to [Semantic Versioning][semver].
   blocks, checks indented tables, handles escaped pipes (`\|`)
   inside cells, and reports a missing file as an error rather
   than crashing.
+- Fit the Spring Boot reference tables (Boot 4 migration, test
+  slice packages, visibility) within the 80-column limit:
+  common prefixes are stated once, and renames too long for a
+  two-column table are listed instead.
 
 ## [0.6.0] - 2026-08-27
 

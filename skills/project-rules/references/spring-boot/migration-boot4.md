@@ -25,34 +25,36 @@ Spring Boot 4 requires at minimum:
 
 Old starters still resolve but are deprecated. Use
 the new names in new projects and during migration.
+Names below omit the `spring-boot-starter-` prefix.
 
-| Deprecated starter                                | Replacement                                                |
-| ------------------------------------------------- | ---------------------------------------------------------- |
-| `spring-boot-starter-aop`                         | `spring-boot-starter-aspectj`                              |
-| `spring-boot-starter-web`                         | `spring-boot-starter-webmvc`                               |
-| `spring-boot-starter-web-services`                | `spring-boot-starter-webservices`                          |
-| `spring-boot-starter-oauth2-authorization-server` | `spring-boot-starter-security-oauth2-authorization-server` |
-| `spring-boot-starter-oauth2-client`               | `spring-boot-starter-security-oauth2-client`               |
-| `spring-boot-starter-oauth2-resource-server`      | `spring-boot-starter-security-oauth2-resource-server`      |
+| Deprecated starter            | Replacement                            |
+| ----------------------------- | -------------------------------------- |
+| `aop`                         | `aspectj`                              |
+| `web`                         | `webmvc`                               |
+| `web-services`                | `webservices`                          |
+| `oauth2-authorization-server` | `security-oauth2-authorization-server` |
+| `oauth2-client`               | `security-oauth2-client`               |
+| `oauth2-resource-server`      | `security-oauth2-resource-server`      |
 
 ## New starters
 
 Technologies that previously relied on transitive
-auto-configuration now require an explicit starter.
+auto-configuration now require an explicit starter
+(prefix `spring-boot-starter-` omitted).
 
-| Technology             | Starter                                    |
-| ---------------------- | ------------------------------------------ |
-| Flyway                 | `spring-boot-starter-flyway`               |
-| Liquibase              | `spring-boot-starter-liquibase`            |
-| OpenTelemetry          | `spring-boot-starter-opentelemetry`        |
-| Zipkin                 | `spring-boot-starter-zipkin`               |
-| Micrometer Metrics     | `spring-boot-starter-micrometer-metrics`   |
-| Jackson                | `spring-boot-starter-jackson`              |
-| Kotlin Serialization   | `spring-boot-starter-kotlin-serialization` |
-| Spring Batch (JDBC)    | `spring-boot-starter-batch-jdbc`           |
-| Spring Batch (no JDBC) | `spring-boot-starter-batch`                |
-| Tomcat WAR runtime     | `spring-boot-starter-tomcat-runtime`       |
-| Security test          | `spring-boot-starter-security-test`        |
+| Technology             | Starter                |
+| ---------------------- | ---------------------- |
+| Flyway                 | `flyway`               |
+| Liquibase              | `liquibase`            |
+| OpenTelemetry          | `opentelemetry`        |
+| Zipkin                 | `zipkin`               |
+| Micrometer Metrics     | `micrometer-metrics`   |
+| Jackson                | `jackson`              |
+| Kotlin Serialization   | `kotlin-serialization` |
+| Spring Batch (JDBC)    | `batch-jdbc`           |
+| Spring Batch (no JDBC) | `batch`                |
+| Tomcat WAR runtime     | `tomcat-runtime`       |
+| Security test          | `security-test`        |
 
 Compatibility starters `spring-boot-starter-classic`
 and `spring-boot-starter-test-classic` restore the
@@ -62,15 +64,16 @@ transitional period.
 ## Jackson 3
 
 Jackson 3 changes both the Maven groupId and the Java
-package root.
+package root. The package root moves from
+`com.fasterxml.jackson` to `tools.jackson`, and the
+groupIds follow:
 
-| Scope        | Old                                | New                        |
-| ------------ | ---------------------------------- | -------------------------- |
-| GroupId      | `com.fasterxml.jackson.core`       | `tools.jackson.core`       |
-| GroupId      | `com.fasterxml.jackson.dataformat` | `tools.jackson.dataformat` |
-| GroupId      | `com.fasterxml.jackson.datatype`   | `tools.jackson.datatype`   |
-| GroupId      | `com.fasterxml.jackson.module`     | `tools.jackson.module`     |
-| Java package | `com.fasterxml.jackson`            | `tools.jackson`            |
+| Old groupId                        | New groupId                |
+| ---------------------------------- | -------------------------- |
+| `com.fasterxml.jackson.core`       | `tools.jackson.core`       |
+| `com.fasterxml.jackson.dataformat` | `tools.jackson.dataformat` |
+| `com.fasterxml.jackson.datatype`   | `tools.jackson.datatype`   |
+| `com.fasterxml.jackson.module`     | `tools.jackson.module`     |
 
 Exception: `jackson-annotations` keeps its original
 groupId `com.fasterxml.jackson.core` and its original
@@ -83,44 +86,59 @@ Jackson 2 compatibility during transition.
 
 ### Spring Boot
 
-| Old                                                | New                                                                               |
-| -------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `@JsonComponent`                                   | `@JacksonComponent`                                                               |
-| `@JsonMixin`                                       | `@JacksonMixin`                                                                   |
-| `JsonObjectSerializer`                             | `ObjectValueSerializer`                                                           |
-| `JsonValueDeserializer`                            | `ObjectValueDeserializer`                                                         |
-| `Jackson2ObjectMapperBuilderCustomizer`            | `JsonMapperBuilderCustomizer`                                                     |
-| `HttpMessageConverters`                            | `ClientHttpMessageConvertersCustomizer` / `ServerHttpMessageConvertersCustomizer` |
-| `@MockBean`                                        | `@MockitoBean` (Spring Framework)                                                 |
-| `@SpyBean`                                         | `@MockitoSpyBean` (Spring Framework)                                              |
-| `ConditionalOnEnabledTracing`                      | `ConditionalOnEnabledTracingExport`                                               |
-| `ScheduledTasksObservabilityAutoConfiguration`     | `ScheduledTasksObservationAutoConfiguration`                                      |
-| `RestClientBuilderCustomizer` (Elasticsearch)      | `Rest5ClientBuilderCustomizer`                                                    |
-| `RabbitRetryTemplateCustomizer`                    | `RabbitTemplateRetrySettingsCustomizer` / `RabbitListenerRetrySettingsCustomizer` |
-| `StreamBuilderFactoryBeanCustomizer`               | `StreamsBuilderFactoryBeanConfigurer`                                             |
+| Old                                  | New                                   |
+| ------------------------------------ | ------------------------------------- |
+| `@JsonComponent`                     | `@JacksonComponent`                   |
+| `@JsonMixin`                         | `@JacksonMixin`                       |
+| `JsonObjectSerializer`               | `ObjectValueSerializer`               |
+| `JsonValueDeserializer`              | `ObjectValueDeserializer`             |
+| `@MockBean`                          | `@MockitoBean` (Spring Framework)     |
+| `@SpyBean`                           | `@MockitoSpyBean` (Spring Framework)  |
+| `ConditionalOnEnabledTracing`        | `ConditionalOnEnabledTracingExport`   |
+| `StreamBuilderFactoryBeanCustomizer` | `StreamsBuilderFactoryBeanConfigurer` |
+
+Renames too long for the table:
+
+- `Jackson2ObjectMapperBuilderCustomizer` →
+  `JsonMapperBuilderCustomizer`
+- `HttpMessageConverters` →
+  `ClientHttpMessageConvertersCustomizer` /
+  `ServerHttpMessageConvertersCustomizer`
+- `ScheduledTasksObservabilityAutoConfiguration` →
+  `ScheduledTasksObservationAutoConfiguration`
+- `RestClientBuilderCustomizer` (Elasticsearch) →
+  `Rest5ClientBuilderCustomizer`
+- `RabbitRetryTemplateCustomizer` →
+  `RabbitTemplateRetrySettingsCustomizer` /
+  `RabbitListenerRetrySettingsCustomizer`
 
 ### Spring Framework 7
 
-| Old                                    | New                                       |
-| -------------------------------------- | ----------------------------------------- |
-| `org.springframework.lang.Nullable`    | `org.jspecify.annotations.Nullable`       |
-| `org.springframework.lang.NonNull`     | JSpecify `@NonNullByDefault` (module)     |
-| `org.springframework.orm.hibernate5.*` | `org.springframework.orm.jpa.hibernate.*` |
+| Old                    | New                                   |
+| ---------------------- | ------------------------------------- |
+| `o.s.lang.Nullable`    | `org.jspecify.annotations.Nullable`   |
+| `o.s.lang.NonNull`     | JSpecify `@NonNullByDefault` (module) |
+| `o.s.orm.hibernate5.*` | `o.s.orm.jpa.hibernate.*`             |
+
+(`o.s` = `org.springframework`)
 
 ## Package reorganizations (Spring Boot 4)
 
 Boot 4 modularizes packages under
 `org.springframework.boot.<technology>`.
 
-| Old                                                       | New                                                |
-| --------------------------------------------------------- | -------------------------------------------------- |
-| `o.s.boot.BootstrapRegistry`                              | `o.s.boot.bootstrap.BootstrapRegistry`             |
-| `o.s.boot.env.EnvironmentPostProcessor`                   | `o.s.boot.EnvironmentPostProcessor`                |
-| `o.s.boot.autoconfigure.domain.EntityScan`                | `o.s.boot.persistence.autoconfigure.EntityScan`    |
-| `o.s.boot.test.autoconfigure.properties.PropertyMapping`  | `o.s.boot.test.context.PropertyMapping`            |
-| `o.s.boot.test.web.client.TestRestTemplate`               | `o.s.boot.resttestclient.TestRestTemplate`         |
+With `o.s` = `org.springframework`:
 
-(`o.s` = `org.springframework`)
+- `o.s.boot.BootstrapRegistry` →
+  `o.s.boot.bootstrap.BootstrapRegistry`
+- `o.s.boot.env.EnvironmentPostProcessor` →
+  `o.s.boot.EnvironmentPostProcessor`
+- `o.s.boot.autoconfigure.domain.EntityScan` →
+  `o.s.boot.persistence.autoconfigure.EntityScan`
+- `o.s.boot.test.autoconfigure.properties.PropertyMapping` →
+  `o.s.boot.test.context.PropertyMapping`
+- `o.s.boot.test.web.client.TestRestTemplate` →
+  `o.s.boot.resttestclient.TestRestTemplate`
 
 ## javax to jakarta
 
@@ -128,13 +146,13 @@ Spring Framework 7 removes support for the legacy
 `javax.*` annotations. All code must use the
 `jakarta.*` equivalents:
 
-| Old                                | New                                  |
-| ---------------------------------- | ------------------------------------ |
-| `javax.annotation.Resource`        | `jakarta.annotation.Resource`        |
-| `javax.annotation.PostConstruct`   | `jakarta.annotation.PostConstruct`   |
-| `javax.annotation.PreDestroy`      | `jakarta.annotation.PreDestroy`      |
-| `javax.inject.Inject`              | `jakarta.inject.Inject`              |
-| `javax.inject.Named`               | `jakarta.inject.Named`               |
+| Old                              | New                                |
+| -------------------------------- | ---------------------------------- |
+| `javax.annotation.Resource`      | `jakarta.annotation.Resource`      |
+| `javax.annotation.PostConstruct` | `jakarta.annotation.PostConstruct` |
+| `javax.annotation.PreDestroy`    | `jakarta.annotation.PreDestroy`    |
+| `javax.inject.Inject`            | `jakarta.inject.Inject`            |
+| `javax.inject.Named`             | `jakarta.inject.Named`             |
 
 ## Hibernate artifacts
 
@@ -148,27 +166,27 @@ Spring Framework 7 removes support for the legacy
 
 The low-level REST client artifacts are removed:
 
-| Removed artifact                                             | Replacement                             |
-| ------------------------------------------------------------ | --------------------------------------- |
-| `org.elasticsearch.client:elasticsearch-rest-client`         | `co.elastic.clients:elasticsearch-java` |
-| `org.elasticsearch.client:elasticsearch-rest-client-sniffer` | `co.elastic.clients:elasticsearch-java` |
+- `org.elasticsearch.client:elasticsearch-rest-client`
+- `org.elasticsearch.client:elasticsearch-rest-client-sniffer`
+
+Replace both with `co.elastic.clients:elasticsearch-java`.
 
 ## Other removals
 
-| Removed                                | Alternative                                                  |
-| -------------------------------------- | ------------------------------------------------------------ |
-| `org.springframework:spring-jcl`       | `commons-logging:commons-logging:1.3.0+`                     |
-| Spring Retry dependency management     | `org.springframework.core.retry` (built-in)                  |
-| Spring Auth Server dep. mgmt.          | Now part of Spring Security 7                                |
-| Undertow server support                | Tomcat or Jetty (incompatible with Servlet 6.1)              |
-| Pulsar Reactive auto-configuration     | Removed                                                      |
-| Spring Session Hazelcast support       | Maintained by Hazelcast                                      |
-| Spring Session MongoDB support         | Maintained by MongoDB                                        |
-| Spock test integration                 | Removed (Spock incompatible with Groovy 5)                   |
-| Wavefront metrics export               | Removed (end-of-life)                                        |
-| SignalFx metrics export                | Removed (deprecated in Micrometer 1.15)                      |
-| `ListenableFuture`                     | `CompletableFuture`                                          |
-| OkHttp3 client support                 | Removed                                                      |
-| `webjars-locator-core`                 | `webjars-locator-lite`                                       |
-| `Jackson2ObjectMapperBuilder`          | `JsonMapper.builder()`                                       |
-| Embedded executable uber-jar scripts   | Removed                                                      |
+| Removed                          | Alternative                              |
+| -------------------------------- | ---------------------------------------- |
+| `o.s:spring-jcl`                 | `commons-logging:commons-logging:1.3.0+` |
+| Spring Retry dependency mgmt.    | `o.s.core.retry` (built-in)              |
+| Spring Auth Server dep. mgmt.    | Now part of Spring Security 7            |
+| Undertow (lacks Servlet 6.1)     | Tomcat or Jetty                          |
+| Pulsar Reactive auto-config      | Removed                                  |
+| Spring Session Hazelcast support | Maintained by Hazelcast                  |
+| Spring Session MongoDB support   | Maintained by MongoDB                    |
+| Spock test integration           | Removed (Spock lacks Groovy 5 support)   |
+| Wavefront metrics export         | Removed (end-of-life)                    |
+| SignalFx metrics export          | Removed (deprecated in Micrometer 1.15)  |
+| `ListenableFuture`               | `CompletableFuture`                      |
+| OkHttp3 client support           | Removed                                  |
+| `webjars-locator-core`           | `webjars-locator-lite`                   |
+| `Jackson2ObjectMapperBuilder`    | `JsonMapper.builder()`                   |
+| Executable jar launch scripts    | Removed                                  |
