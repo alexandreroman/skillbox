@@ -34,14 +34,13 @@ take effect automatically.
 
 ## Idiomatic mechanisms
 
-| Technology         | Hot-reload mechanism                     |
-| ------------------ | ---------------------------------------- |
-| Go                 | `air` (or `wgo`) watch + rebuild         |
-| Java / Spring Boot | Spring Boot DevTools automatic restart   |
-| Node.js / TS       | `tsx watch` or `nodemon`                 |
-| Vite / Nuxt        | built-in HMR via the dev server          |
-| Python (ASGI)      | `uvicorn --reload`                       |
-| Python (Flask)     | debug mode reloader (`flask run --debug`)|
+| Technology         | Hot-reload mechanism                       |
+| ------------------ | ------------------------------------------ |
+| Go                 | `air` (or `wgo`) watch + rebuild           |
+| Java / Spring Boot | Spring Boot DevTools automatic restart     |
+| Node.js / TS       | `tsx watch` or `nodemon`                   |
+| Vite / Nuxt        | built-in HMR via the dev server            |
+| Python             | see [Python tooling](../python/tooling.md) |
 
 For other stacks, pick the community-standard watcher
 or the framework's built-in reload feature.
