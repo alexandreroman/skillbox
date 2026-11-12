@@ -22,8 +22,10 @@ Build it from the template at
 | `check`      | Run tests and static checks                      |
 | `build`      | Build the production artifact                    |
 
-`infra-*` and `app-*` exist only when the project has a
-compose file (see [compose.md](compose.md)).
+The `app-*` targets exist only when the project has a
+compose file (see [compose.md](compose.md)); the `infra-*`
+targets only when that file defines infrastructure
+services.
 
 ## Adapt the template
 
@@ -41,12 +43,16 @@ Replace each `{{placeholder}}` with commands for the stack:
   `wait` so a crash of one tears down the rest.
 - `{{compose}}`: the compose command (`docker compose` or
   `podman compose`), used by `app-up` / `app-down` and by
-  `infra-up` / `infra-down`. Remove the **Stack** and
-  **Infra** sections if the project has no compose file.
-- `{{infra-services}}`: the compose service names the app
-  needs while running locally (e.g. `postgres redis`);
-  `dev` brings them up first. Leave empty to manage every
-  service.
+  `infra-up` / `infra-down`. Remove the **Stack** section
+  if the project has no compose file.
+- `{{infra-services}}`: the infrastructure services the app
+  needs while running locally (e.g. `postgres redis`),
+  never the app's own service; `dev` brings them up first.
+  Never leave it empty: `up -d` with no service starts
+  every service, the app container included. Without
+  infrastructure services, remove the **Infra** section,
+  the `infra-up` prerequisite of `dev` and the "Start
+  infra, then" part of its description.
 - `{{test-command}}`, `{{lint-command}}`, `{{build-command}}`:
   the stack's test, lint and build commands.
 - `{{dev-targets}}`: extra target names that should load
