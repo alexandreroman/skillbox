@@ -118,13 +118,10 @@ mode.
 
 ### Phase 2 — Establish project context
 
-This phase runs **before a single project file is
-written**. Its purpose is to make the project's own
-instructions — `AGENTS.md`, the project memory, and the
-project rules — active for the rest of *this* session.
-Nothing here may be deferred to a session restart: the
-instruction file is loaded at startup only, so the skill
-must load and apply it itself.
+Runs **before any project file is written**, so that
+`AGENTS.md`, the project memory, and the project rules
+govern the scaffold itself. The skill loads them into
+*this* session; never ask the user to restart it.
 
 #### 2a — Bootstrap AGENTS.md
 
