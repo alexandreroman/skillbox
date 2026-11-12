@@ -11,10 +11,12 @@
 - Anything already in AGENTS.md or CLAUDE.md files.
 - Ephemeral task details or current conversation
   context.
-- Personal user data (role, preferences,
-  identity) — these belong in `~/.claude/`
-  (user-level), not in a shared project
-  repository.
+- Personal user data (role, identity, personal
+  preferences that apply across all projects) —
+  these belong in `~/.claude/` (user-level), not
+  in a shared project repository. Workflow
+  preferences for this project do belong in
+  project memory.
 
 ## When to access memories
 
