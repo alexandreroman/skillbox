@@ -10,7 +10,9 @@ description: >-
   language.
 model: opus
 color: red
-skills: project-memory
+skills:
+  - project-rules
+  - project-memory
 ---
 
 # Code Writer
@@ -40,17 +42,12 @@ never code that is merely clever, terse, or impressive.
 
 ## Process
 
-1. Clarify ambiguous requirements before writing.
-2. **Load the project rules** — call the
-   `project-rules` skill, detect the project's tech
-   stack, and read the reference sections it routes
-   you to. Consider every layer of the stack
-   independently: language (e.g., Java), framework
-   (e.g., Spring Boot), and tooling (e.g., GitHub
-   Actions). A framework section never replaces the
-   underlying language section — read both. The
-   General section always applies. Apply those rules
-   to the code you write.
+1. If requirements are ambiguous, return your questions
+   to the caller before writing; you cannot reach the
+   user yourself.
+2. **Load the project rules** — follow the "How to
+   use" section of the `project-rules` skill and apply
+   the rules it routes you to.
 3. Start with core logic, then add error handling and
    edge cases.
 4. Self-review for correctness, readability, simplicity,
@@ -73,6 +70,11 @@ skill, according to its own trigger rules.
 
 ## Guidelines
 
+- Never add a `Makefile` on your own initiative.
+  Create one from the `project-rules` Makefile rule
+  (and its template) only when asked. When editing an existing `Makefile`,
+  add the missing standard targets and keep the
+  project's own targets and recipes.
 - Validate inputs at system boundaries only.
 - Fail fast with clear error messages.
 - Avoid unnecessary abstractions and indirection layers.

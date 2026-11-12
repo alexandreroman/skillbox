@@ -1,18 +1,13 @@
 ---
 name: project-memory
 description: >-
-  PROACTIVE — invoke this skill automatically,
-  without being asked, whenever the conversation
-  reveals project decisions, deadlines, team
-  context, external references, workflow
-  preferences, or corrective feedback that should
-  persist across conversations. Also invoke when
-  the user says "remember", "don't forget",
-  "keep track of", "note that", or asks to recall
-  something previously saved. Do not wait for an
-  explicit request — if the information is worth
-  remembering, invoke this skill immediately.
-allowed-tools: Read, Write, Edit, Glob
+  Use proactively, without being asked, whenever the conversation reveals
+  project decisions, deadlines, team context, external references, workflow
+  preferences, or corrective feedback worth keeping across conversations.
+  Also use when the user says "remember", "don't forget", "keep track of",
+  "note that", or asks to recall something saved earlier.
+user-invocable: false
+allowed-tools: Read Write Edit Glob
 ---
 
 # Project Memory
@@ -24,6 +19,10 @@ the main conversation and any subagent:
 `<project root>/.claude/project-memory/`
 
 Create the directory if it does not exist.
+
+Inside a subagent, never write on a conflict or
+a duplicate: report it back to the caller instead,
+since a subagent cannot reach the user.
 
 ## When to save — trigger checklist
 
@@ -46,6 +45,21 @@ Save a memory whenever:
 
 To forget: find and remove the relevant entry.
 
+Do NOT save:
+
+- Code patterns, architecture, file paths, or
+  project structure — derivable from the project.
+- Git history or who-changed-what — use `git log`.
+- Debugging solutions — the fix is in the code.
+- Anything already in AGENTS.md or CLAUDE.md.
+- Ephemeral task details or current conversation
+  context.
+- Personal user data (role, identity, personal
+  preferences that apply across all projects) —
+  these belong in `~/.claude/` (user-level), not
+  in a shared project repository. Workflow
+  preferences for this project do belong here.
+
 ## When to recall
 
 Recall memories whenever:
@@ -58,11 +72,11 @@ Recall memories whenever:
 - Starting a new conversation where past
   decisions or preferences may apply.
 
-Before acting on a recalled memory, verify
-it against the current state of the codebase
-or resource it references. See
-`references/guidelines.md` for full rules
-on staleness and verification.
+If the user says to ignore memory, do not use it.
+Before acting on a recalled memory, verify it
+against the current state: check that a file path
+it names exists, grep for a function or flag it
+names.
 
 ## Decision tracking
 
@@ -106,14 +120,11 @@ After the frontmatter, start with a
 `# <memory name>` heading matching the `name`
 field.
 
-Write all memory content in English, regardless
-of the conversation language.
-
-Write entries in the present tense, as standing
-facts. Do NOT narrate past events or anecdotes
-(e.g. avoid "the user asked to remove the cache");
-state the durable fact instead (e.g. "the project
-does not use a cache layer").
+Write all memory content (file names,
+frontmatter, body text, `MEMORY.md` index) in
+English, regardless of the conversation language.
+Word every note as the `MEMORY.md` header below
+requires.
 
 **Step 3** — Add a pointer in `MEMORY.md`
 (inside the same memory directory). If the file
@@ -121,14 +132,6 @@ does not exist yet, create it with this header:
 
 ```markdown
 # Project Memory
-
-> When a new decision **contradicts** an existing
-> memory note, do NOT silently override it.
-> Instead: surface the conflict, quote the
-> existing memory, explain how the new decision
-> differs, and ask for explicit confirmation
-> before updating. **Do NOT take any action** —
-> no tool calls, no file writes — until confirmed.
 
 > **Note wording** — state permanent facts in the
 > present tense. A note read out of context must
@@ -147,21 +150,13 @@ does not exist yet, create it with this header:
 One line per entry, under 150 characters:
 `- [Title](references/file.md) — one-line hook`.
 Keep the index concise (max 200 lines).
-Check for duplicates before writing.
-
-If a duplicate or conflicting entry exists, do
-NOT write anything — neither the memory file
-nor the `MEMORY.md` entry. Surface the conflict,
-ask for explicit confirmation, and wait. No
-tool calls or file writes until confirmed.
+Check for duplicates before writing. If a
+duplicate or conflicting entry exists, write
+nothing (neither the memory file nor the
+`MEMORY.md` entry) and follow "Decision
+tracking".
 
 > **Important:** Always write to the *project*
 > memory directory (`<project root>/.claude/…`),
 > never to the user-level directory
 > (`~/.claude/projects/…`).
-
-## Before saving or recalling
-
-Read `references/guidelines.md` (next to this
-SKILL.md) to check exclusion rules, access
-rules, and persistence boundaries.

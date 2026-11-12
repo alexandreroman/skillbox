@@ -51,20 +51,28 @@ AOT cache (Java 25). Replace the AOT flags with
 the CDS flags above if targeting Java < 24.
 
 ```dockerfile
-# Stage 1 — extract layers from the fat JAR
-FROM eclipse-temurin:25-jre AS extract
+# Stage 1 — build the fat JAR and extract its layers
+FROM eclipse-temurin:25-jdk AS build
 WORKDIR /build
-COPY target/*.jar app.jar
-RUN java -Djarmode=tools -jar app.jar \
+COPY mvnw pom.xml ./
+COPY .mvn .mvn
+RUN --mount=type=cache,id=maven,target=/root/.m2 \
+    ./mvnw -B dependency:go-offline -q
+COPY src ./src
+RUN --mount=type=cache,id=maven,target=/root/.m2 \
+    ./mvnw -B package -DskipTests -q
+# extract keeps the JAR's file name: rename it first
+RUN cp target/*.jar application.jar \
+ && java -Djarmode=tools -jar application.jar \
       extract --layers --destination extracted
 
 # Stage 2 — training run to build AOT cache
 FROM eclipse-temurin:25-jre AS train
 WORKDIR /app
-COPY --from=extract /build/extracted/dependencies/ ./
-COPY --from=extract /build/extracted/spring-boot-loader/ ./
-COPY --from=extract /build/extracted/snapshot-dependencies/ ./
-COPY --from=extract /build/extracted/application/ ./
+COPY --from=build /build/extracted/dependencies/ ./
+COPY --from=build /build/extracted/spring-boot-loader/ ./
+COPY --from=build /build/extracted/snapshot-dependencies/ ./
+COPY --from=build /build/extracted/application/ ./
 RUN java -XX:AOTCacheOutput=app.aot \
       -Dspring.context.exit=onRefresh \
       -jar application.jar
@@ -74,14 +82,20 @@ FROM eclipse-temurin:25-jre
 WORKDIR /app
 RUN addgroup --system app \
  && adduser --system --ingroup app app
-COPY --from=train --chown=app:app /app/ ./
+COPY --from=build --chown=app:app /build/extracted/dependencies/ ./
+COPY --from=build --chown=app:app /build/extracted/spring-boot-loader/ ./
+COPY --from=build --chown=app:app /build/extracted/snapshot-dependencies/ ./
+COPY --from=build --chown=app:app /build/extracted/application/ ./
+COPY --from=train --chown=app:app /app/app.aot ./
 USER app:app
 ENTRYPOINT ["java", "-XX:AOTCache=app.aot", \
             "-jar", "application.jar"]
 ```
 
-Each `COPY` instruction in the extract stage
-creates a separate Docker layer. Dependencies
-change rarely, so they stay cached across builds;
-only the `application/` layer is rebuilt on code
-changes.
+The build stage follows the Java build stage
+(Maven Wrapper, BuildKit cache mount). Each layer
+`COPY` in the runtime stage creates a separate
+Docker layer, in order of change frequency:
+dependencies stay cached across builds, and a code
+change rebuilds only the `application/` layer and
+the AOT cache.

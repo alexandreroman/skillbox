@@ -4,17 +4,19 @@ Node.js / TypeScript additions to the
 language-agnostic container rules defined in
 `general/containers.md`.
 
-## Activate pnpm via Corepack
+## Install pnpm with npm
 
-Copy `package.json` **before** running
-`corepack prepare` — it reads the
-`packageManager` field and fails without it.
-This also enables layer caching: a code-only
-change does not invalidate the install layer.
+Node.js 25+ no longer bundles Corepack: install
+pnpm with npm. By default, pnpm then switches to
+the version pinned in the `packageManager` field
+of `package.json`.
+Copy the manifests before installing dependencies
+so a code-only change does not invalidate the
+install layer.
 
 ```dockerfile
-COPY package.json pnpm-lock.yaml .npmrc ./
-RUN corepack enable && corepack prepare
+RUN npm install -g pnpm
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 ```
 
@@ -32,11 +34,11 @@ RUN pnpm prune --prod --ignore-scripts
 
 ```dockerfile
 # — builder stage —
-FROM node:24-alpine AS builder
+FROM node:26-alpine AS builder
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml .npmrc ./
-RUN corepack enable && corepack prepare
+RUN npm install -g pnpm
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 COPY . .
@@ -44,7 +46,7 @@ RUN pnpm build
 RUN pnpm prune --prod --ignore-scripts
 
 # — runtime stage —
-FROM node:24-alpine
+FROM node:26-alpine
 WORKDIR /app
 
 RUN apk add --no-cache tini \

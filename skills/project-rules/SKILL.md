@@ -1,17 +1,14 @@
 ---
 name: project-rules
 description: >-
-  Project engineering rules: best practices, code
-  conventions, and design preferences for Java
-  (21+), Go (1.21+), Node.js / TypeScript, and
-  Spring Boot (3.4+, 4.x), plus language-agnostic
-  concerns (containers, Docker Compose, CI/CD, Git,
-  HTTP servers). Consult this skill when designing,
-  planning, or researching best practices — even for
-  familiar APIs and tools — and when writing,
-  reviewing, or refactoring code. Invoke it before
-  external web search; these rules are the project's
-  authoritative conventions.
+  Project engineering rules and conventions for Java
+  21+, Go 1.21+, Node.js / TypeScript, Python, Spring
+  Boot 3.4+ / 4.x, and containers, Compose, Makefile,
+  CI/CD, Git, HTTP servers. Use when designing,
+  planning, writing, reviewing, or refactoring code,
+  or researching best practices, even for familiar
+  APIs and tools. Invoke it before any web search:
+  these rules are authoritative.
 allowed-tools: Read
 user-invocable: false
 ---
@@ -46,6 +43,7 @@ writing, reviewing, or refactoring code.
 | a `spring-boot-starter-*` dependency | `spring-boot/` and `java/` |
 | `go.mod`                             | `go/`                      |
 | `package.json`, `tsconfig.json`      | `nodejs-typescript/`       |
+| `pyproject.toml`, `requirements.txt` | `python/`                  |
 
 ## Always applies
 
@@ -57,17 +55,22 @@ writing, reviewing, or refactoring code.
 - **If context7 is available**, use it to verify
   current API and tool versions before adding or
   modifying dependencies.
+- **Use the latest LTS / stable version** of every
+  language, runtime, framework, and dependency,
+  unless the project pins one.
+- **Check the project's language version** (e.g.
+  in `pom.xml` or `go.mod`) before suggesting
+  features. Never propose an API that requires a
+  newer version than the project targets.
+- **Prefer standard APIs** (JDK, Go standard
+  library, Node.js and the Web Platform) over
+  third-party libraries that duplicate them.
 
 ## General
 
 Language-agnostic rules, for every project.
 
-- [Compose](references/general/compose.md) —
-  Docker Compose health checks, dependencies,
-  restart policy, read-only volumes, multi-file
-  overlays (dev overlay vs. auto-merged
-  `compose.override.yaml`), and host-port overrides
-  with `!override`
+- [Compose](references/general/compose.md) — health checks, overlays, Temporal
 - [Containers](references/general/containers.md) —
   Dockerfile best practices, image size, security,
   layer caching
@@ -82,6 +85,10 @@ Language-agnostic rules, for every project.
 - [HTTP servers](references/general/http-servers.md) —
   port configuration via `PORT` env var, bind
   address, framework defaults
+- [Makefile](references/general/makefile.md) —
+  mandatory standard targets, adapting the
+  [template](assets/Makefile) per stack, completing
+  an existing Makefile
 - [Markdown tables](references/general/markdown-tables.md) —
   column alignment rules, validated by
   `scripts/check_tables.py`
@@ -108,22 +115,10 @@ keeps applying to newer Java releases.
 - [Tooling](references/java/tooling.md) —
   build system (Maven), logging (SLF4J/Logback)
 
-Key rules:
-
-- **Check the project's Java version** before
-  suggesting features. Do not suggest features that
-  require a higher Java version than the project
-  targets.
-- **Use modern Java syntax** — prefer `var`,
-  records, sealed classes, pattern matching, switch
-  expressions, text blocks, and unnamed variables
-  over their older equivalents. See
-  [Modern syntax](references/java/modern-syntax.md)
-  for edge cases and caveats.
-- **Prefer standard APIs** over third-party
-  libraries when the JDK provides an equivalent.
-- **Use Maven and SLF4J/Logback** — see
-  [Tooling](references/java/tooling.md) for details.
+Key rule: **use modern Java syntax** — prefer
+`var`, records, sealed classes, pattern matching,
+switch expressions, text blocks, and unnamed
+variables over their older equivalents.
 
 ## Go
 
@@ -133,7 +128,7 @@ Guide).
 
 - [Tooling](references/go/tooling.md) —
   `go.mod` toolchain, golangci-lint, gofumpt,
-  Air (hot reload), Task, project layout
+  Air (hot reload), Make, project layout
 - [Code style](references/go/code-style.md) —
   receivers, errors, `slog`, `context`,
   `any` vs `interface{}`
@@ -153,28 +148,6 @@ Guide).
   distroless base, `CGO_ENABLED=0`, `-ldflags`,
   BuildKit cache mounts
 
-Key rules:
-
-- **Check the project's Go version** in `go.mod`
-  before suggesting features. Do not propose APIs
-  that require a newer Go toolchain than the
-  project targets.
-- **Prefer the standard library** over third-party
-  packages when `slices`, `maps`, `cmp`,
-  `log/slog`, `net/http`, or `context` already
-  cover the use case.
-- **Use `any` over `interface{}`** in new code
-  (Go 1.18+ alias).
-- **Wrap errors with `%w`** in `fmt.Errorf` and
-  compare via `errors.Is` / `errors.As` — never
-  `==` or string matching.
-- **Recommend uber-go/fx for a large volume of
-  components** — many constructors, several
-  subsystems, or start/stop lifecycles. Hand wiring
-  stays the default below that bar, and libraries
-  never depend on fx. See
-  [Dependency injection](references/go/dependency-injection.md).
-
 ## Node.js / TypeScript
 
 Opinionated choices and non-trivial configurations
@@ -182,9 +155,9 @@ for modern Node.js / TypeScript projects.
 
 - [Tooling](references/nodejs-typescript/tooling.md) —
   pnpm, tsx, Vitest, Husky, Zod + t3-env,
-  project structure
+  Vite + Nuxt for web front ends, project structure
 - [Containers](references/nodejs-typescript/containers.md) —
-  Dockerfile with pnpm, Corepack, multi-stage
+  Dockerfile with pnpm, multi-stage
   builds, dev-dependency pruning
 - [TypeScript](references/nodejs-typescript/typescript.md) —
   strict ESM-first `tsconfig.json`
@@ -192,14 +165,13 @@ for modern Node.js / TypeScript projects.
   ESLint v9 flat config, Prettier preferences,
   lint-staged globs
 
-Key rules:
+## Python
 
-- **Prefer standard APIs** over third-party
-  libraries when Node.js or the Web Platform
-  provides an equivalent.
-- **Use pnpm** — see
-  [Tooling](references/nodejs-typescript/tooling.md)
-  for details.
+Python projects, drawn from the scaffold's choices.
+
+- [Tooling](references/python/tooling.md) —
+  uv, ruff, pytest, watchfiles, hot reload per
+  framework
 
 ## Spring Boot
 

@@ -26,13 +26,13 @@ class OrderService {
 
 Guidelines:
 
-| Element                | Default scope         | Make `public` only when…             |
-| ---------------------- | --------------------- | ------------------------------------ |
-| Stereotype components  | package-private class | exposed in another module's API      |
-| `@Configuration`       | package-private class | referenced by `@Import` from outside |
-| `@Bean` methods        | package-private       | called from another package          |
-| Controllers            | package-private class | needed by code outside the package   |
-| Helper methods         | `private`             | reused across the package            |
+| Element               | Default scope   | Make `public` only when…        |
+| --------------------- | --------------- | ------------------------------- |
+| Stereotype components | package-private | exposed in another module's API |
+| `@Configuration`      | package-private | used by an outside `@Import`    |
+| `@Bean` methods       | package-private | called from another package     |
+| Controllers           | package-private | used outside the package        |
+| Helper methods        | `private`       | reused across the package       |
 
 Keeping classes and methods package-private:
 

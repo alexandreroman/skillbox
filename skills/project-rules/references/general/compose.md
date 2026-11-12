@@ -37,6 +37,14 @@ Choose the probe command based on the service:
   (e.g., `temporal operator cluster health`).
 - **TCP-only** — use
   `nc -z localhost <port>` or an equivalent.
+- **Shell-less image** (distroless, `scratch`, the
+  Go default) — with neither a shell nor `curl`,
+  `CMD-SHELL` never succeeds. Use the exec form with
+  a probe shipped in the image: a health subcommand
+  of the app binary, or a small static probe binary
+  copied in, that calls the health endpoint and
+  exits non-zero on failure:
+  `test: ["CMD", "/app", "healthcheck"]`.
 
 Infrastructure services that pull a public image
 (Prometheus, Grafana, etc.) may omit the
@@ -202,3 +210,15 @@ the effective host ports back from it (in scripts,
 Makefiles, or banners) rather than assuming the
 defaults, so tooling never diverges from what Docker
 actually binds.
+
+## Infrastructure services
+
+Define the app's infrastructure services (databases,
+brokers, Temporal, object storage, ...) in a
+`compose.yaml` at the project root, and list their
+names in the Makefile's `{{infra-services}}` (see
+[makefile.md](makefile.md)).
+
+For Temporal (dev only, never production), copy the
+`temporal` service and its header comment from
+[compose.temporal.yaml](../../assets/compose.temporal.yaml).

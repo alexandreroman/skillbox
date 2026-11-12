@@ -23,6 +23,84 @@ project adheres to [Semantic Versioning][semver].
   when to prefer a method over a package-level generic function,
   method expressions, and the standing ban on generic interface
   methods.
+- A Python section in `project-rules`: `uv` for environments and
+  dependencies, `ruff` for lint and format, `pytest` for tests,
+  `watchfiles` for generic reload, and per-framework hot reload,
+  with `fastapi dev` kept for FastAPI even when its CLI must be
+  added first. The conventions now live with the rules, not in
+  the scaffold.
+- A "latest stable version" rule under "Always applies" in
+  `project-rules`: new dependencies and tools are pinned to the
+  latest stable release instead of a remembered version.
+- An integration mode in `init-project` for adopting an existing
+  repository: it adds the missing conventions without regenerating
+  files that already exist, and seeds the project memory with a
+  summary of the project that the user confirms.
+- Safeguards in `init-project`: it stops before scaffolding when
+  the project memory cannot be written, always asks for the Go
+  module owner instead of guessing it, never checks the Claude
+  Code version, and asks closed questions as multiple choice.
+- Tests for `check_tables.py` in `tests/`, covering every case
+  fixed below.
+
+### Changed
+
+- Update the `README.md` skill lists to match the current skills
+  and add a section on `AGENTS.md`, the shared instruction file.
+- Make `init-project` the only user-invocable skill.
+  `project-memory` and `write-readme` are now model-only: the
+  agent loads them when needed, so they no longer clutter the
+  slash-command list.
+- Move the Makefile rule and its template from `init-project` to
+  `project-rules`, so the rule applies to any project and not only
+  to new ones. Go projects now build on Make and Task is dropped;
+  Air is run through `go tool` rather than a separate install.
+- Move the Compose/Temporal rule and the `compose.temporal.yaml`
+  template from `init-project` to `project-rules`, for the same
+  reason.
+- Prefer Vite and Nuxt in the Node rules, and fix the pnpm-only
+  guidance so that no `npm` or `npx` command is suggested.
+- Slim down the `init-project` scaffolds (Go, Java, Node, Python):
+  conventions already stated in `project-rules` are no longer
+  repeated, which removes the risk of the two copies drifting.
+  This covers the `golangci` `gosimple` linter, `go install`, the
+  `.air.toml` file, `npm init` and `npx`, and the ECS logging
+  block.
+- Rename the `init-project` instruction template from
+  `CLAUDE.md` to `AGENTS.md`. It imports the memory index with
+  `@.claude/project-memory/MEMORY.md`, so the memory loads on
+  startup.
+- State each `project-memory` rule once (the conflict rule and
+  the English rule were repeated) and add a rule for subagents:
+  on a conflict or a duplicate they write nothing and report it
+  to the caller, since they cannot reach the user.
+- Restrict `code-reviewer` to read and search tools, with the
+  skills it needs preloaded. Alignment checks are done by reading
+  the files rather than by running a script, and a missing or
+  diverging Makefile is reported as a minor finding.
+- Have the agents return open questions to the caller instead of
+  asking the user directly. `code-writer` adds a Makefile only
+  when asked; when editing one, it adds the missing standard
+  targets and keeps the project's own.
+- Slim down `init-project` itself (491 to 345 lines): the
+  Makefile and Compose phases point to the rules, rules already
+  stated by a phase are no longer repeated, the plan is one rule
+  instead of task lists, and the integration mode moves to
+  `references/integration.md`, loaded only in that mode.
+- Narrow the `gh` permissions in `.claude/settings.json` to
+  read-only commands and `gh pr create`.
+- Rename this repository's `CLAUDE.md` to `AGENTS.md`.
+- Trim what every session loads: each rule is now stated once
+  across `write-readme`, `project-memory`, `project-rules`,
+  `init-project` and the Compose and container references, and
+  the `project-rules` and `project-memory` descriptions are
+  shorter. `project-rules` no longer repeats per-stack key rules
+  that its references already state, and `write-readme` gains
+  explicit "Use when" triggers.
+- Document the `tests/` folder and its command in `README.md` and
+  `AGENTS.md`, mention Python in the skill list, and note in
+  `AGENTS.md` that `user-invocable` is the one Claude Code field
+  allowed beyond the Agent Skills spec.
 
 ### Removed
 
@@ -30,6 +108,52 @@ project adheres to [Semantic Versioning][semver].
   Makefile template. Following container logs is a one-off
   troubleshooting step, not a task worth a dedicated target;
   `infra-logs` is also dropped from `DEV_TARGETS`.
+- The generated `CLAUDE.md` from `init-project`: `AGENTS.md` is
+  the single instruction file.
+- Task as the Go task runner; Go projects use Make.
+- `project-memory/references/guidelines.md`, whose remaining
+  rules moved into the skill itself; the stale "Variables" tables
+  of the `init-project` stack references; the `.npmrc` block that
+  only restated pnpm defaults; and the default `skills` path in
+  `plugin.json`.
+
+### Fixed
+
+- `check_tables.py` now reports every misaligned file instead of
+  stopping at the first, ignores tables inside fenced code
+  blocks, checks indented tables, handles escaped pipes (`\|`)
+  inside cells, and reports a missing file as an error rather
+  than crashing.
+- Fit the Spring Boot reference tables (Boot 4 migration, test
+  slice packages, visibility) within the 80-column limit:
+  common prefixes are stated once, and renames too long for a
+  two-column table are listed instead.
+- Container examples that did not build or did not do what they
+  claimed: the Java Dockerfile now copies the Maven Wrapper, and
+  the Spring Boot runtime image copies each extracted layer
+  separately so dependency layers stay cached.
+- Compose health checks no longer require a shell and `curl`,
+  which distroless images lack, and an init process (tini) is
+  required only where the process does not handle signals.
+- The Makefile rule now says to drop the `infra-up` prerequisite
+  of `dev` along with the Infra section, and never to leave the
+  infrastructure service list empty.
+- Contradictions in the rules: the golangci-lint example no longer
+  lists linters already in the `standard` set, Node.js hot reload
+  is stated once, the Java line-wrapping rule matches its example,
+  and the last `npm` commands become `pnpm` ones.
+- `init-project` no longer generates the Makefile twice (once per
+  stack reference, once in phase 4a) and no longer asks twice
+  before overwriting a README.
+- Image and action versions follow the latest-stable rule: the
+  Temporal dev server is pinned to `1.10.0` instead of `:latest`,
+  Node.js images use `node:26-alpine` and install pnpm with npm
+  (Node.js 25+ no longer ships Corepack), and the GitHub Actions
+  examples use `checkout@v7` and `build-push-action@v7`.
+- `project-memory` sends a project's workflow preferences to the
+  project memory, in line with the generated `AGENTS.md`, and its
+  `allowed-tools` field is space-separated, as the Agent Skills
+  spec requires.
 
 ## [0.6.0] - 2026-08-27
 
