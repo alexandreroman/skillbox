@@ -8,6 +8,28 @@ project adheres to [Semantic Versioning][semver].
 [keepachangelog]: https://keepachangelog.com/en/1.1.0/
 [semver]: https://semver.org/spec/v2.0.0.html
 
+## [Unreleased]
+
+### Added
+
+- A rule in `init-project` phase 2a for a user who explicitly asks
+  for a `CLAUDE.md`: the skill explains the conflict with
+  `AGENTS.md` and asks whether to use `AGENTS.md` only, `AGENTS.md`
+  with a one-line `CLAUDE.md` importing it, or `CLAUDE.md` only,
+  then records the choice in the project memory. Integration mode
+  asks the same question when neither file exists yet.
+
+### Changed
+
+- Broaden the `init-project` description with the words users
+  actually type ("initialize", "initialise", "init", "scaffold",
+  "set up a new repo") and with demo, sample, and companion
+  repositories, so the skill triggers on those requests even when
+  the prompt names other skills.
+- Point the `project-rules` and `write-readme` descriptions and
+  bodies to `init-project` for a brand-new repository or module,
+  since it loads both of them itself.
+
 ## [0.7.0] - 2026-11-12
 
 ### Added
@@ -336,6 +358,7 @@ project adheres to [Semantic Versioning][semver].
 - `code-writer` and `code-reviewer` agents with opinionated
   best-practice defaults.
 
+[Unreleased]: https://github.com/alexandreroman/skillbox/compare/v0.7.0...HEAD
 [0.7.0]: https://github.com/alexandreroman/skillbox/releases/tag/v0.7.0
 [0.6.0]: https://github.com/alexandreroman/skillbox/releases/tag/v0.6.0
 [0.5.0]: https://github.com/alexandreroman/skillbox/releases/tag/v0.5.0
