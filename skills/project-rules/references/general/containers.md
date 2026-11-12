@@ -93,16 +93,18 @@ Add language-specific exclusions (e.g., `node_modules/`,
 ## Signal handling (PID 1)
 
 A container's entry-point process runs as PID 1.
-Under Linux, PID 1 does **not** receive default
-signal handlers — `SIGINT` and `SIGTERM` are
-silently ignored unless the process explicitly
-handles them. This means `Ctrl+C` and
-`docker stop` have no effect.
+Under Linux, PID 1 gets **no default signal
+actions**: `SIGINT` and `SIGTERM` are ignored unless
+the process installs a handler, so `Ctrl+C` and
+`docker stop` have no effect. PID 1 must also reap
+orphaned child processes (zombies).
 
 **Use a lightweight init** such as
 [`tini`](https://github.com/krallin/tini) as the
-`ENTRYPOINT`. It forwards signals to child
-processes and reaps zombies:
+`ENTRYPOINT` when the process does not handle
+signals or reap children itself (e.g. Node.js, a
+shell script). It forwards signals and reaps
+zombies:
 
 ```dockerfile
 RUN apk add --no-cache tini
@@ -110,9 +112,11 @@ ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["node", "dist/index.js"]
 ```
 
-Alternatively, pass `--init` to `docker run`, but
-an in-image init is preferred so the behaviour is
-portable across orchestrators.
+A process that handles `SIGTERM` and spawns no
+children (a Go binary, the JVM) runs directly as
+PID 1, with no init. Prefer an in-image init over
+`docker run --init` so the behaviour is portable
+across orchestrators.
 
 ## Health checks
 
