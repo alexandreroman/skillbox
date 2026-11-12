@@ -51,8 +51,8 @@ downloads, compiler caches). Each language's
   `id`-less mount can misbehave under podman/buildah:
   at best you get silent cache misses, and for Go it
   breaks `go build` module resolution outright
-  (`no required module provides package …` — see
-  `go/containers.md`).
+  (`no required module provides package …` even
+  though `go mod download` populated the cache).
 
 ## Security
 
