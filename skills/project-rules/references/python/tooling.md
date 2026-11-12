@@ -37,3 +37,9 @@ by framework:
 | Django        | `manage.py runserver`                    |
 | Other ASGI    | `uvicorn --reload`                       |
 | Anything else | `watchfiles` (add with `uv add --dev`)   |
+
+Use the framework's own command even when its tooling
+is not installed yet: add the missing dependency
+instead of falling back to `uvicorn --reload`.
+`fastapi dev` needs the FastAPI CLI, installed with
+`uv add "fastapi[standard]"` or `uv add --dev fastapi-cli`.
