@@ -183,6 +183,12 @@ layout.
   decisions, then save the module's objective and
   where it sits in the project.
 
+If the memory cannot be written (a refused permission,
+for instance), stop before scaffolding and tell the
+user: the `AGENTS.md` import would point at a missing
+file. Continue only once it exists, or when the user
+says to go on without it.
+
 #### 2d — Load the project rules
 
 Invoke the **project-rules** skill. Detect the stack
