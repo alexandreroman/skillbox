@@ -207,28 +207,18 @@ project rules and the project memory on its own.
 #### When a base was provided
 
 The base takes precedence: do not mix it with the
-scaffolding references below.
+scaffolding references below. Read its manifests,
+source layout, and code patterns, copy its structure
+into the new location, then:
 
-1. Read the base directory's structure (manifest
-   files, source layout, configuration).
-2. Identify the **tech stack**, **build setup**,
-   **dependency list**, and **code patterns**
-   (naming conventions, directory layout, shared
-   utilities, framework idioms).
-3. Note what should be **kept as-is** (build config,
-   shared dependencies, structural conventions) vs.
-   what should be **adapted** (module-specific names,
-   business logic, endpoints, routes).
-4. Copy the base directory structure into the new
-   location, then adapt it:
-   - Rename packages, namespaces, and identifiers
-     to match the chosen name.
-   - Replace business logic with starter code that
-     matches the new objective.
-   - Keep build configuration, shared dependencies,
-     and structural conventions from the base.
-   - Remove base-specific tests and replace with
-     placeholder tests for the new module.
+- **Keep** its build configuration, shared
+  dependencies, and structural conventions.
+- **Adapt** packages, namespaces, and identifiers to
+  the chosen name, and replace business logic,
+  endpoints, and routes with starter code for the new
+  objective.
+- **Replace** base-specific tests with placeholder
+  tests.
 
 #### When no base was provided
 
