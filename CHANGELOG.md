@@ -25,14 +25,21 @@ project adheres to [Semantic Versioning][semver].
   methods.
 - A Python section in `project-rules`: `uv` for environments and
   dependencies, `ruff` for lint and format, `pytest` for tests,
-  `watchfiles` for generic reload, and per-framework hot reload.
-  The conventions now live with the rules, not in the scaffold.
+  `watchfiles` for generic reload, and per-framework hot reload,
+  with `fastapi dev` kept for FastAPI even when its CLI must be
+  added first. The conventions now live with the rules, not in
+  the scaffold.
 - A "latest stable version" rule under "Always applies" in
   `project-rules`: new dependencies and tools are pinned to the
   latest stable release instead of a remembered version.
 - An integration mode in `init-project` for adopting an existing
   repository: it adds the missing conventions without regenerating
-  files that already exist.
+  files that already exist, and seeds the project memory with a
+  summary of the project that the user confirms.
+- Safeguards in `init-project`: it stops before scaffolding when
+  the project memory cannot be written, always asks for the Go
+  module owner instead of guessing it, and never checks the
+  Claude Code version.
 - Tests for `check_tables.py` in `tests/`, covering every case
   fixed below.
 
