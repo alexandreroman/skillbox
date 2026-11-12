@@ -290,9 +290,6 @@ such dependencies.
 
 #### 5a — Generate README.md
 
-Before generating files, check for an existing
-`README.md` — ask the user before overwriting.
-
 Delegate README generation to the **write-readme**
 skill. It scans the scaffolded project, gathers any
 missing context from the user, and produces a polished
