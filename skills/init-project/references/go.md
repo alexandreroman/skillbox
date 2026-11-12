@@ -18,12 +18,6 @@
 
 2. Run `go mod init github.com/{{owner}}/{{project-name}}`
 
-3. Generate the `Makefile` following
-   [the Makefile rule](../../project-rules/references/general/makefile.md),
-   adapted to the chosen framework and project type
-   (replace `{{project-name}}` with the name chosen in
-   Step 2).
-
-4. Set up linting, formatting and hot reload as
+3. Set up linting, formatting and hot reload as
    described in
    [Go tooling](../../project-rules/references/go/tooling.md).

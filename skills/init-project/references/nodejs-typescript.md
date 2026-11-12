@@ -12,10 +12,3 @@ Ask the user to confirm the framework choice if not
 explicitly stated. See
 [Node.js / TypeScript tooling](../../project-rules/references/nodejs-typescript/tooling.md)
 for the preferred option.
-
-## Makefile
-
-After scaffolding, generate the `Makefile` following
-[the Makefile rule](../../project-rules/references/general/makefile.md),
-as a thin wrapper around pnpm scripts. Remove `build`
-and `start` if the framework provides its own.

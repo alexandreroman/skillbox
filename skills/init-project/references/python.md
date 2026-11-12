@@ -18,12 +18,6 @@
    `uv add <package>`. To remove a dependency, use
    `uv remove <package>`.
 
-3. Generate the `Makefile` following
-   [the Makefile rule](../../project-rules/references/general/makefile.md),
-   adapted to the chosen framework and dependencies
-   (`{{module_name}}` is the `project-name` converted
-   to snake_case).
-
-4. Add the dev dependencies and the hot-reload command
+3. Add the dev dependencies and the hot-reload command
    described in
    [Python tooling](../../project-rules/references/python/tooling.md).
