@@ -20,7 +20,8 @@ does not state it.
 
 ## Dev Runner — tsx
 
-Use `--env-file` with `--import` for development:
+Hot reload uses Node's built-in `--watch`, with
+`--env-file` and `--import tsx/esm`:
 
 ```json
 "dev": "node --watch --env-file=.env --import tsx/esm src/index.ts"
