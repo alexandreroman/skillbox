@@ -213,33 +213,12 @@ actually binds.
 
 ## Infrastructure services
 
-When the app depends on infrastructure services
-(databases, brokers, Temporal, object storage, ...),
-define them in a `compose.yaml` at the project root.
-Skip it when the app has no such dependencies. List
-those service names in the Makefile's
-`{{infra-services}}` (see [makefile.md](makefile.md)).
+Define the app's infrastructure services (databases,
+brokers, Temporal, object storage, ...) in a
+`compose.yaml` at the project root, and list their
+names in the Makefile's `{{infra-services}}` (see
+[makefile.md](makefile.md)).
 
-## Temporal
-
-When the project uses Temporal, add a `temporal`
-service to `compose.yaml`, modeled on
-[compose.temporal.yaml](../../assets/compose.temporal.yaml),
-and add `temporal` to the Makefile's
-`{{infra-services}}`. Follow this canonical model:
-
-- Use the official `temporalio/temporal` image and
-  run the `server start-dev` command, a
-  single-process dev server with a built-in database
-  and Web UI. **Dev only, never production.**
-- Bind `--ip 0.0.0.0` so other containers and the
-  host can reach it. Publish `7233` (gRPC, for
-  workers and clients) and the UI port `8233`.
-- Add the `temporal operator cluster health`
-  healthcheck so dependent services can wait on
-  `condition: service_healthy`.
-- Cap memory via `deploy.resources.limits.memory`
-  and set `restart: unless-stopped`.
-- Point workers and clients at `temporal:7233` from
-  inside the Compose network (or `localhost:7233`
-  from the host) with the `default` namespace.
+For Temporal (dev only, never production), copy the
+`temporal` service and its header comment from
+[compose.temporal.yaml](../../assets/compose.temporal.yaml).
