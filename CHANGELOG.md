@@ -90,6 +90,17 @@ project adheres to [Semantic Versioning][semver].
 - Narrow the `gh` permissions in `.claude/settings.json` to
   read-only commands and `gh pr create`.
 - Rename this repository's `CLAUDE.md` to `AGENTS.md`.
+- Trim what every session loads: each rule is now stated once
+  across `write-readme`, `project-memory`, `project-rules`,
+  `init-project` and the Compose and container references, and
+  the `project-rules` and `project-memory` descriptions are
+  shorter. `project-rules` no longer repeats per-stack key rules
+  that its references already state, and `write-readme` gains
+  explicit "Use when" triggers.
+- Document the `tests/` folder and its command in `README.md` and
+  `AGENTS.md`, mention Python in the skill list, and note in
+  `AGENTS.md` that `user-invocable` is the one Claude Code field
+  allowed beyond the Agent Skills spec.
 
 ### Removed
 
@@ -100,6 +111,11 @@ project adheres to [Semantic Versioning][semver].
 - The generated `CLAUDE.md` from `init-project`: `AGENTS.md` is
   the single instruction file.
 - Task as the Go task runner; Go projects use Make.
+- `project-memory/references/guidelines.md`, whose remaining
+  rules moved into the skill itself; the stale "Variables" tables
+  of the `init-project` stack references; the `.npmrc` block that
+  only restated pnpm defaults; and the default `skills` path in
+  `plugin.json`.
 
 ### Fixed
 
@@ -112,6 +128,32 @@ project adheres to [Semantic Versioning][semver].
   slice packages, visibility) within the 80-column limit:
   common prefixes are stated once, and renames too long for a
   two-column table are listed instead.
+- Container examples that did not build or did not do what they
+  claimed: the Java Dockerfile now copies the Maven Wrapper, and
+  the Spring Boot runtime image copies each extracted layer
+  separately so dependency layers stay cached.
+- Compose health checks no longer require a shell and `curl`,
+  which distroless images lack, and an init process (tini) is
+  required only where the process does not handle signals.
+- The Makefile rule now says to drop the `infra-up` prerequisite
+  of `dev` along with the Infra section, and never to leave the
+  infrastructure service list empty.
+- Contradictions in the rules: the golangci-lint example no longer
+  lists linters already in the `standard` set, Node.js hot reload
+  is stated once, the Java line-wrapping rule matches its example,
+  and the last `npm` commands become `pnpm` ones.
+- `init-project` no longer generates the Makefile twice (once per
+  stack reference, once in phase 4a) and no longer asks twice
+  before overwriting a README.
+- Image and action versions follow the latest-stable rule: the
+  Temporal dev server is pinned to `1.10.0` instead of `:latest`,
+  Node.js images use `node:26-alpine` and install pnpm with npm
+  (Node.js 25+ no longer ships Corepack), and the GitHub Actions
+  examples use `checkout@v7` and `build-push-action@v7`.
+- `project-memory` sends a project's workflow preferences to the
+  project memory, in line with the generated `AGENTS.md`, and its
+  `allowed-tools` field is space-separated, as the Agent Skills
+  spec requires.
 
 ## [0.6.0] - 2026-08-27
 
