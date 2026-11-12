@@ -1,17 +1,11 @@
 ---
 name: project-memory
 description: >-
-  PROACTIVE — invoke this skill automatically,
-  without being asked, whenever the conversation
-  reveals project decisions, deadlines, team
-  context, external references, workflow
-  preferences, or corrective feedback that should
-  persist across conversations. Also invoke when
-  the user says "remember", "don't forget",
-  "keep track of", "note that", or asks to recall
-  something previously saved. Do not wait for an
-  explicit request — if the information is worth
-  remembering, invoke this skill immediately.
+  Use proactively, without being asked, whenever the conversation reveals
+  project decisions, deadlines, team context, external references, workflow
+  preferences, or corrective feedback worth keeping across conversations.
+  Also use when the user says "remember", "don't forget", "keep track of",
+  "note that", or asks to recall something saved earlier.
 user-invocable: false
 allowed-tools: Read Write Edit Glob
 ---

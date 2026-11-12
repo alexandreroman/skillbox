@@ -1,11 +1,10 @@
 ---
 name: write-readme
 description: >-
-  Generate a high-quality README.md for an existing
-  project targeting GitHub publication. Analyzes the
-  codebase, gathers missing context from the user,
-  and produces a polished README following best
-  practices.
+  Generate or update the README.md of an existing project for GitHub
+  publication, from its codebase and the user's answers. Use when the user
+  asks to write, create, regenerate, or improve a README, or when another
+  skill delegates README generation.
 user-invocable: false
 ---
 
