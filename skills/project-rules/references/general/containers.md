@@ -69,7 +69,7 @@ USER app:app
   via environment variables or mounted secrets at
   runtime, never bake them into layers.
 - **Pin image tags** — use a specific version tag
-  (e.g., `node:24-alpine`), not `:latest`, to
+  (e.g., `node:26-alpine`), not `:latest`, to
   ensure reproducible builds.
 - **Scan images** — integrate a vulnerability
   scanner (Trivy, Grype, Snyk) into the CI

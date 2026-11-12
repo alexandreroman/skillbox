@@ -157,7 +157,7 @@ for modern Node.js / TypeScript projects.
   pnpm, tsx, Vitest, Husky, Zod + t3-env,
   Vite + Nuxt for web front ends, project structure
 - [Containers](references/nodejs-typescript/containers.md) —
-  Dockerfile with pnpm, Corepack, multi-stage
+  Dockerfile with pnpm, multi-stage
   builds, dev-dependency pruning
 - [TypeScript](references/nodejs-typescript/typescript.md) —
   strict ESM-first `tsconfig.json`

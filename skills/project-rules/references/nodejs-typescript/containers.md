@@ -34,7 +34,7 @@ RUN pnpm prune --prod --ignore-scripts
 
 ```dockerfile
 # — builder stage —
-FROM node:24-alpine AS builder
+FROM node:26-alpine AS builder
 WORKDIR /app
 
 RUN npm install -g pnpm
@@ -46,7 +46,7 @@ RUN pnpm build
 RUN pnpm prune --prod --ignore-scripts
 
 # — runtime stage —
-FROM node:24-alpine
+FROM node:26-alpine
 WORKDIR /app
 
 RUN apk add --no-cache tini \
