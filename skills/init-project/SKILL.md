@@ -44,7 +44,7 @@ Create the following tasks in order:
 3. Generate developer tooling
 4. Generate README.md
 5. Generate LICENSE
-6. Finalize CLAUDE.md
+6. Finalize AGENTS.md
 7. Review and confirm
 
 ### Module-mode plan
@@ -80,11 +80,11 @@ sentences:
   directory** in the codebase? If so, which one?
 
 **Detecting module mode:** if the current working
-directory already contains a `CLAUDE.md` or a parent
-project manifest, this is likely a module. Ask the
-user to confirm. If the user explicitly says they
-want to create a module, component, or sub-project,
-treat it as a module.
+directory already contains an `AGENTS.md` (or
+`CLAUDE.md`) or a parent project manifest, this is
+likely a module. Ask the user to confirm. If the user
+explicitly says they want to create a module,
+component, or sub-project, treat it as a module.
 
 Do NOT proceed until you have a clear answer.
 
@@ -127,35 +127,41 @@ Mark the context task `in_progress`.
 
 This phase runs **before a single project file is
 written**. Its purpose is to make the project's own
-instructions — `CLAUDE.md`, the project memory, and the
+instructions — `AGENTS.md`, the project memory, and the
 project rules — active for the rest of *this* session.
-Nothing here may be deferred to a session restart:
-Claude Code loads `CLAUDE.md` at startup only, so the
-skill must load and apply it itself.
+Nothing here may be deferred to a session restart: the
+instruction file is loaded at startup only, so the skill
+must load and apply it itself.
 
-#### 2a — Bootstrap CLAUDE.md
+#### 2a — Bootstrap AGENTS.md
 
 **Project mode.** Read the template at
-[assets/CLAUDE.md](assets/CLAUDE.md) and write
-`./CLAUDE.md` now, filling it with what phase 1 already
+[assets/AGENTS.md](assets/AGENTS.md) and write
+`./AGENTS.md` now, filling it with what phase 1 already
 established: the project name, a one-sentence
 description, and the tech stack when it is known.
 
 - Copy the **Agents**, **Memory**, and **Conventions**
   sections as-is — they never depend on the scaffold.
+  The **Memory** section imports the memory index
+  (`@.claude/project-memory/MEMORY.md`).
 - Omit **Build & run** and **Modules** for now; phase
   5c fills them in once the scaffold exists.
-- Check for an existing `CLAUDE.md` first and ask the
-  user before overwriting.
+- Check for an existing `AGENTS.md` (or `CLAUDE.md`)
+  first and ask the user before overwriting.
+- Do **not** generate a `CLAUDE.md`: its presence makes
+  Claude Code ignore `AGENTS.md`. Only for Claude Code
+  older than 2.1.277, which does not read `AGENTS.md`,
+  add a one-line `CLAUDE.md` containing `@AGENTS.md`.
 
-**Module mode.** Do not write a `CLAUDE.md`. Read the
-parent project's `CLAUDE.md` instead, plus any closer
-one between the repository root and the module
-directory.
+**Module mode.** Do not write an instruction file. Read
+the parent project's `AGENTS.md` (or `CLAUDE.md`) instead,
+plus any closer one between the repository root and the
+module directory.
 
-#### 2b — Adopt CLAUDE.md immediately
+#### 2b — Adopt AGENTS.md immediately
 
-Read back the `CLAUDE.md` that now governs the project
+Read back the `AGENTS.md` that now governs the project
 and treat its content as **active instructions for the
 remainder of this session**, exactly as if it had been
 loaded at startup. In particular, from phase 3 onwards:
@@ -163,9 +169,8 @@ loaded at startup. In particular, from phase 3 onwards:
 - Delegate every source-file write, edit, or refactor
   to the **code-writer** agent — never edit source
   files yourself.
-- Apply the conventions it states: line-length limits,
-  Markdown formatting, and latest stable versions for
-  languages, frameworks, and libraries.
+- Apply the conventions it states: line-length limits
+  and Markdown formatting.
 
 #### 2c — Open the project memory
 
@@ -202,7 +207,7 @@ Mark the context task `completed`.
 
 Mark the scaffold task `in_progress`.
 
-Per the `CLAUDE.md` adopted in phase 2b, the
+Per the `AGENTS.md` adopted in phase 2b, the
 **code-writer** agent writes every source file created
 in this phase. Hand it the objective, the chosen name,
 the stack, and the layout decided below; it loads the
@@ -266,81 +271,24 @@ Mark the tooling task `in_progress`.
 
 #### 4a — Generate the Makefile
 
-Every project gets a `Makefile` at its root as the single,
-self-documenting entry point for common developer tasks.
-
-Read the template at [assets/Makefile](assets/Makefile).
-Write `./Makefile`, replacing each `{{placeholder}}` with
-commands appropriate for the detected tech stack:
-
-- `{{dev-command}}` — run the app locally with hot reload
-  (e.g. `go tool air`, `pnpm dev`, `uvicorn --reload`,
-  `./mvnw spring-boot:run`). This is the headline `dev`
-  target developers run day to day. It is wrapped in a
-  `trap 'kill 0' EXIT INT TERM` so Ctrl-C reaps the whole
-  process group and leaves no orphans. Replace just the
-  command itself; keep the surrounding `trap`, `&`, and
-  `wait`. When `dev` runs several processes, background each
-  as `( cmd; kill 0 ) &` before the final `wait` so a crash
-  of one tears down the rest (see the reference pattern).
-- `{{compose}}` — the container compose command
-  (`docker compose` or `podman compose`), used by the
-  `app-up` / `app-down` targets to run the full stack in
-  containers and by the `infra-up` / `infra-down` targets
-  to manage infrastructure services. Remove the **Stack**
-  and **Infra** sections if the project has no compose
-  file.
-- `{{infra-services}}` — the compose service names for
-  infrastructure dependencies the app needs while running
-  locally (e.g. `postgres redis`). The `dev` target brings
-  these up before starting the app. Leave empty to manage
-  every service.
-- `{{test-command}}`, `{{lint-command}}`,
-  `{{build-command}}` — the stack's test, lint, and build
-  commands.
-- `{{dev-targets}}` — any extra target names that should
-  load `.env.local` (leave empty if none).
-
-Rules for the generated Makefile:
-
-- Keep the `help` target as the default goal so a bare
-  `make` lists available targets instead of running them.
-- Preserve the self-documenting convention: `##@` for
-  section headers and `## description` after each target.
-- Declare every non-file target `.PHONY`.
-- Remove sections that do not apply rather than leaving
-  empty or placeholder recipes.
+Apply the project-rules rules in `references/general/makefile.md`
+(see [project-rules](../project-rules/SKILL.md)), starting
+from the template
+[../project-rules/assets/Makefile](../project-rules/assets/Makefile).
+Write `./Makefile` at the project root, filling every
+`{{placeholder}}` for the detected tech stack.
 
 #### 4b — Configure Compose infrastructure
 
 If the app depends on infrastructure services (databases,
-brokers, Temporal, object storage, ...), create a
-`compose.yaml` at the project root that defines them, and
-list those service names in the Makefile's
+brokers, Temporal, object storage, ...), apply the
+project-rules rules in `references/general/compose.md` and
+create `compose.yaml` at the project root. For Temporal,
+start from
+[compose.temporal.yaml](../project-rules/assets/compose.temporal.yaml).
+List the service names in the Makefile's
 `{{infra-services}}`. Skip this step when the app has no
 such dependencies.
-
-**Temporal service.** When the project uses Temporal, add a
-`temporal` service modeled on
-[assets/compose.temporal.yaml](assets/compose.temporal.yaml).
-Merge that service into `compose.yaml` and add `temporal`
-to `{{infra-services}}`. Follow this canonical model:
-
-- Use the official `temporalio/temporal` image and run the
-  `server start-dev` command — a single-process dev server
-  with a built-in database and Web UI. **Dev only, never
-  production.**
-- Bind `--ip 0.0.0.0` so other containers and the host can
-  reach it. Publish `7233` (gRPC, for workers and clients)
-  and the UI port `8233`.
-- Add a healthcheck running
-  `temporal operator cluster health` so dependent services
-  can wait on `condition: service_healthy`.
-- Cap memory via `deploy.resources.limits.memory` and set
-  `restart: unless-stopped`.
-- Point workers and clients at `temporal:7233` from inside
-  the Compose network (or `localhost:7233` from the host)
-  with the `default` namespace.
 
 Mark the tooling task `completed`.
 
@@ -379,11 +327,11 @@ https://choosealicense.com/licenses/
 
 Mark the LICENSE task `completed`.
 
-#### 5c — Finalize CLAUDE.md
+#### 5c — Finalize AGENTS.md
 
-Mark the CLAUDE.md task `in_progress`.
+Mark the AGENTS.md task `in_progress`.
 
-`CLAUDE.md` already exists from phase 2a. Fill in the
+`AGENTS.md` already exists from phase 2a. Fill in the
 `{{placeholder}}` sections that were left out because
 the scaffold did not exist yet:
 
@@ -402,7 +350,7 @@ sections are mandatory — never remove them.
 Reference:
 https://code.claude.com/docs/en/best-practices
 
-Mark the CLAUDE.md task `completed`.
+Mark the AGENTS.md task `completed`.
 
 ### Phase 6 — Review and confirm
 
@@ -416,44 +364,32 @@ Mark the review task `completed`.
 ## Rules
 
 - **English only for generated files** — all content
-  in README.md and CLAUDE.md must be in English,
+  in README.md and AGENTS.md must be in English,
   regardless of the user's language.
-- **Respond in the user's language** when
-  communicating with the user.
 - **Concise** — prefer references over inline
   documentation. Do not duplicate information between
-  README.md and CLAUDE.md; CLAUDE.md should reference
+  README.md and AGENTS.md; AGENTS.md should reference
   README.md rather than repeat it.
-- **Makefile is mandatory** for projects (not modules) —
-  generate a self-documenting `Makefile` with a `help`
-  default goal, a `dev` target to run the app locally with
-  hot reload, and `app-up`/`app-down` targets when a
-  container compose file exists.
-- **Temporal in Compose** — when the project uses Temporal,
-  define its dev service with the `temporalio/temporal`
-  image running `server start-dev`, exposing `7233` and the
-  UI port `8233`, with a `temporal operator cluster health`
-  healthcheck. Dev only, never production.
 - **Context before code** — phase 2 must complete
   before any project file is written. The generated
-  `CLAUDE.md`, the project memory, and the project
+  `AGENTS.md`, the project memory, and the project
   rules govern the scaffold itself, not only the work
   that follows it.
 - **No session restart** — never tell the user to
-  restart the session for `CLAUDE.md` or the project
+  restart the session for `AGENTS.md` or the project
   memory to take effect. The skill reads and applies
   them itself, in the current session.
 - **Delegate code to code-writer** — from phase 3
   onwards, every source file is written by the
   code-writer agent. The skill writes only what it
-  owns: `README.md`, `CLAUDE.md`, `LICENSE`,
+  owns: `README.md`, `AGENTS.md`, `LICENSE`,
   `Makefile`, and `compose.yaml`.
-- **Agents section is mandatory** in CLAUDE.md —
+- **Agents section is mandatory** in AGENTS.md —
   always include code-writer and code-reviewer.
-- **Memory section is mandatory** in CLAUDE.md —
+- **Memory section is mandatory** in AGENTS.md —
   always point at `.claude/project-memory/MEMORY.md`
   and the project-memory skill.
-- **README.md reference is mandatory** in CLAUDE.md —
+- **README.md reference is mandatory** in AGENTS.md —
   always link to README.md.
 - **No secrets or paths** — do not include absolute
   paths, credentials, or environment-specific values.
@@ -462,7 +398,7 @@ Mark the review task `completed`.
   the user has confirmed the objective and name.
 - **Module mode** — when creating a module, skip
   phases marked "project only". Load the parent
-  project's `CLAUDE.md`, memory, and rules in phase 2,
+  project's `AGENTS.md`, memory, and rules in phase 2,
   then scaffold the code. The module inherits the
   parent project's documentation and configuration.
 - **Base mode** — when an existing directory is
