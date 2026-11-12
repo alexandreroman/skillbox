@@ -35,32 +35,12 @@ template for the new project or module.
 ## Plan
 
 After gathering requirements (phase 1), create a
-tracked plan so the user can follow progress.
-Adapt the plan to the detected mode:
-
-### Project-mode plan
-
-Create the following tasks in order:
-
-1. Establish project context
-2. Scaffold project
-3. Generate developer tooling
-4. Generate README.md
-5. Generate LICENSE
-6. Finalize AGENTS.md
-7. Review and confirm
-
-### Module-mode plan
-
-Create the following tasks in order:
-
-1. Load project context
-2. Scaffold module
-3. Review and confirm
-
-### Integration-mode plan
-
-Use the plan in
+tracked plan so the user can follow progress: one task
+per phase from 2 to 6, in order, with phase 5 split into
+its three steps (README, LICENSE, AGENTS.md). Module
+mode skips the phases marked "project only", which
+leaves context, scaffold, and review. Integration mode
+uses the plan in
 [references/integration.md](references/integration.md).
 
 Mark each task `in_progress` when you start it and
@@ -132,9 +112,9 @@ If the user has no preference, use Apache-2.0.
 
 #### 1d — Create the plan
 
-Now that requirements are clear, create the tasks
-listed in the Plan section above (project-mode,
-module-mode, or integration-mode).
+Now that requirements are clear, create the plan
+described in the Plan section above for the detected
+mode.
 
 ### Phase 2 — Establish project context
 
