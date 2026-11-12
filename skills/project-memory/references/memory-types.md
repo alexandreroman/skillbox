@@ -26,10 +26,7 @@ absolute dates (e.g. "next Thursday" becomes
 
 **Body structure:** lead with the fact or
 decision, then a **Why:** line and a
-**How to apply:** line. Phrase the fact in the
-present tense as a standing truth, not as a past
-event ("the API is versioned under /v2", not
-"the user asked to version the API under /v2").
+**How to apply:** line.
 
 ## reference
 
