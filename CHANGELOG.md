@@ -23,6 +23,59 @@ project adheres to [Semantic Versioning][semver].
   when to prefer a method over a package-level generic function,
   method expressions, and the standing ban on generic interface
   methods.
+- A Python section in `project-rules`: `uv` for environments and
+  dependencies, `ruff` for lint and format, `pytest` for tests,
+  `watchfiles` for generic reload, and per-framework hot reload.
+  The conventions now live with the rules, not in the scaffold.
+- A "latest stable version" rule under "Always applies" in
+  `project-rules`: new dependencies and tools are pinned to the
+  latest stable release instead of a remembered version.
+- An integration mode in `init-project` for adopting an existing
+  repository: it adds the missing conventions without regenerating
+  files that already exist.
+- Tests for `check_tables.py` in `tests/`, covering every case
+  fixed below.
+
+### Changed
+
+- Update the `README.md` skill lists to match the current skills
+  and add a section on `AGENTS.md`, the shared instruction file.
+- Make `init-project` the only user-invocable skill.
+  `project-memory` and `write-readme` are now model-only: the
+  agent loads them when needed, so they no longer clutter the
+  slash-command list.
+- Move the Makefile rule and its template from `init-project` to
+  `project-rules`, so the rule applies to any project and not only
+  to new ones. Go projects now build on Make and Task is dropped;
+  Air is run through `go tool` rather than a separate install.
+- Move the Compose/Temporal rule and the `compose.temporal.yaml`
+  template from `init-project` to `project-rules`, for the same
+  reason.
+- Prefer Vite and Nuxt in the Node rules, and fix the pnpm-only
+  guidance so that no `npm` or `npx` command is suggested.
+- Slim down the `init-project` scaffolds (Go, Java, Node, Python):
+  conventions already stated in `project-rules` are no longer
+  repeated, which removes the risk of the two copies drifting.
+  This covers the `golangci` `gosimple` linter, `go install`, the
+  `.air.toml` file, `npm init` and `npx`, and the ECS logging
+  block.
+- Rewrite the `AGENTS.md` template of `init-project` (formerly
+  `CLAUDE.md`): it imports the project memory, states size limits
+  and gives a fallback when the import is unavailable. The skill
+  no longer generates a `CLAUDE.md`.
+- Make `project-memory` avoid duplicate entries and add a rule
+  for subagents, which read the memory but do not rewrite it.
+- Restrict `code-reviewer` to read and search tools, with the
+  skills it needs preloaded. Alignment checks are done by reading
+  the files rather than by running a script.
+- Have the agents return open questions to the caller instead of
+  asking the user directly, and have them follow the Makefile
+  targets for build, test and lint.
+- Slim down `init-project` itself, moving detail into the rules
+  it loads.
+- Narrow the `gh` permissions in `.claude/settings.json` to the
+  commands the repository actually uses.
+- Rename this repository's `CLAUDE.md` to `AGENTS.md`.
 
 ### Removed
 
@@ -30,6 +83,16 @@ project adheres to [Semantic Versioning][semver].
   Makefile template. Following container logs is a one-off
   troubleshooting step, not a task worth a dedicated target;
   `infra-logs` is also dropped from `DEV_TARGETS`.
+- The generated `CLAUDE.md` from `init-project`; `AGENTS.md` is
+  the single instruction file, and Task as a Go build tool.
+
+### Fixed
+
+- `check_tables.py` now reports every misaligned file instead of
+  stopping at the first, ignores tables inside fenced code
+  blocks, checks indented tables, handles escaped pipes (`\|`)
+  inside cells, and reports a missing file as an error rather
+  than crashing.
 
 ## [0.6.0] - 2026-08-27
 
