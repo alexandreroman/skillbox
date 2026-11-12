@@ -13,7 +13,7 @@ description: >-
   explicit request — if the information is worth
   remembering, invoke this skill immediately.
 user-invocable: false
-allowed-tools: Read, Write, Edit, Glob
+allowed-tools: Read Write Edit Glob
 ---
 
 # Project Memory
