@@ -13,11 +13,14 @@
 
 After writing or editing a Markdown file that
 contains tables, run `scripts/check_tables.py` to
-detect misaligned columns. Fix any reported lines
-before considering the task complete.
+detect misaligned columns. The path is relative to
+the project-rules skill directory (where its
+`SKILL.md` lives), not to the project: prefix it with
+that directory. Fix any reported lines before
+considering the task complete.
 
 ```bash
-python3 scripts/check_tables.py path/to/file.md
+python3 <project-rules-dir>/scripts/check_tables.py path/to/file.md
 ```
 
 Pass multiple files to check them all in one run.
