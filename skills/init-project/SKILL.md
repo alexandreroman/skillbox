@@ -2,10 +2,12 @@
 name: init-project
 description: >-
   Use when starting a new project, bootstrapping an
-  empty repository, or adding a new module to an
-  existing project. Interactively gathers the objective
-  and name, then generates the appropriate files so
-  Claude Code has proper context from day one.
+  empty repository, adding a new module to an existing
+  project, or adopting skillbox in an existing
+  repository ("adopt skillbox", "set up Claude Code in
+  this repo"). Interactively gathers the objective and
+  name, then generates or completes the files so Claude
+  Code has proper context from day one.
 ---
 
 # Initialize Project
@@ -16,13 +18,14 @@ foundational files.
 
 ## Modes
 
-This skill operates in one of two modes, determined
+This skill operates in one of three modes, determined
 during the requirements phase:
 
-| Mode        | Scope                                  |
-| ----------- | -------------------------------------- |
-| **Project** | Top-level repository — full scaffold   |
-| **Module**  | Sub-directory inside existing project  |
+| Mode            | Scope                                      |
+| --------------- | ------------------------------------------ |
+| **Project**     | Top-level repository — full scaffold       |
+| **Module**      | Sub-directory inside existing project      |
+| **Integration** | Existing repository adopting skillbox      |
 
 A **base directory** can optionally be specified in
 either mode. When provided, the base replaces the
@@ -55,6 +58,18 @@ Create the following tasks in order:
 2. Scaffold module
 3. Review and confirm
 
+### Integration-mode plan
+
+Create the following tasks in order:
+
+1. Choose the instruction file
+2. Add the missing sections
+3. Open the project memory
+4. Offer the missing files
+5. Review and confirm
+
+See "Integration mode" after phase 6.
+
 Mark each task `in_progress` when you start it and
 `completed` when you finish it.
 
@@ -85,6 +100,13 @@ directory already contains an `AGENTS.md` (or
 likely a module. Ask the user to confirm. If the user
 explicitly says they want to create a module,
 component, or sub-project, treat it as a module.
+
+**Detecting integration mode:** if the current
+directory is an existing project (sources present) and
+the user does not ask for a new module, offer
+integration mode and ask for confirmation. In that
+mode, skip 1b and 1c, then follow "Integration mode"
+below instead of phases 2 to 6.
 
 Do NOT proceed until you have a clear answer.
 
@@ -118,8 +140,8 @@ If the user has no preference, use Apache-2.0.
 #### 1d — Create the plan
 
 Now that requirements are clear, create the tasks
-listed in the Plan section above (project-mode or
-module-mode).
+listed in the Plan section above (project-mode,
+module-mode, or integration-mode).
 
 ### Phase 2 — Establish project context
 
@@ -360,6 +382,66 @@ Show all generated files to the user for review.
 Ask if anything needs adjustment before finalizing.
 
 Mark the review task `completed`.
+
+## Integration mode
+
+For an existing repository. Everything here is
+**additive and idempotent**: add only what is missing,
+never rewrite, reorder, or overwrite existing content,
+so a second run changes nothing.
+
+### Choose the instruction file
+
+Look for `AGENTS.md` and `CLAUDE.md` at the root.
+
+| Found            | Write to    | Then                            |
+| ---------------- | ----------- | ------------------------------- |
+| `AGENTS.md` only | `AGENTS.md` | Nothing else                    |
+| Neither          | `AGENTS.md` | Create it from the template     |
+| `CLAUDE.md` only | `CLAUDE.md` | Offer to move it to `AGENTS.md` |
+| Both             | `AGENTS.md` | Ensure `CLAUDE.md` imports it   |
+
+- **Move offer** — ask whether to rename `CLAUDE.md`
+  to `AGENTS.md` with `git mv`. Move nothing without an
+  explicit yes; on no or silence, leave it in place.
+- **Both exist** — make sure `CLAUDE.md` contains the
+  line `@AGENTS.md`; append it only when missing and
+  leave the rest of the file as it is.
+- A missing `AGENTS.md` is created from
+  [assets/AGENTS.md](assets/AGENTS.md), as in phase 2a.
+
+### Add the missing sections
+
+Compare the target file's headings with the **Agents**
+and **Memory** sections of the template. Append each
+section whose heading is missing, copied as in phase 2a.
+Leave every existing section untouched, even when it
+differs from the template. Then read the file back and
+adopt it as in phase 2b.
+
+### Open the project memory
+
+Invoke **project-memory** as in phase 2c: it creates
+`.claude/project-memory/MEMORY.md` only when missing.
+Record only decisions the user explicitly confirmed
+during the interview. Record nothing inferred from the
+code, even when it seems obvious.
+
+### Offer the missing files
+
+For each piece below that is missing, ask separately
+and create it only when the user accepts. Never
+overwrite an existing file.
+
+- **Makefile** — per the project-rules rules in
+  `references/general/makefile.md`, as in phase 4a.
+- **README.md** — delegate to **write-readme**, as in
+  phase 5a.
+- **LICENSE** — ask which license, then write it as in
+  phase 5b.
+
+Finish with phase 6: show what changed and ask whether
+anything needs adjusting.
 
 ## Rules
 
