@@ -59,22 +59,32 @@ project adheres to [Semantic Versioning][semver].
   This covers the `golangci` `gosimple` linter, `go install`, the
   `.air.toml` file, `npm init` and `npx`, and the ECS logging
   block.
-- Rewrite the `AGENTS.md` template of `init-project` (formerly
-  `CLAUDE.md`): it imports the project memory, states size limits
-  and gives a fallback when the import is unavailable. The skill
-  no longer generates a `CLAUDE.md`.
-- Make `project-memory` avoid duplicate entries and add a rule
-  for subagents, which read the memory but do not rewrite it.
+- Rename the `init-project` instruction template from
+  `CLAUDE.md` to `AGENTS.md`. It imports the memory index with
+  `@.claude/project-memory/MEMORY.md`, so the memory loads on
+  startup, and states the two limits of `AGENTS.md` (Claude Code
+  2.1.277+, ignored next to a `CLAUDE.md` or `CLAUDE.local.md`)
+  with a one-line `CLAUDE.md` importing `@AGENTS.md` as the
+  fallback.
+- State each `project-memory` rule once (the conflict rule and
+  the English rule were repeated) and add a rule for subagents:
+  on a conflict or a duplicate they write nothing and report it
+  to the caller, since they cannot reach the user.
 - Restrict `code-reviewer` to read and search tools, with the
   skills it needs preloaded. Alignment checks are done by reading
-  the files rather than by running a script.
+  the files rather than by running a script, and a missing or
+  diverging Makefile is reported as a minor finding.
 - Have the agents return open questions to the caller instead of
-  asking the user directly, and have them follow the Makefile
-  targets for build, test and lint.
-- Slim down `init-project` itself, moving detail into the rules
-  it loads.
-- Narrow the `gh` permissions in `.claude/settings.json` to the
-  commands the repository actually uses.
+  asking the user directly. `code-writer` adds a Makefile only
+  when asked; when editing one, it adds the missing standard
+  targets and keeps the project's own.
+- Slim down `init-project` itself (491 to 345 lines): the
+  Makefile and Compose phases point to the rules, rules already
+  stated by a phase are no longer repeated, the plan is one rule
+  instead of task lists, and the integration mode moves to
+  `references/integration.md`, loaded only in that mode.
+- Narrow the `gh` permissions in `.claude/settings.json` to
+  read-only commands and `gh pr create`.
 - Rename this repository's `CLAUDE.md` to `AGENTS.md`.
 
 ### Removed
@@ -83,8 +93,9 @@ project adheres to [Semantic Versioning][semver].
   Makefile template. Following container logs is a one-off
   troubleshooting step, not a task worth a dedicated target;
   `infra-logs` is also dropped from `DEV_TARGETS`.
-- The generated `CLAUDE.md` from `init-project`; `AGENTS.md` is
-  the single instruction file, and Task as a Go build tool.
+- The generated `CLAUDE.md` from `init-project`: `AGENTS.md` is
+  the single instruction file.
+- Task as the Go task runner; Go projects use Make.
 
 ### Fixed
 
