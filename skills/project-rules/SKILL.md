@@ -3,10 +3,10 @@ name: project-rules
 description: >-
   Project engineering rules: best practices, code
   conventions, and design preferences for Java
-  (21+), Go (1.21+), Node.js / TypeScript, and
-  Spring Boot (3.4+, 4.x), plus language-agnostic
-  concerns (containers, Docker Compose, CI/CD, Git,
-  HTTP servers). Consult this skill when designing,
+  (21+), Go (1.21+), Node.js / TypeScript, Python,
+  and Spring Boot (3.4+, 4.x), plus language-agnostic
+  concerns (containers, Docker Compose, Makefile,
+  CI/CD, Git, HTTP servers). Consult this skill when designing,
   planning, or researching best practices — even for
   familiar APIs and tools — and when writing,
   reviewing, or refactoring code. Invoke it before
@@ -46,6 +46,7 @@ writing, reviewing, or refactoring code.
 | a `spring-boot-starter-*` dependency | `spring-boot/` and `java/` |
 | `go.mod`                             | `go/`                      |
 | `package.json`, `tsconfig.json`      | `nodejs-typescript/`       |
+| `pyproject.toml`, `requirements.txt` | `python/`                  |
 
 ## Always applies
 
@@ -57,6 +58,9 @@ writing, reviewing, or refactoring code.
 - **If context7 is available**, use it to verify
   current API and tool versions before adding or
   modifying dependencies.
+- **Use the latest LTS / stable version** of every
+  language, runtime, framework, and dependency,
+  unless the project pins one.
 
 ## General
 
@@ -66,8 +70,9 @@ Language-agnostic rules, for every project.
   Docker Compose health checks, dependencies,
   restart policy, read-only volumes, multi-file
   overlays (dev overlay vs. auto-merged
-  `compose.override.yaml`), and host-port overrides
-  with `!override`
+  `compose.override.yaml`), host-port overrides
+  with `!override`, and the Temporal template
+  ([compose.temporal.yaml](assets/compose.temporal.yaml))
 - [Containers](references/general/containers.md) —
   Dockerfile best practices, image size, security,
   layer caching
@@ -82,6 +87,10 @@ Language-agnostic rules, for every project.
 - [HTTP servers](references/general/http-servers.md) —
   port configuration via `PORT` env var, bind
   address, framework defaults
+- [Makefile](references/general/makefile.md) —
+  mandatory standard targets, adapting the
+  [template](assets/Makefile) per stack, completing
+  an existing Makefile
 - [Markdown tables](references/general/markdown-tables.md) —
   column alignment rules, validated by
   `scripts/check_tables.py`
@@ -133,7 +142,7 @@ Guide).
 
 - [Tooling](references/go/tooling.md) —
   `go.mod` toolchain, golangci-lint, gofumpt,
-  Air (hot reload), Task, project layout
+  Air (hot reload), Make, project layout
 - [Code style](references/go/code-style.md) —
   receivers, errors, `slog`, `context`,
   `any` vs `interface{}`
@@ -182,7 +191,7 @@ for modern Node.js / TypeScript projects.
 
 - [Tooling](references/nodejs-typescript/tooling.md) —
   pnpm, tsx, Vitest, Husky, Zod + t3-env,
-  project structure
+  Vite + Nuxt for web front ends, project structure
 - [Containers](references/nodejs-typescript/containers.md) —
   Dockerfile with pnpm, Corepack, multi-stage
   builds, dev-dependency pruning
@@ -200,6 +209,22 @@ Key rules:
 - **Use pnpm** — see
   [Tooling](references/nodejs-typescript/tooling.md)
   for details.
+- **Prefer Vite + Nuxt** for web front ends — see
+  [Tooling](references/nodejs-typescript/tooling.md).
+
+## Python
+
+Python projects, drawn from the scaffold's choices.
+
+- [Tooling](references/python/tooling.md) —
+  uv, ruff, pytest, watchfiles, hot reload per
+  framework
+
+Key rules:
+
+- **Use uv, ruff, and pytest** — see
+  [Tooling](references/python/tooling.md) for
+  details, including the hot-reload command.
 
 ## Spring Boot
 
